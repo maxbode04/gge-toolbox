@@ -29,28 +29,7 @@
 
       <div class="home-card">
         <div class="home-card-head">📋 What's New</div>
-        <ul class="changelog">
-          <li>
-            <span class="cl-date">Jun 2026</span>
-            <span class="cl-body"><b>Rift Raid Bosses</b> — all 3 bosses, 20 levels each, with per-stage wall garrisons and boss effects. Rift Commander Maker also added.</span>
-          </li>
-          <li>
-            <span class="cl-date">Jun 2026</span>
-            <span class="cl-body"><b>Equipment Overview</b> — 617 gear pieces with full effect lists and real art. Equipment items in the Gacha Sim now link directly here.</span>
-          </li>
-          <li>
-            <span class="cl-date">Jun 2026</span>
-            <span class="cl-body"><b>Decorations Overview</b> — 532 decorations with images. Default sort changed to Decoration Points.</span>
-          </li>
-          <li>
-            <span class="cl-date">Jun 2026</span>
-            <span class="cl-body"><b>Gacha Spin Simulator</b> — real drop rates across 5 game versions, with pulls-to-get targeting.</span>
-          </li>
-          <li>
-            <span class="cl-date">Jun 2026</span>
-            <span class="cl-body"><b>Attack Speed &amp; Detection</b> — travel time, horse boosts and exact detection window.</span>
-          </li>
-        </ul>
+        <ul class="changelog" id="changelog"><!-- rendered from assets/data/site-feed.json --></ul>
       </div>
 
       <div class="home-card home-social">
@@ -80,83 +59,13 @@
 
       <div class="home-card">
         <div class="home-card-head">📰 Latest from GGS</div>
-        <ul class="news-list">
-          <li class="news-item">
-            <span class="news-date">19 May 2026</span>
-            <a class="news-title" href="https://communityhub.goodgamestudios.com/2026/05/19/elementor-12525/" target="_blank" rel="noopener">The Ashen Tyrant</a>
-          </li>
-          <li class="news-item">
-            <span class="news-date">19 May 2026</span>
-            <a class="news-title" href="https://communityhub.goodgamestudios.com/2026/05/19/the-mycelial-sovereign/" target="_blank" rel="noopener">The Mycelial Sovereign</a>
-          </li>
-          <li class="news-item">
-            <span class="news-date">19 May 2026</span>
-            <a class="news-title" href="https://communityhub.goodgamestudios.com/2026/05/19/the-mistress-of-decay/" target="_blank" rel="noopener">The Mistress of Decay</a>
-          </li>
-          <li class="news-item">
-            <span class="news-date">19 May 2026</span>
-            <a class="news-title" href="https://communityhub.goodgamestudios.com/2026/05/19/the-berimond-kingdom-advisor-has-arrived/" target="_blank" rel="noopener">The Berimond Kingdom Advisor Has Arrived</a>
-          </li>
-          <li class="news-item">
-            <span class="news-date">25 Mar 2026</span>
-            <a class="news-title" href="https://communityhub.goodgamestudios.com/2026/03/25/the-hollowed-moon-eggs-have-returned/" target="_blank" rel="noopener">The Hollowed Moon Eggs Have Returned</a>
-          </li>
-        </ul>
-        <a class="news-all" href="https://communityhub.goodgamestudios.com/newshube4k/" target="_blank" rel="noopener">View all GGS news →</a>
+        <ul class="news-list" id="news-list"><!-- rendered from assets/data/site-feed.json --></ul>
+        <a class="news-all" id="news-all" href="https://communityhub.goodgamestudios.com/newshube4k/" target="_blank" rel="noopener">View all GGS news →</a>
       </div>
 
       <div class="home-card">
-        <div class="home-card-head">📅 Upcoming Events — June 2026</div>
-        <div class="events-grid">
-          <div class="event-chip">
-            <div class="event-chip-name">🌊 Nomad Invasion</div>
-            <div class="event-chip-dates">06–09 · 13–16 · 20–23 · 27–30 Jun</div>
-          </div>
-          <div class="event-chip">
-            <div class="event-chip-name">⚔️ Samurai Invasion</div>
-            <div class="event-chip-dates">05–06 · 12–13 · 19–20 · 26–27 Jun</div>
-          </div>
-          <div class="event-chip">
-            <div class="event-chip-name">🩸 Bloodcrow Invasion</div>
-            <div class="event-chip-dates">09–12 · 23–26 Jun</div>
-          </div>
-          <div class="event-chip">
-            <div class="event-chip-name">⚔️ War of the Realms</div>
-            <div class="event-chip-dates">02–05 · 16–19 · 30 Jun–03 Jul</div>
-          </div>
-          <div class="event-chip">
-            <div class="event-chip-name">🏰 Berimond Kingdom</div>
-            <div class="event-chip-dates">02–05 · 23–26 Jun</div>
-          </div>
-          <div class="event-chip">
-            <div class="event-chip-name">🌀 Rift Raid (Necromancer)</div>
-            <div class="event-chip-dates">06–13 Jun</div>
-          </div>
-          <div class="event-chip">
-            <div class="event-chip-name">🗡️ Bladecoast</div>
-            <div class="event-chip-dates">10–17 Jun</div>
-          </div>
-          <div class="event-chip">
-            <div class="event-chip-name">🏆 Grand Tournament</div>
-            <div class="event-chip-dates">16–23 Jun</div>
-          </div>
-          <div class="event-chip">
-            <div class="event-chip-name">🌅 Beyond the Horizon</div>
-            <div class="event-chip-dates">11–15 · 18–22 Jun</div>
-          </div>
-          <div class="event-chip">
-            <div class="event-chip-name">🌌 Outer Realms</div>
-            <div class="event-chip-dates">01/06 · 04/06 · 08/06 · 15/06 · 22/06 · 25/06</div>
-          </div>
-          <div class="event-chip">
-            <div class="event-chip-name">👑 Imperial Patronage</div>
-            <div class="event-chip-dates">16–23 Jun</div>
-          </div>
-          <div class="event-chip">
-            <div class="event-chip-name">🎖️ Grand Nobility Contest</div>
-            <div class="event-chip-dates">16 Jun – 17 Jul</div>
-          </div>
-        </div>
+        <div class="home-card-head" id="events-head">📅 Upcoming Events</div>
+        <div class="events-grid" id="events-grid"><!-- rendered from assets/data/site-feed.json --></div>
         <a class="news-all" href="https://communityhub.goodgamestudios.com/newshube4k/" target="_blank" rel="noopener">Full schedule on GGS Hub →</a>
       </div>
 
@@ -184,5 +93,6 @@
 
   <script src="assets/js/registry.js"></script>
   <script src="assets/js/hub.js"></script>
+  <script src="assets/js/home-feed.js"></script>
 </body>
 </html>

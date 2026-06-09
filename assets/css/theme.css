@@ -173,8 +173,10 @@ a:hover { text-decoration: underline; }
     padding: 8px 12px;
     font-size: .78rem;
 }
-.event-chip-name { font-weight: 600; color: var(--text); margin-bottom: 3px; }
+.event-chip-name { font-weight: 600; color: var(--text); margin-bottom: 3px; display: flex; align-items: center; gap: 6px; }
 .event-chip-dates { color: var(--text-faint); font-size: .72rem; line-height: 1.5; }
+.ev-ico { width: 30px; height: 30px; object-fit: cover; border-radius: 5px; flex-shrink: 0; }
+.ev-emoji { font-size: 1.05rem; flex-shrink: 0; width: 30px; height: 30px; display: inline-flex; align-items: center; justify-content: center; background: var(--bg-elev-2); border-radius: 5px; }
 
 /* ---- Search + filters ---------------------------------------------------- */
 .controls {
