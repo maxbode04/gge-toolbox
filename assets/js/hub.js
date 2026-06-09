@@ -3,12 +3,14 @@
 (function () {
   const CATS = [
     { id: "all", label: "All" },
+    { id: "guides", label: "Guides" },
     { id: "calculators", label: "Calculators" },
     { id: "simulators", label: "Simulators" },
     { id: "rankings", label: "Rankings" },
     { id: "overviews", label: "Overviews" },
   ];
   const CAT_LABEL = {
+    guides: "Guides",
     calculators: "Calculators",
     simulators: "Simulators",
     rankings: "Rankings & Stats",
@@ -52,7 +54,9 @@
     const live = t.status === "live";
     const el = document.createElement(live ? "a" : "div");
     el.className = "card" + (live ? "" : " disabled");
-    if (live) el.href = "tools/" + t.slug + "/";
+    // Guides (and any entry with an explicit url) link straight to a page;
+    // everything else follows the folder-per-tool convention.
+    if (live) el.href = t.url || "tools/" + t.slug + "/";
     el.innerHTML =
       '<div class="ico">' + t.icon + "</div>" +
       "<h3>" + t.name + "</h3>" +
@@ -69,7 +73,7 @@
       return;
     }
     // Group by category, preserving registry order
-    const order = ["calculators", "simulators", "rankings", "overviews"];
+    const order = ["guides", "calculators", "simulators", "rankings", "overviews"];
     order.forEach((cat) => {
       const items = visible.filter((t) => t.cat === cat);
       if (!items.length) return;

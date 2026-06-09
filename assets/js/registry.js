@@ -2,10 +2,54 @@
    Maxy's Empire Toolkit — tool registry
    The hub is generated from this list. To add a tool: drop a folder under
    /tools/<slug>/ with an index.html, then add an entry here.
+   For a guide: drop an HTML file in /tools/guides/ and add an entry with
+   cat:"guides" and an explicit "url".
    status: "live" | "soon"
-   cat:    "calculators" | "simulators" | "rankings" | "overviews"
+   cat:    "guides" | "calculators" | "simulators" | "rankings" | "overviews"
    =========================================================================== */
 window.TOOLS = [
+  // ---- Guides ------------------------------------------------------------
+  {
+    slug: "guide-getting-started",
+    cat: "guides",
+    name: "Getting Started",
+    desc: "A no-nonsense first-week guide: what to build, what to spend rubies on, and what to ignore.",
+    icon: "🚀",
+    status: "live",
+    url: "tools/guides/getting-started.html",
+    tags: ["guide", "beginner", "new player", "start", "economy", "first week", "rubies", "tutorial"],
+  },
+  {
+    slug: "guide-combat-basics",
+    cat: "guides",
+    name: "Combat Basics",
+    desc: "How battles resolve: front vs flanks, melee vs ranged, waves, tools and the wall.",
+    icon: "⚔️",
+    status: "live",
+    url: "tools/guides/combat-basics.html",
+    tags: ["guide", "combat", "battle", "attack", "defence", "front", "flank", "courtyard", "melee", "ranged", "waves", "tools"],
+  },
+  {
+    slug: "guide-commander-setup",
+    cat: "guides",
+    name: "Attack Commander Setup",
+    desc: "How equipment slots and gems work, and which stats to stack for courtyard, flanks and front.",
+    icon: "🎖️",
+    status: "live",
+    url: "tools/guides/commander-setup.html",
+    tags: ["guide", "commander", "equipment", "gems", "sets", "stats", "courtyard", "attack", "build"],
+  },
+  {
+    slug: "guide-rift-raid",
+    cat: "guides",
+    name: "Rift Raid Basics",
+    desc: "How the Rift Raid alliance event works: boss health, reserves, wall breaching and activity points.",
+    icon: "🌀",
+    status: "live",
+    url: "tools/guides/rift-raid.html",
+    tags: ["guide", "rift", "raid", "event", "boss", "necromancer", "dragon", "fungal", "wall", "alliance"],
+  },
+
   // ---- Calculators -------------------------------------------------------
   {
     slug: "travel-speed",
