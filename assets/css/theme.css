@@ -82,6 +82,67 @@ a:hover { text-decoration: underline; }
 .hero h1 b { color: var(--gold); }
 .hero p { margin: 0 auto; max-width: 620px; color: var(--text-dim); }
 
+/* ---- Home feed (changelog + community) ---------------------------------- */
+.home-feed {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 20px 0 0;
+}
+@media (max-width: 680px) { .home-feed { grid-template-columns: 1fr; } }
+
+.home-card {
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+}
+.home-card-head {
+    font-size: .74rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 14px;
+}
+
+.changelog { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.changelog li { display: flex; gap: 10px; font-size: .85rem; }
+.cl-date {
+    flex: 0 0 4.5rem;
+    color: var(--text-faint);
+    font-size: .78rem;
+    padding-top: 1px;
+    font-variant-numeric: tabular-nums;
+}
+.cl-body { color: var(--text-dim); line-height: 1.45; }
+.cl-body b { color: var(--text); }
+
+.home-social { display: flex; flex-direction: column; }
+.social-links { display: flex; flex-wrap: wrap; gap: 10px; }
+.social-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 15px;
+    border-radius: var(--radius-sm);
+    font-size: .88rem;
+    font-weight: 600;
+    border: 1px solid var(--border);
+    color: var(--text);
+    background: var(--bg-elev-2);
+    transition: .15s;
+    text-decoration: none;
+}
+.social-btn:hover { text-decoration: none; border-color: var(--gold-dim); color: var(--text); }
+.social-btn.discord:hover { border-color: #5865F2; color: #7289da; }
+.social-btn.instagram:hover { border-color: #e1306c; color: #e1306c; }
+.social-btn.github:hover { border-color: #6e7681; color: var(--text); }
+.social-ico { width: 16px; height: 16px; flex-shrink: 0; }
+.social-note { margin-top: auto; padding-top: 14px; font-size: .78rem; color: var(--text-faint); }
+.social-note a { color: var(--text-faint); }
+.social-note a:hover { color: var(--text-dim); }
+
 /* ---- Search + filters ---------------------------------------------------- */
 .controls {
     display: flex;

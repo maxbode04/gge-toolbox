@@ -43,14 +43,33 @@
         const num = (v) => (v || 0).toLocaleString();
         const esc = (s) => String(s == null ? "" : s).replace(/[&<>"]/g, (c) =>
           ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+        // Compute _setRank so "Newest" groups a set together and puts newer sets first.
+        // Items with no set rank by their own ID only (always below any set-ranked item).
+        const setMaxId = {};
+        data.forEach((it) => {
+          if (!it.set) return;
+          const id = +it.id || 0;
+          if (!setMaxId[it.set] || id > setMaxId[it.set]) setMaxId[it.set] = id;
+        });
+        data.forEach((it) => {
+          it._setRank = it.set
+            ? (setMaxId[it.set] || 0) * 10000 + (+it.id || 0)
+            : +it.id || 0;
+        });
+
+        const defaultSearch = new URLSearchParams(location.search).get("q") || "";
+
         EmpireOverview({
           mount: document.getElementById("ov"),
           data,
           layout: "cards",
           searchKeys: ["name", "set", "slot", "wearer"],
-          defaultSort: { key: "might", dir: -1 },
+          defaultSort: { key: "_setRank", dir: -1 },
+          defaultSearch,
           placeholder: "Search " + data.length + " items (name, set, slot)…",
           sortOptions: [
+            { key: "_setRank", label: "Newest", num: true },
             { key: "might", label: "Might", num: true },
             { key: "set", label: "Set" },
             { key: "slot", label: "Slot" },

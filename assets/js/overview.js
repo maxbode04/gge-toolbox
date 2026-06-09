@@ -120,6 +120,7 @@ function cardOverview(opts) {
   search.innerHTML = '<span class="icon">🔍</span>';
   const input = document.createElement("input");
   input.type = "search"; input.placeholder = opts.placeholder || "Search…"; input.autocomplete = "off";
+  if (opts.defaultSearch) { input.value = opts.defaultSearch; query = opts.defaultSearch.trim().toLowerCase(); }
   search.appendChild(input);
 
   const sortWrap = document.createElement("div");

@@ -119,8 +119,11 @@ function renderOdds() {
   const rows = pool.entries
     .map((e) => {
       const amt = e.amount != null && e.amount !== 1 ? '<span class="amt"> ×' + e.amount + "</span>" : "";
+      const nameHtml = e.type === "Equipment"
+        ? '<a class="eq-link" href="../overview-equipment/?q=' + encodeURIComponent(e.name) + '">' + esc(e.name) + "</a>"
+        : esc(e.name);
       return (
-        '<tr><td class="r' + e.rarity + '">' + esc(e.name) + amt +
+        '<tr><td class="r' + e.rarity + '">' + nameHtml + amt +
         '</td><td class="amt">' + (e.type || "") +
         '</td><td class="pct">' + fmtPct(pct(e.shares)) + "%</td></tr>"
       );
