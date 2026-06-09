@@ -1,0 +1,125 @@
+/* rift raid boss overview */
+
+/* ---- Boss tabs ---- */
+.boss-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+.boss-tab {
+  display: flex; flex-direction: column; gap: 2px;
+  padding: 10px 18px; border-radius: var(--radius-sm);
+  background: var(--bg-elev-2); border: 1px solid var(--border);
+  color: var(--text-dim); cursor: pointer; font: inherit; text-align: left;
+  transition: .15s;
+}
+.boss-tab:hover { border-color: var(--gold-dim); color: var(--text); }
+.boss-tab.active { border-color: var(--gold); color: var(--text); background: rgba(227,179,65,.08); }
+.boss-tab-name { font-weight: 700; font-size: .92rem; }
+.boss-tab-sub { font-size: .72rem; color: var(--text-faint); }
+.boss-tab.active .boss-tab-sub { color: var(--gold-dim); }
+
+/* ---- Boss header ---- */
+.boss-head {
+  display: flex; gap: 14px; align-items: flex-start;
+  padding: 16px 18px; margin-bottom: 18px;
+  background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--radius);
+}
+.boss-head-main { flex: 1; min-width: 0; }
+.boss-head h2 { margin: 0 0 4px; font-size: 1.15rem; }
+.rarity-pill {
+  display: inline-block; font-size: .68rem; font-weight: 700; letter-spacing: .05em;
+  text-transform: uppercase; padding: 2px 8px; border-radius: 99px; margin-left: 8px;
+  vertical-align: middle;
+}
+.rarity-pill.common    { background: rgba(154,167,180,.18); color: #cdd6df; }
+.rarity-pill.rare      { background: rgba(79,157,222,.18);  color: #79c0ff; }
+.rarity-pill.epic      { background: rgba(163,113,247,.18); color: #c39bff; }
+.rarity-pill.legendary { background: rgba(227,179,65,.18);  color: var(--gold); }
+.boss-desc { color: var(--text-dim); font-size: .88rem; line-height: 1.5; margin: 0; }
+
+/* ---- Level selector ---- */
+.level-bar { margin-bottom: 18px; }
+.level-bar-label { font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--text-dim); margin-bottom: 8px; }
+.level-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+.level-pill {
+  width: 38px; height: 34px; border-radius: var(--radius-sm);
+  background: var(--bg-elev-2); border: 1px solid var(--border);
+  color: var(--text-dim); cursor: pointer; font: inherit; font-size: .85rem; font-weight: 600;
+  transition: .12s;
+}
+.level-pill:hover { border-color: var(--gold-dim); color: var(--text); }
+.level-pill.active { background: var(--gold); border-color: var(--gold); color: #1a1000; }
+
+/* ---- Level summary ---- */
+.level-summary {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px; margin-bottom: 20px;
+}
+.lvl-stat {
+  background: var(--bg-elev); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 12px 14px;
+}
+.lvl-stat-label { font-size: .68rem; text-transform: uppercase; letter-spacing: .05em; color: var(--text-faint); margin-bottom: 4px; }
+.lvl-stat-val { font-size: 1.1rem; font-weight: 700; color: var(--text); font-variant-numeric: tabular-nums; }
+.lvl-stat-val small { font-size: .72rem; color: var(--text-dim); font-weight: 400; }
+
+/* ---- Stage cards ---- */
+.stages-head { font-size: .8rem; text-transform: uppercase; letter-spacing: .06em; color: var(--text-dim); margin: 0 0 12px; }
+.stage-list { display: flex; flex-direction: column; gap: 12px; }
+.stage-card {
+  background: var(--bg-elev); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden;
+}
+.stage-card-head {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 14px; background: rgba(0,0,0,.18);
+}
+.stage-hp-badge {
+  font-weight: 800; font-size: .95rem; color: var(--gold);
+  font-variant-numeric: tabular-nums; min-width: 48px;
+}
+.stage-hp-bar { flex: 1; height: 6px; background: var(--border); border-radius: 99px; overflow: hidden; }
+.stage-hp-fill { height: 100%; background: linear-gradient(90deg, var(--bad), var(--gold), var(--good)); }
+.stage-walltotal { font-size: .76rem; color: var(--text-dim); white-space: nowrap; }
+
+.stage-body { padding: 12px 14px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 16px; }
+@media (max-width: 680px) { .stage-body { grid-template-columns: 1fr; } }
+
+/* wall segments */
+.walls-block-h, .fx-block-h {
+  font-size: .68rem; text-transform: uppercase; letter-spacing: .05em;
+  color: var(--text-faint); margin: 0 0 8px;
+}
+.wall-seg { display: flex; align-items: baseline; gap: 8px; margin-bottom: 6px; font-size: .82rem; }
+.wall-seg-name { flex: 0 0 48px; font-weight: 600; color: var(--text-dim); font-size: .72rem; text-transform: uppercase; }
+.wall-seg-units { flex: 1; color: var(--text); }
+.unit-pill {
+  display: inline-block; margin: 0 6px 3px 0; padding: 1px 7px; border-radius: 99px;
+  font-size: .76rem; background: var(--bg-elev-2); border: 1px solid var(--border);
+}
+.unit-pill.melee  { border-color: rgba(248,81,73,.4); }
+.unit-pill.ranged { border-color: rgba(79,157,222,.4); }
+.unit-pill b { color: var(--text); font-variant-numeric: tabular-nums; }
+
+/* effects */
+.fx-list { list-style: none; margin: 0 0 12px; padding: 0; }
+.fx-list li { font-size: .8rem; color: var(--text-dim); padding: 2px 0 2px 14px; position: relative; }
+.fx-list.defender li::before { content: "🛡"; position: absolute; left: 0; font-size: .7rem; }
+.fx-list.attacker li::before { content: "⚔"; position: absolute; left: 0; font-size: .7rem; }
+.fx-list li.none { color: var(--text-faint); font-style: italic; padding-left: 0; }
+.fx-list li.none::before { content: ""; }
+.highlights { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.highlight-chip {
+  font-size: .72rem; padding: 3px 9px; border-radius: 99px;
+  background: rgba(227,179,65,.12); border: 1px solid rgba(227,179,65,.3); color: var(--gold);
+}
+
+/* ---- Sim placeholder banner ---- */
+.sim-cta {
+  margin-bottom: 22px; padding: 14px 18px;
+  background: linear-gradient(90deg, rgba(227,179,65,.07), rgba(163,113,247,.05));
+  border: 1px dashed var(--gold-dim); border-radius: var(--radius);
+  display: flex; gap: 14px; align-items: center; flex-wrap: wrap;
+}
+.sim-cta-ico { font-size: 1.6rem; }
+.sim-cta-text { flex: 1; min-width: 200px; }
+.sim-cta-text b { color: var(--gold); }
+.sim-cta-text p { margin: 2px 0 0; font-size: .82rem; color: var(--text-dim); }
+.sim-cta-soon { font-size: .68rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--gold-dim); border: 1px solid var(--gold-dim); padding: 4px 10px; border-radius: 99px; }

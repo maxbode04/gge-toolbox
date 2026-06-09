@@ -52,6 +52,15 @@ window.TOOLS = [
     status: "soon",
     tags: ["rift", "raid", "points", "event"],
   },
+  {
+    slug: "rift-wall-break",
+    cat: "calculators",
+    name: "Rift Wall-Break Simulator",
+    desc: "Work out the units and tools needed to breach a boss wall segment on a given stage.",
+    icon: "🧱",
+    status: "soon",
+    tags: ["rift", "raid", "wall", "break", "breach", "boss", "simulator", "necromancer"],
+  },
 
   {
     slug: "rift-optimizer",
@@ -146,6 +155,15 @@ window.TOOLS = [
     icon: "📦",
     status: "soon",
     tags: ["loot box", "mystery box", "drops"],
+  },
+  {
+    slug: "overview-rift",
+    cat: "overviews",
+    name: "Rift Raid Bosses",
+    desc: "Every Rift Raid boss, level and health stage: wall garrison, boss effects and reserve size.",
+    icon: "🌀",
+    status: "live",
+    tags: ["rift", "raid", "boss", "necromancer", "dragon", "fungal", "wall", "stages", "effects"],
   },
   {
     slug: "overview-event-rewards",
