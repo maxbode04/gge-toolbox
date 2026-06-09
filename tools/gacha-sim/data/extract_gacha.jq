@@ -65,7 +65,10 @@ def poolEntries($tid):
             levels: (
               group_by(.gachaLevel|tonumber)
               | map(
-                  .[0] as $g
+                  # events can carry an old + a current version per level
+                  # (different rewardSetID) — use the current (highest) one,
+                  # which holds the live reward/equipment set.
+                  (max_by(.rewardSetID|tonumber? // 0)) as $g
                   | ($g.gachaLevel|tonumber) as $lvl
                   | ($g | to_entries | map(select((.key|startswith("cost")) and ((.value|tonumber? // 0) > 0))) | .[0]) as $cost
                   | (poolEntries($g.lootBoxTombolaID)) as $pool

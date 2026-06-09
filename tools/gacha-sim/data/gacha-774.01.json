@@ -1,5 +1,5 @@
 {
-  "generated": "2026-06-09T06:46:26Z",
+  "generated": "2026-06-09T12:07:25Z",
   "events": [
     {
       "eventID": "135",
@@ -7466,173 +7466,250 @@
             "what": "HollowMoonEgg",
             "amount": 100
           },
-          "total": 99700,
+          "total": 149400,
           "entries": [
             {
               "rarity": 1,
-              "shares": 12100,
-              "name": "Bunch of eggs",
+              "shares": 6800,
+              "name": "Guardian of Plenty",
               "type": "Decoration",
               "amount": 1
             },
             {
               "rarity": 1,
-              "shares": 12100,
-              "name": "Offering to Ulrich",
+              "shares": 6800,
+              "name": "Relic splinters",
               "type": "Resource",
-              "amount": 5
+              "amount": 2000
             },
             {
               "rarity": 1,
-              "shares": 12100,
+              "shares": 6800,
               "name": "Offering to Ludwig",
               "type": "Resource",
-              "amount": 10
+              "amount": 15
             },
             {
-              "rarity": 1,
-              "shares": 8100,
-              "name": "1,000 generals XP",
-              "type": "Resource",
-              "amount": 10
-            },
-            {
-              "rarity": 1,
-              "shares": 8100,
-              "name": "Offering to Beatrice",
-              "type": "Resource",
-              "amount": 2
-            },
-            {
-              "rarity": 1,
-              "shares": 6000,
-              "name": "Exalted Purple Guardian of Nurture",
-              "type": "Decoration",
-              "amount": 1
-            },
-            {
-              "rarity": 1,
-              "shares": 6000,
-              "name": "Guardian of Spring",
-              "type": "Units",
-              "amount": 1500
-            },
-            {
-              "rarity": 1,
-              "shares": 6000,
-              "name": "Celestial Marksman",
-              "type": "Units",
-              "amount": 1500
-            },
-            {
-              "rarity": 1,
-              "shares": 6000,
+              "rarity": 2,
+              "shares": 6800,
               "name": "Easter Championess",
               "type": "Units",
               "amount": 1500
             },
             {
-              "rarity": 1,
-              "shares": 6000,
+              "rarity": 2,
+              "shares": 6800,
+              "name": "Guardian of Spring",
+              "type": "Units",
+              "amount": 1500
+            },
+            {
+              "rarity": 2,
+              "shares": 6800,
               "name": "Valkyrie Huntress",
               "type": "Units",
               "amount": 1500
             },
             {
               "rarity": 2,
-              "shares": 4500,
-              "name": "Relic splinters",
+              "shares": 6800,
+              "name": "Celestial Marksman",
+              "type": "Units",
+              "amount": 1500
+            },
+            {
+              "rarity": 2,
+              "shares": 6800,
+              "name": "Bronze PvP Gacha Set 2026",
+              "type": "Gem",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 6800,
+              "name": "Bronze PvP Gacha Set 2026",
+              "type": "Gem",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 6800,
+              "name": "Bronze PvP Gacha Set 2026",
+              "type": "Gem",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 6800,
+              "name": "Bronze PvP Gacha Set 2026",
+              "type": "Gem",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 6800,
+              "name": "Bronze Victorious Helmet",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 6800,
+              "name": "Bronze Victorious Armor",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 6800,
+              "name": "Bronze Victorious Mace",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 6800,
+              "name": "Bronze Victorious Artifact",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 5700,
+              "name": "Victorious Maiden",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 5100,
+              "name": "Valenta's Offering to Ludwig",
               "type": "Resource",
-              "amount": 2000
+              "amount": 5
             },
             {
               "rarity": 2,
-              "shares": 3000,
-              "name": "Sasaki's Offering to Beatrice",
+              "shares": 5100,
+              "name": "Hasan's Offering to Ludwig",
               "type": "Resource",
+              "amount": 5
+            },
+            {
+              "rarity": 1,
+              "shares": 4600,
+              "name": "1,000 generals XP",
+              "type": "Resource",
+              "amount": 10
+            },
+            {
+              "rarity": 1,
+              "shares": 4600,
+              "name": "Offering to Ulrich",
+              "type": "Resource",
+              "amount": 10
+            },
+            {
+              "rarity": 1,
+              "shares": 3400,
+              "name": "Offering to Beatrice",
+              "type": "Resource",
+              "amount": 5
+            },
+            {
+              "rarity": 1,
+              "shares": 1700,
+              "name": "Exalted Spring time tower",
+              "type": "Decoration",
+              "amount": 1
+            },
+            {
+              "rarity": 1,
+              "shares": 1700,
+              "name": "Exalted Purple Guardian of Plenty",
+              "type": "Decoration",
               "amount": 1
             },
             {
               "rarity": 2,
-              "shares": 1100,
-              "name": "Broken Egg tavern",
+              "shares": 1700,
+              "name": "Broken Egg Hall of Legends",
               "type": "Construction",
               "amount": 1
             },
             {
               "rarity": 2,
-              "shares": 1100,
-              "name": "Broken Egg Storehouse",
+              "shares": 1700,
+              "name": "Broken Egg Defense Workshop",
               "type": "Construction",
               "amount": 1
             },
             {
               "rarity": 2,
-              "shares": 1100,
-              "name": "Broken Egg Dwelling",
+              "shares": 1700,
+              "name": "Broken Egg Siege Workshop",
               "type": "Construction",
               "amount": 1
             },
             {
               "rarity": 2,
+              "shares": 1700,
+              "name": "Broken Egg Granary",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 1700,
+              "name": "Broken Egg Stone Quarry",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 1700,
+              "name": "Broken Egg Woodcutter",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
+              "shares": 1200,
+              "name": "Imperial tulip",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
+              "shares": 1200,
+              "name": "Birdhouse",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
               "shares": 1100,
+              "name": "Sparrow prince's crest",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
+              "shares": 1100,
+              "name": "Evergreen Clover",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 4,
+              "shares": 500,
               "name": "Broken Egg Greenhouse",
               "type": "Construction",
               "amount": 1
             },
             {
-              "rarity": 3,
-              "shares": 900,
-              "name": "Gift of Spring",
-              "type": "Equipment",
-              "amount": 1
-            },
-            {
-              "rarity": 3,
-              "shares": 900,
-              "name": "Bell of Spring",
-              "type": "Equipment",
-              "amount": 1
-            },
-            {
-              "rarity": 3,
-              "shares": 900,
-              "name": "Frozen blossom",
-              "type": "Equipment",
-              "amount": 1
-            },
-            {
-              "rarity": 3,
-              "shares": 900,
-              "name": "Blooming blossom",
-              "type": "Equipment",
-              "amount": 1
-            },
-            {
-              "rarity": 3,
-              "shares": 800,
-              "name": "Broken Egg Dwelling",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 3,
-              "shares": 600,
-              "name": "Tizi's Offering to Ulrich",
-              "type": "Resource",
-              "amount": 1
-            },
-            {
-              "rarity": 3,
-              "shares": 200,
-              "name": "Hasan's Offering to Ludwig",
-              "type": "Resource",
-              "amount": 1
-            },
-            {
               "rarity": 4,
-              "shares": 100,
-              "name": "Exalted Purple Easter Ruins",
+              "shares": 200,
+              "name": "Exalted Purple Guardian of Renewal",
               "type": "Decoration",
               "amount": 1
             }
@@ -7644,201 +7721,334 @@
             "what": "HollowMoonEgg",
             "amount": 100
           },
-          "total": 100200,
+          "total": 501400,
           "entries": [
             {
               "rarity": 1,
-              "shares": 10000,
-              "name": "Bunch of eggs",
+              "shares": 21900,
+              "name": "Guardian of Plenty",
               "type": "Decoration",
               "amount": 1
             },
             {
               "rarity": 1,
-              "shares": 10000,
-              "name": "Offering to Ulrich",
+              "shares": 21900,
+              "name": "Relic splinters",
               "type": "Resource",
-              "amount": 10
+              "amount": 2000
             },
             {
               "rarity": 1,
-              "shares": 10000,
+              "shares": 21900,
               "name": "Offering to Ludwig",
               "type": "Resource",
               "amount": 15
             },
             {
-              "rarity": 1,
-              "shares": 8000,
-              "name": "1,000 generals XP",
-              "type": "Resource",
-              "amount": 10
-            },
-            {
-              "rarity": 1,
-              "shares": 6700,
-              "name": "Offering to Beatrice",
-              "type": "Resource",
-              "amount": 4
-            },
-            {
-              "rarity": 1,
-              "shares": 6700,
-              "name": "5,000 generals XP",
-              "type": "Resource",
-              "amount": 10
-            },
-            {
-              "rarity": 1,
-              "shares": 6700,
-              "name": "Exalted Purple Guardian of Nurture",
-              "type": "Decoration",
-              "amount": 1
-            },
-            {
-              "rarity": 1,
-              "shares": 5000,
-              "name": "Exalted Spring time tower",
-              "type": "Decoration",
-              "amount": 1
-            },
-            {
               "rarity": 2,
-              "shares": 5000,
-              "name": "Guardian of Spring",
-              "type": "Units",
-              "amount": 1500
-            },
-            {
-              "rarity": 2,
-              "shares": 5000,
-              "name": "Celestial Marksman",
-              "type": "Units",
-              "amount": 1500
-            },
-            {
-              "rarity": 2,
-              "shares": 5000,
+              "shares": 21900,
               "name": "Easter Championess",
               "type": "Units",
               "amount": 1500
             },
             {
               "rarity": 2,
-              "shares": 5000,
+              "shares": 21900,
+              "name": "Guardian of Spring",
+              "type": "Units",
+              "amount": 1500
+            },
+            {
+              "rarity": 2,
+              "shares": 21900,
               "name": "Valkyrie Huntress",
               "type": "Units",
               "amount": 1500
             },
             {
               "rarity": 2,
-              "shares": 3700,
-              "name": "Relic splinters",
-              "type": "Resource",
-              "amount": 4000
+              "shares": 21900,
+              "name": "Celestial Marksman",
+              "type": "Units",
+              "amount": 1500
             },
             {
               "rarity": 2,
-              "shares": 2500,
-              "name": "Sasaki's Offering to Beatrice",
-              "type": "Resource",
-              "amount": 1
-            },
-            {
-              "rarity": 3,
-              "shares": 1200,
-              "name": "Gift of Spring",
-              "type": "Equipment",
-              "amount": 1
-            },
-            {
-              "rarity": 3,
-              "shares": 1200,
-              "name": "Bell of Spring",
-              "type": "Equipment",
-              "amount": 1
-            },
-            {
-              "rarity": 3,
-              "shares": 1100,
-              "name": "Frozen blossom",
-              "type": "Equipment",
-              "amount": 1
-            },
-            {
-              "rarity": 3,
-              "shares": 1100,
-              "name": "Blooming blossom",
-              "type": "Equipment",
+              "shares": 16500,
+              "name": "Bronze PvP Gacha Set 2026",
+              "type": "Gem",
               "amount": 1
             },
             {
               "rarity": 2,
-              "shares": 900,
-              "name": "Broken Egg tavern",
+              "shares": 16500,
+              "name": "Bronze PvP Gacha Set 2026",
+              "type": "Gem",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 16500,
+              "name": "Bronze PvP Gacha Set 2026",
+              "type": "Gem",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 16500,
+              "name": "Bronze PvP Gacha Set 2026",
+              "type": "Gem",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 16500,
+              "name": "Bronze Victorious Helmet",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 16500,
+              "name": "Bronze Victorious Armor",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 16500,
+              "name": "Bronze Victorious Mace",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 16500,
+              "name": "Bronze Victorious Artifact",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 16500,
+              "name": "Valenta's Offering to Ludwig",
+              "type": "Resource",
+              "amount": 5
+            },
+            {
+              "rarity": 2,
+              "shares": 16500,
+              "name": "Hasan's Offering to Ludwig",
+              "type": "Resource",
+              "amount": 5
+            },
+            {
+              "rarity": 1,
+              "shares": 16300,
+              "name": "5,000 generals XP",
+              "type": "Resource",
+              "amount": 10
+            },
+            {
+              "rarity": 2,
+              "shares": 15000,
+              "name": "Victorious Maiden",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 1,
+              "shares": 14600,
+              "name": "1,000 generals XP",
+              "type": "Resource",
+              "amount": 10
+            },
+            {
+              "rarity": 1,
+              "shares": 14600,
+              "name": "Offering to Ulrich",
+              "type": "Resource",
+              "amount": 10
+            },
+            {
+              "rarity": 1,
+              "shares": 11000,
+              "name": "Offering to Beatrice",
+              "type": "Resource",
+              "amount": 5
+            },
+            {
+              "rarity": 2,
+              "shares": 11000,
+              "name": "Exalted Green Guardian of Plenty",
+              "type": "Decoration",
+              "amount": 1
+            },
+            {
+              "rarity": 1,
+              "shares": 5500,
+              "name": "Exalted Spring time tower",
+              "type": "Decoration",
+              "amount": 1
+            },
+            {
+              "rarity": 1,
+              "shares": 5500,
+              "name": "Exalted Purple Guardian of Plenty",
+              "type": "Decoration",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 5500,
+              "name": "Broken Egg Hall of Legends",
               "type": "Construction",
               "amount": 1
             },
             {
               "rarity": 2,
-              "shares": 900,
+              "shares": 5500,
+              "name": "Broken Egg Defense Workshop",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 5500,
+              "name": "Broken Egg Siege Workshop",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 5500,
+              "name": "Broken Egg Granary",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 5500,
+              "name": "Broken Egg Stone Quarry",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 5500,
+              "name": "Broken Egg Woodcutter",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
+              "shares": 4900,
               "name": "Broken Egg Storehouse",
               "type": "Construction",
               "amount": 1
             },
             {
-              "rarity": 2,
-              "shares": 900,
-              "name": "Broken Egg Dwelling",
-              "type": "Construction",
+              "rarity": 3,
+              "shares": 4400,
+              "name": "Imperial tulip",
+              "type": "Equipment",
               "amount": 1
             },
             {
-              "rarity": 2,
-              "shares": 900,
+              "rarity": 3,
+              "shares": 4400,
+              "name": "Birdhouse",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
+              "shares": 4400,
+              "name": "Silver PvP Gacha Set 2026",
+              "type": "Gem",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
+              "shares": 4400,
+              "name": "Silver PvP Gacha Set 2026",
+              "type": "Gem",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
+              "shares": 4400,
+              "name": "Silver PvP Gacha Set 2026",
+              "type": "Gem",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
+              "shares": 4400,
+              "name": "Silver PvP Gacha Set 2026",
+              "type": "Gem",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
+              "shares": 4000,
+              "name": "Sparrow prince's crest",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
+              "shares": 4000,
+              "name": "Evergreen Clover",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
+              "shares": 3700,
+              "name": "Silver Victorious Helmet",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
+              "shares": 3700,
+              "name": "Silver Victorious Armor",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
+              "shares": 3700,
+              "name": "Silver Victorious Mace",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
+              "shares": 3700,
+              "name": "Silver Victorious Artifact",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 4,
+              "shares": 1600,
               "name": "Broken Egg Greenhouse",
               "type": "Construction",
               "amount": 1
             },
             {
-              "rarity": 2,
-              "shares": 700,
-              "name": "Tizi's Offering to Ulrich",
-              "type": "Resource",
-              "amount": 1
-            },
-            {
-              "rarity": 3,
-              "shares": 700,
-              "name": "Broken Egg Dwelling",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 3,
-              "shares": 700,
-              "name": "Broken Egg Dwelling",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 3,
-              "shares": 400,
-              "name": "Hasan's Offering to Ludwig",
-              "type": "Resource",
-              "amount": 1
-            },
-            {
               "rarity": 4,
-              "shares": 100,
-              "name": "Exalted Purple Easter Ruins",
+              "shares": 500,
+              "name": "Exalted Purple Guardian of Renewal",
               "type": "Decoration",
               "amount": 1
             },
             {
               "rarity": 4,
-              "shares": 100,
-              "name": "Exalted Green Easter Ruins",
+              "shares": 400,
+              "name": "Exalted Green Guardian of Renewal",
               "type": "Decoration",
               "amount": 1
             }
@@ -7850,243 +8060,397 @@
             "what": "HollowMoonEgg",
             "amount": 100
           },
-          "total": 1000300,
+          "total": 501500,
           "entries": [
             {
               "rarity": 1,
-              "shares": 72000,
-              "name": "Bunch of eggs",
+              "shares": 18300,
+              "name": "Guardian of Plenty",
               "type": "Decoration",
               "amount": 1
             },
             {
               "rarity": 1,
-              "shares": 72000,
-              "name": "Offering to Ulrich",
+              "shares": 18300,
+              "name": "Relic splinters",
               "type": "Resource",
-              "amount": 10
+              "amount": 4000
             },
             {
               "rarity": 1,
-              "shares": 72000,
+              "shares": 18300,
               "name": "Offering to Ludwig",
               "type": "Resource",
               "amount": 15
             },
             {
-              "rarity": 1,
-              "shares": 72000,
-              "name": "Guardian of Spring",
-              "type": "Units",
-              "amount": 1500
-            },
-            {
-              "rarity": 1,
-              "shares": 72000,
-              "name": "Celestial Marksman",
-              "type": "Units",
-              "amount": 1500
-            },
-            {
-              "rarity": 1,
-              "shares": 72000,
+              "rarity": 2,
+              "shares": 18300,
               "name": "Easter Championess",
               "type": "Units",
               "amount": 1500
             },
             {
-              "rarity": 1,
-              "shares": 72000,
+              "rarity": 2,
+              "shares": 18300,
+              "name": "Guardian of Spring",
+              "type": "Units",
+              "amount": 1500
+            },
+            {
+              "rarity": 2,
+              "shares": 18300,
               "name": "Valkyrie Huntress",
               "type": "Units",
               "amount": 1500
             },
             {
-              "rarity": 1,
-              "shares": 57600,
-              "name": "1,000 generals XP",
+              "rarity": 2,
+              "shares": 18300,
+              "name": "Celestial Marksman",
+              "type": "Units",
+              "amount": 1500
+            },
+            {
+              "rarity": 2,
+              "shares": 13700,
+              "name": "Valenta's Offering to Ludwig",
               "type": "Resource",
-              "amount": 10
+              "amount": 5
+            },
+            {
+              "rarity": 2,
+              "shares": 13700,
+              "name": "Hasan's Offering to Ludwig",
+              "type": "Resource",
+              "amount": 5
             },
             {
               "rarity": 1,
-              "shares": 57600,
-              "name": "Offering to Beatrice",
-              "type": "Resource",
-              "amount": 4
-            },
-            {
-              "rarity": 1,
-              "shares": 48000,
+              "shares": 13600,
               "name": "5,000 generals XP",
               "type": "Resource",
               "amount": 10
             },
             {
               "rarity": 1,
-              "shares": 48000,
-              "name": "Exalted Purple Guardian of Nurture",
-              "type": "Decoration",
-              "amount": 1
+              "shares": 12200,
+              "name": "1,000 generals XP",
+              "type": "Resource",
+              "amount": 10
             },
             {
               "rarity": 1,
-              "shares": 48000,
-              "name": "Exalted Spring time tower",
-              "type": "Decoration",
-              "amount": 1
-            },
-            {
-              "rarity": 1,
-              "shares": 36000,
-              "name": "10,000 generals XP",
+              "shares": 12200,
+              "name": "Offering to Ulrich",
               "type": "Resource",
               "amount": 10
             },
             {
               "rarity": 2,
-              "shares": 36000,
-              "name": "Exalted Red Guardian of Nurture",
+              "shares": 12200,
+              "name": "Bronze PvP Gacha Set 2026",
+              "type": "Gem",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 12200,
+              "name": "Bronze PvP Gacha Set 2026",
+              "type": "Gem",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 12200,
+              "name": "Bronze PvP Gacha Set 2026",
+              "type": "Gem",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 12200,
+              "name": "Bronze PvP Gacha Set 2026",
+              "type": "Gem",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 12200,
+              "name": "Bronze Victorious Helmet",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 12200,
+              "name": "Bronze Victorious Armor",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 12200,
+              "name": "Bronze Victorious Mace",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 12200,
+              "name": "Bronze Victorious Artifact",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
+              "shares": 12200,
+              "name": "Silver PvP Gacha Set 2026",
+              "type": "Gem",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
+              "shares": 12200,
+              "name": "Silver PvP Gacha Set 2026",
+              "type": "Gem",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
+              "shares": 12200,
+              "name": "Silver PvP Gacha Set 2026",
+              "type": "Gem",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
+              "shares": 12200,
+              "name": "Silver PvP Gacha Set 2026",
+              "type": "Gem",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
+              "shares": 12200,
+              "name": "Silver Victorious Helmet",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
+              "shares": 12200,
+              "name": "Silver Victorious Armor",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
+              "shares": 12200,
+              "name": "Silver Victorious Mace",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
+              "shares": 12200,
+              "name": "Silver Victorious Artifact",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 1,
+              "shares": 9200,
+              "name": "Offering to Beatrice",
+              "type": "Resource",
+              "amount": 5
+            },
+            {
+              "rarity": 2,
+              "shares": 9200,
+              "name": "Victorious Maiden",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 9200,
+              "name": "Exalted Green Guardian of Plenty",
               "type": "Decoration",
               "amount": 1
             },
             {
               "rarity": 2,
-              "shares": 27000,
-              "name": "Relic splinters",
-              "type": "Resource",
-              "amount": 6000
-            },
-            {
-              "rarity": 2,
-              "shares": 21600,
-              "name": "Sasaki's Offering to Beatrice",
-              "type": "Resource",
-              "amount": 10
-            },
-            {
-              "rarity": 3,
-              "shares": 12000,
-              "name": "Gift of Spring",
-              "type": "Equipment",
-              "amount": 1
-            },
-            {
-              "rarity": 3,
-              "shares": 12000,
-              "name": "Bell of Spring",
-              "type": "Equipment",
-              "amount": 1
-            },
-            {
-              "rarity": 3,
-              "shares": 9000,
-              "name": "Frozen blossom",
-              "type": "Equipment",
-              "amount": 1
-            },
-            {
-              "rarity": 3,
-              "shares": 9000,
-              "name": "Blooming blossom",
-              "type": "Equipment",
-              "amount": 1
-            },
-            {
-              "rarity": 3,
-              "shares": 8300,
-              "name": "Broken Egg Dwelling",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 3,
-              "shares": 7700,
-              "name": "Broken Egg Dwelling",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 7700,
+              "shares": 6900,
               "name": "Tizi's Offering to Ulrich",
               "type": "Resource",
               "amount": 2
             },
             {
               "rarity": 2,
-              "shares": 7200,
-              "name": "Broken Egg tavern",
+              "shares": 6900,
+              "name": "Diana's Offering to Ulrich",
+              "type": "Resource",
+              "amount": 2
+            },
+            {
+              "rarity": 2,
+              "shares": 6900,
+              "name": "Barin's Offering to Ulrich",
+              "type": "Resource",
+              "amount": 2
+            },
+            {
+              "rarity": 2,
+              "shares": 4600,
+              "name": "Broken Egg Hall of Legends",
               "type": "Construction",
               "amount": 1
             },
             {
               "rarity": 2,
-              "shares": 7200,
+              "shares": 4600,
+              "name": "Broken Egg Defense Workshop",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 4600,
+              "name": "Broken Egg Siege Workshop",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 4600,
+              "name": "Broken Egg Granary",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 4600,
+              "name": "Broken Egg Stone Quarry",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 4600,
+              "name": "Broken Egg Woodcutter",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 3900,
+              "name": "10,000 generals XP",
+              "type": "Resource",
+              "amount": 10
+            },
+            {
+              "rarity": 1,
+              "shares": 3400,
+              "name": "Exalted Spring time tower",
+              "type": "Decoration",
+              "amount": 1
+            },
+            {
+              "rarity": 1,
+              "shares": 3400,
+              "name": "Exalted Purple Guardian of Plenty",
+              "type": "Decoration",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
+              "shares": 3300,
+              "name": "Imperial tulip",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
+              "shares": 3300,
+              "name": "Birdhouse",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
+              "shares": 3100,
+              "name": "Sparrow prince's crest",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
+              "shares": 3100,
+              "name": "Evergreen Clover",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 2800,
+              "name": "Exalted Red Guardian of Plenty",
+              "type": "Decoration",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
+              "shares": 2600,
               "name": "Broken Egg Storehouse",
               "type": "Construction",
               "amount": 1
             },
             {
-              "rarity": 2,
-              "shares": 7200,
-              "name": "Broken Egg Dwelling",
+              "rarity": 3,
+              "shares": 2500,
+              "name": "Broken Egg Storehouse",
               "type": "Construction",
               "amount": 1
             },
             {
-              "rarity": 2,
-              "shares": 7200,
+              "rarity": 3,
+              "shares": 2500,
+              "name": "Broken Egg Storehouse",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 4,
+              "shares": 1300,
               "name": "Broken Egg Greenhouse",
               "type": "Construction",
               "amount": 1
             },
             {
-              "rarity": 3,
-              "shares": 5400,
-              "name": "Hasan's Offering to Ludwig",
-              "type": "Resource",
-              "amount": 1
-            },
-            {
-              "rarity": 3,
-              "shares": 4800,
-              "name": "Broken Egg Dwelling",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 3,
-              "shares": 4800,
-              "name": "Broken Egg Dwelling",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
               "rarity": 4,
-              "shares": 3600,
-              "name": "Exalted Purple Easter Ruins",
+              "shares": 600,
+              "name": "Exalted Purple Guardian of Renewal",
               "type": "Decoration",
               "amount": 1
             },
             {
               "rarity": 4,
-              "shares": 1800,
-              "name": "Exalted Green Easter Ruins",
+              "shares": 500,
+              "name": "Exalted Green Guardian of Renewal",
               "type": "Decoration",
               "amount": 1
             },
             {
               "rarity": 4,
-              "shares": 1200,
-              "name": "Exalted Red Easter Ruins",
+              "shares": 300,
+              "name": "Exalted Red Guardian of Renewal",
               "type": "Decoration",
               "amount": 1
             },
             {
               "rarity": 4,
-              "shares": 400,
-              "name": "Exalted Purple Easter Hotspring",
+              "shares": 300,
+              "name": "Exalted Purple Guardian of Nature",
               "type": "Decoration",
               "amount": 1
             }
@@ -8098,236 +8462,432 @@
             "what": "HollowMoonEgg",
             "amount": 100
           },
-          "total": 99800,
+          "total": 399500,
           "entries": [
             {
               "rarity": 1,
-              "shares": 7000,
-              "name": "Bunch of eggs",
+              "shares": 15000,
+              "name": "Guardian of Plenty",
               "type": "Decoration",
               "amount": 1
             },
             {
               "rarity": 1,
-              "shares": 7000,
-              "name": "Offering to Ulrich",
+              "shares": 15000,
+              "name": "Relic splinters",
               "type": "Resource",
-              "amount": 20
+              "amount": 4000
             },
             {
               "rarity": 1,
-              "shares": 7000,
+              "shares": 15000,
               "name": "Offering to Ludwig",
               "type": "Resource",
-              "amount": 30
+              "amount": 15
             },
             {
-              "rarity": 1,
-              "shares": 7000,
-              "name": "Guardian of Spring",
-              "type": "Units",
-              "amount": 1500
-            },
-            {
-              "rarity": 1,
-              "shares": 7000,
-              "name": "Celestial Marksman",
-              "type": "Units",
-              "amount": 1500
-            },
-            {
-              "rarity": 1,
-              "shares": 7000,
+              "rarity": 2,
+              "shares": 15000,
               "name": "Easter Championess",
               "type": "Units",
               "amount": 1500
             },
             {
-              "rarity": 1,
-              "shares": 7000,
+              "rarity": 2,
+              "shares": 15000,
+              "name": "Guardian of Spring",
+              "type": "Units",
+              "amount": 1500
+            },
+            {
+              "rarity": 2,
+              "shares": 15000,
               "name": "Valkyrie Huntress",
               "type": "Units",
               "amount": 1500
             },
             {
-              "rarity": 1,
-              "shares": 5600,
-              "name": "Offering to Beatrice",
+              "rarity": 2,
+              "shares": 15000,
+              "name": "Celestial Marksman",
+              "type": "Units",
+              "amount": 1500
+            },
+            {
+              "rarity": 3,
+              "shares": 15000,
+              "name": "Silver PvP Gacha Set 2026",
+              "type": "Gem",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
+              "shares": 15000,
+              "name": "Silver PvP Gacha Set 2026",
+              "type": "Gem",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
+              "shares": 15000,
+              "name": "Silver PvP Gacha Set 2026",
+              "type": "Gem",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
+              "shares": 15000,
+              "name": "Silver PvP Gacha Set 2026",
+              "type": "Gem",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
+              "shares": 15000,
+              "name": "Silver Victorious Helmet",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
+              "shares": 15000,
+              "name": "Silver Victorious Armor",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
+              "shares": 15000,
+              "name": "Silver Victorious Mace",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
+              "shares": 15000,
+              "name": "Silver Victorious Artifact",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 11300,
+              "name": "Valenta's Offering to Ludwig",
               "type": "Resource",
-              "amount": 8
+              "amount": 5
+            },
+            {
+              "rarity": 2,
+              "shares": 11300,
+              "name": "Hasan's Offering to Ludwig",
+              "type": "Resource",
+              "amount": 5
             },
             {
               "rarity": 1,
-              "shares": 4700,
-              "name": "Exalted Purple Guardian of Nurture",
+              "shares": 11100,
+              "name": "5,000 generals XP",
+              "type": "Resource",
+              "amount": 10
+            },
+            {
+              "rarity": 1,
+              "shares": 10000,
+              "name": "1,000 generals XP",
+              "type": "Resource",
+              "amount": 10
+            },
+            {
+              "rarity": 1,
+              "shares": 10000,
+              "name": "Offering to Ulrich",
+              "type": "Resource",
+              "amount": 10
+            },
+            {
+              "rarity": 1,
+              "shares": 7500,
+              "name": "Offering to Beatrice",
+              "type": "Resource",
+              "amount": 5
+            },
+            {
+              "rarity": 2,
+              "shares": 7500,
+              "name": "Exalted Green Guardian of Plenty",
               "type": "Decoration",
               "amount": 1
             },
             {
+              "rarity": 2,
+              "shares": 5600,
+              "name": "Tizi's Offering to Ulrich",
+              "type": "Resource",
+              "amount": 2
+            },
+            {
+              "rarity": 2,
+              "shares": 5600,
+              "name": "Diana's Offering to Ulrich",
+              "type": "Resource",
+              "amount": 2
+            },
+            {
+              "rarity": 2,
+              "shares": 5600,
+              "name": "Barin's Offering to Ulrich",
+              "type": "Resource",
+              "amount": 2
+            },
+            {
               "rarity": 1,
-              "shares": 4700,
+              "shares": 3800,
               "name": "Exalted Spring time tower",
               "type": "Decoration",
               "amount": 1
             },
             {
               "rarity": 1,
-              "shares": 3500,
+              "shares": 3800,
+              "name": "Exalted Purple Guardian of Plenty",
+              "type": "Decoration",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 3800,
+              "name": "Broken Egg Hall of Legends",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 3800,
+              "name": "Broken Egg Defense Workshop",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 3800,
+              "name": "Broken Egg Siege Workshop",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 3800,
+              "name": "Broken Egg Granary",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 3800,
+              "name": "Broken Egg Stone Quarry",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 3800,
+              "name": "Broken Egg Woodcutter",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 3200,
+              "name": "10,000 generals XP",
+              "type": "Resource",
+              "amount": 10
+            },
+            {
+              "rarity": 2,
+              "shares": 3200,
               "name": "12,500 generals XP",
               "type": "Resource",
               "amount": 10
             },
             {
               "rarity": 2,
-              "shares": 3500,
-              "name": "Exalted Red Guardian of Nurture",
+              "shares": 3200,
+              "name": "Exalted Green Guardian of Plenty",
               "type": "Decoration",
               "amount": 1
             },
             {
               "rarity": 3,
-              "shares": 3500,
-              "name": "Broken Egg Dwelling",
-              "type": "Construction",
+              "shares": 2700,
+              "name": "Imperial tulip",
+              "type": "Equipment",
               "amount": 1
             },
             {
               "rarity": 3,
-              "shares": 2800,
-              "name": "Broken Egg Dwelling",
-              "type": "Construction",
+              "shares": 2700,
+              "name": "Birdhouse",
+              "type": "Equipment",
               "amount": 1
             },
             {
               "rarity": 2,
-              "shares": 2600,
-              "name": "Relic splinters",
-              "type": "Resource",
-              "amount": 8000
+              "shares": 2500,
+              "name": "Bronze PvP Gacha Set 2026",
+              "type": "Gem",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 2500,
+              "name": "Bronze PvP Gacha Set 2026",
+              "type": "Gem",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 2500,
+              "name": "Bronze PvP Gacha Set 2026",
+              "type": "Gem",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 2500,
+              "name": "Bronze PvP Gacha Set 2026",
+              "type": "Gem",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 2500,
+              "name": "Bronze Victorious Helmet",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 2500,
+              "name": "Bronze Victorious Armor",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 2500,
+              "name": "Bronze Victorious Mace",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 2500,
+              "name": "Bronze Victorious Artifact",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 2500,
+              "name": "Victorious Maiden",
+              "type": "Equipment",
+              "amount": 1
             },
             {
               "rarity": 3,
-              "shares": 2300,
-              "name": "Broken Egg Dwelling",
-              "type": "Construction",
+              "shares": 2500,
+              "name": "Sparrow prince's crest",
+              "type": "Equipment",
               "amount": 1
             },
             {
               "rarity": 3,
-              "shares": 2300,
-              "name": "Broken Egg Dwelling",
-              "type": "Construction",
+              "shares": 2500,
+              "name": "Evergreen Clover",
+              "type": "Equipment",
               "amount": 1
             },
             {
               "rarity": 2,
-              "shares": 2100,
-              "name": "Sasaki's Offering to Beatrice",
-              "type": "Resource",
-              "amount": 10
+              "shares": 2200,
+              "name": "Exalted Red Guardian of Plenty",
+              "type": "Decoration",
+              "amount": 1
             },
             {
               "rarity": 2,
-              "shares": 1300,
+              "shares": 2200,
+              "name": "Exalted Green Guardian of Plenty",
+              "type": "Decoration",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 2200,
               "name": "Exalted Green Guardian of Nurture",
               "type": "Decoration",
               "amount": 1
             },
             {
-              "rarity": 2,
-              "shares": 1300,
-              "name": "Exalted Green Guardian of Nurture",
-              "type": "Decoration",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 1300,
-              "name": "Exalted Green Guardian of Nurture",
-              "type": "Decoration",
-              "amount": 1
-            },
-            {
               "rarity": 3,
-              "shares": 1200,
-              "name": "Gift of Spring",
-              "type": "Equipment",
-              "amount": 1
-            },
-            {
-              "rarity": 3,
-              "shares": 1200,
-              "name": "Bell of Spring",
-              "type": "Equipment",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 1200,
-              "name": "Tizi's Offering to Ulrich",
-              "type": "Resource",
-              "amount": 5
-            },
-            {
-              "rarity": 3,
-              "shares": 900,
-              "name": "Frozen blossom",
-              "type": "Equipment",
-              "amount": 1
-            },
-            {
-              "rarity": 3,
-              "shares": 900,
-              "name": "Blooming blossom",
-              "type": "Equipment",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 700,
-              "name": "Broken Egg tavern",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 700,
+              "shares": 2200,
               "name": "Broken Egg Storehouse",
               "type": "Construction",
               "amount": 1
             },
             {
-              "rarity": 2,
-              "shares": 700,
-              "name": "Broken Egg Dwelling",
+              "rarity": 3,
+              "shares": 2000,
+              "name": "Broken Egg Storehouse",
               "type": "Construction",
               "amount": 1
             },
             {
-              "rarity": 2,
-              "shares": 700,
+              "rarity": 3,
+              "shares": 2000,
+              "name": "Broken Egg Storehouse",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 4,
+              "shares": 1100,
               "name": "Broken Egg Greenhouse",
               "type": "Construction",
               "amount": 1
             },
             {
-              "rarity": 2,
-              "shares": 600,
-              "name": "Hasan's Offering to Ludwig",
-              "type": "Resource",
-              "amount": 2
-            },
-            {
               "rarity": 4,
-              "shares": 400,
-              "name": "Exalted Purple Easter Hotspring",
+              "shares": 800,
+              "name": "Exalted Purple Guardian of Renewal",
               "type": "Decoration",
               "amount": 1
             },
             {
               "rarity": 4,
-              "shares": 100,
-              "name": "Exalted Green Easter Hotspring",
+              "shares": 500,
+              "name": "Exalted Green Guardian of Renewal",
+              "type": "Decoration",
+              "amount": 1
+            },
+            {
+              "rarity": 4,
+              "shares": 400,
+              "name": "Exalted Red Guardian of Renewal",
+              "type": "Decoration",
+              "amount": 1
+            },
+            {
+              "rarity": 4,
+              "shares": 300,
+              "name": "Exalted Purple Guardian of Nature",
+              "type": "Decoration",
+              "amount": 1
+            },
+            {
+              "rarity": 4,
+              "shares": 200,
+              "name": "Exalted Green Guardian of Nature",
               "type": "Decoration",
               "amount": 1
             }
@@ -8339,236 +8899,446 @@
             "what": "HollowMoonEgg",
             "amount": 100
           },
-          "total": 1000100,
+          "total": 2000200,
           "entries": [
             {
               "rarity": 1,
-              "shares": 70600,
-              "name": "Offering to Ulrich",
+              "shares": 79400,
+              "name": "Relic splinters",
               "type": "Resource",
-              "amount": 30
+              "amount": 6000
             },
             {
               "rarity": 1,
-              "shares": 70600,
+              "shares": 79400,
               "name": "Offering to Ludwig",
               "type": "Resource",
-              "amount": 50
+              "amount": 15
             },
             {
-              "rarity": 1,
-              "shares": 70600,
-              "name": "Guardian of Spring",
-              "type": "Units",
-              "amount": 1500
-            },
-            {
-              "rarity": 1,
-              "shares": 70600,
-              "name": "Celestial Marksman",
-              "type": "Units",
-              "amount": 1500
-            },
-            {
-              "rarity": 1,
-              "shares": 70600,
+              "rarity": 2,
+              "shares": 79400,
               "name": "Easter Championess",
               "type": "Units",
               "amount": 1500
             },
             {
-              "rarity": 1,
-              "shares": 70600,
+              "rarity": 2,
+              "shares": 79400,
+              "name": "Guardian of Spring",
+              "type": "Units",
+              "amount": 1500
+            },
+            {
+              "rarity": 2,
+              "shares": 79400,
               "name": "Valkyrie Huntress",
               "type": "Units",
               "amount": 1500
             },
             {
-              "rarity": 1,
-              "shares": 56500,
-              "name": "Offering to Beatrice",
-              "type": "Resource",
-              "amount": 15
+              "rarity": 2,
+              "shares": 79400,
+              "name": "Celestial Marksman",
+              "type": "Units",
+              "amount": 1500
             },
             {
-              "rarity": 1,
-              "shares": 47100,
-              "name": "Exalted Purple Guardian of Nurture",
-              "type": "Decoration",
+              "rarity": 3,
+              "shares": 79400,
+              "name": "Silver PvP Gacha Set 2026",
+              "type": "Gem",
               "amount": 1
             },
             {
-              "rarity": 1,
-              "shares": 47100,
-              "name": "Exalted Spring time tower",
-              "type": "Decoration",
+              "rarity": 3,
+              "shares": 79400,
+              "name": "Silver PvP Gacha Set 2026",
+              "type": "Gem",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
+              "shares": 79400,
+              "name": "Silver PvP Gacha Set 2026",
+              "type": "Gem",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
+              "shares": 79400,
+              "name": "Silver PvP Gacha Set 2026",
+              "type": "Gem",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
+              "shares": 79400,
+              "name": "Silver Victorious Helmet",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
+              "shares": 79400,
+              "name": "Silver Victorious Armor",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
+              "shares": 79400,
+              "name": "Silver Victorious Mace",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
+              "shares": 79400,
+              "name": "Silver Victorious Artifact",
+              "type": "Equipment",
               "amount": 1
             },
             {
               "rarity": 2,
-              "shares": 47100,
-              "name": "15,000 generals XP",
+              "shares": 59400,
+              "name": "Tizi's Offering to Ulrich",
               "type": "Resource",
               "amount": 10
             },
             {
               "rarity": 2,
-              "shares": 47100,
-              "name": "Exalted Red Guardian of Nurture",
-              "type": "Decoration",
-              "amount": 1
-            },
-            {
-              "rarity": 3,
-              "shares": 35300,
-              "name": "Broken Egg Dwelling",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 35300,
-              "name": "Relic splinters",
+              "shares": 59400,
+              "name": "Diana's Offering to Ulrich",
               "type": "Resource",
-              "amount": 10000
-            },
-            {
-              "rarity": 3,
-              "shares": 28200,
-              "name": "Broken Egg Dwelling",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 3,
-              "shares": 23500,
-              "name": "Broken Egg Dwelling",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 3,
-              "shares": 23500,
-              "name": "Broken Egg Dwelling",
-              "type": "Construction",
-              "amount": 1
+              "amount": 4
             },
             {
               "rarity": 2,
-              "shares": 23500,
-              "name": "Tizi's Offering to Ulrich",
+              "shares": 59400,
+              "name": "Barin's Offering to Ulrich",
+              "type": "Resource",
+              "amount": 4
+            },
+            {
+              "rarity": 1,
+              "shares": 58800,
+              "name": "5,000 generals XP",
+              "type": "Resource",
+              "amount": 10
+            },
+            {
+              "rarity": 1,
+              "shares": 52800,
+              "name": "1,000 generals XP",
+              "type": "Resource",
+              "amount": 10
+            },
+            {
+              "rarity": 1,
+              "shares": 52800,
+              "name": "Offering to Ulrich",
+              "type": "Resource",
+              "amount": 10
+            },
+            {
+              "rarity": 1,
+              "shares": 39600,
+              "name": "Offering to Beatrice",
               "type": "Resource",
               "amount": 5
             },
             {
               "rarity": 2,
-              "shares": 17700,
-              "name": "Hasan's Offering to Ludwig",
-              "type": "Resource",
-              "amount": 2
+              "shares": 39600,
+              "name": "Exalted Green Guardian of Plenty",
+              "type": "Decoration",
+              "amount": 1
             },
             {
-              "rarity": 2,
-              "shares": 13200,
-              "name": "Exalted Green Guardian of Nurture",
+              "rarity": 1,
+              "shares": 19800,
+              "name": "Exalted Spring time tower",
+              "type": "Decoration",
+              "amount": 1
+            },
+            {
+              "rarity": 1,
+              "shares": 19800,
+              "name": "Exalted Purple Guardian of Plenty",
               "type": "Decoration",
               "amount": 1
             },
             {
               "rarity": 2,
-              "shares": 13200,
-              "name": "Exalted Green Guardian of Nurture",
-              "type": "Decoration",
+              "shares": 19800,
+              "name": "Broken Egg Hall of Legends",
+              "type": "Construction",
               "amount": 1
             },
             {
               "rarity": 2,
-              "shares": 13200,
-              "name": "Exalted Green Guardian of Nurture",
-              "type": "Decoration",
+              "shares": 19800,
+              "name": "Broken Egg Defense Workshop",
+              "type": "Construction",
               "amount": 1
             },
             {
               "rarity": 2,
-              "shares": 11800,
-              "name": "Sasaki's Offering to Beatrice",
+              "shares": 19800,
+              "name": "Broken Egg Siege Workshop",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 19800,
+              "name": "Broken Egg Granary",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 19800,
+              "name": "Broken Egg Stone Quarry",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 19800,
+              "name": "Broken Egg Woodcutter",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 17000,
+              "name": "10,000 generals XP",
               "type": "Resource",
               "amount": 10
             },
             {
-              "rarity": 3,
-              "shares": 11800,
-              "name": "Gift of Spring",
-              "type": "Equipment",
+              "rarity": 2,
+              "shares": 17000,
+              "name": "12,500 generals XP",
+              "type": "Resource",
+              "amount": 10
+            },
+            {
+              "rarity": 2,
+              "shares": 17000,
+              "name": "Exalted Green Guardian of Plenty",
+              "type": "Decoration",
               "amount": 1
             },
             {
-              "rarity": 3,
-              "shares": 11800,
-              "name": "Bell of Spring",
-              "type": "Equipment",
+              "rarity": 2,
+              "shares": 15800,
+              "name": "Broken Egg Dwelling",
+              "type": "Construction",
               "amount": 1
             },
             {
-              "rarity": 3,
-              "shares": 11800,
-              "name": "Broken Egg Greenhouse",
+              "rarity": 2,
+              "shares": 15800,
+              "name": "Broken Egg Dwelling",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 15800,
+              "name": "Broken Egg Dwelling",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 15800,
+              "name": "Broken Egg Dwelling",
               "type": "Construction",
               "amount": 1
             },
             {
               "rarity": 3,
-              "shares": 11800,
-              "name": "Broken Egg Greenhouse",
-              "type": "Construction",
-              "amount": 1
+              "shares": 15800,
+              "name": "Sasaki's Offering to Beatrice",
+              "type": "Resource",
+              "amount": 2
             },
             {
               "rarity": 3,
-              "shares": 11800,
-              "name": "Broken Egg Greenhouse",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 3,
-              "shares": 11800,
-              "name": "Broken Egg Greenhouse",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 3,
-              "shares": 8800,
-              "name": "Frozen blossom",
+              "shares": 14400,
+              "name": "Imperial tulip",
               "type": "Equipment",
               "amount": 1
             },
             {
               "rarity": 3,
-              "shares": 8800,
-              "name": "Blooming blossom",
+              "shares": 14400,
+              "name": "Birdhouse",
               "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
+              "shares": 13200,
+              "name": "Sparrow prince's crest",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
+              "shares": 13200,
+              "name": "Evergreen Clover",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 11800,
+              "name": "Exalted Red Guardian of Plenty",
+              "type": "Decoration",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 11800,
+              "name": "Exalted Green Guardian of Plenty",
+              "type": "Decoration",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 11800,
+              "name": "Exalted Green Guardian of Nurture",
+              "type": "Decoration",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
+              "shares": 11400,
+              "name": "Broken Egg Storehouse",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
+              "shares": 11400,
+              "name": "Kaelrith's Offering to Beatrice",
+              "type": "Resource",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
+              "shares": 10600,
+              "name": "Broken Egg Storehouse",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
+              "shares": 10600,
+              "name": "Broken Egg Storehouse",
+              "type": "Construction",
               "amount": 1
             },
             {
               "rarity": 4,
-              "shares": 3500,
-              "name": "Exalted Purple Easter Hotspring",
+              "shares": 5600,
+              "name": "Broken Egg Greenhouse",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 4,
+              "shares": 5600,
+              "name": "Exalted Purple Guardian of Nature",
+              "type": "Decoration",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
+              "shares": 4000,
+              "name": "15,000 generals XP",
+              "type": "Resource",
+              "amount": 20
+            },
+            {
+              "rarity": 4,
+              "shares": 4000,
+              "name": "Gold PvP Gacha Set 2026",
+              "type": "Gem",
+              "amount": 1
+            },
+            {
+              "rarity": 4,
+              "shares": 4000,
+              "name": "Gold PvP Gacha Set 2026",
+              "type": "Gem",
+              "amount": 1
+            },
+            {
+              "rarity": 4,
+              "shares": 4000,
+              "name": "Gold PvP Gacha Set 2026",
+              "type": "Gem",
+              "amount": 1
+            },
+            {
+              "rarity": 4,
+              "shares": 4000,
+              "name": "Gold PvP Gacha Set 2026",
+              "type": "Gem",
+              "amount": 1
+            },
+            {
+              "rarity": 4,
+              "shares": 4000,
+              "name": "Exalted Green Guardian of Nature",
               "type": "Decoration",
               "amount": 1
             },
             {
               "rarity": 4,
-              "shares": 1200,
-              "name": "Exalted Green Easter Hotspring",
-              "type": "Decoration",
+              "shares": 2000,
+              "name": "Gold Victorious Helmet",
+              "type": "Equipment",
               "amount": 1
             },
             {
               "rarity": 4,
-              "shares": 100,
-              "name": "Exalted Red Easter Hotspring",
+              "shares": 2000,
+              "name": "Gold Victorious Armor",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 4,
+              "shares": 2000,
+              "name": "Gold Victorious Mace",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 4,
+              "shares": 2000,
+              "name": "Gold Victorious Artifact",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 4,
+              "shares": 400,
+              "name": "Victorious Vanguard",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 4,
+              "shares": 200,
+              "name": "Exalted Red Guardian of Nature",
               "type": "Decoration",
               "amount": 1
             }
@@ -8586,173 +9356,201 @@
             "what": "FrozenCarrot",
             "amount": 100
           },
-          "total": 99800,
+          "total": 100000,
           "entries": [
             {
               "rarity": 1,
-              "shares": 10800,
-              "name": "Candy Cane Protector",
-              "type": "Units",
-              "amount": 1000
+              "shares": 7000,
+              "name": "Relic splinters",
+              "type": "Resource",
+              "amount": 2000
             },
             {
               "rarity": 1,
-              "shares": 10800,
-              "name": "Jolly Gingerbread Sniper",
-              "type": "Units",
-              "amount": 1000
-            },
-            {
-              "rarity": 1,
-              "shares": 8000,
+              "shares": 7000,
               "name": "Offering to Ludwig",
               "type": "Resource",
-              "amount": 10
+              "amount": 15
             },
             {
               "rarity": 1,
-              "shares": 8000,
-              "name": "Offering to Beatrice",
-              "type": "Resource",
-              "amount": 2
-            },
-            {
-              "rarity": 1,
-              "shares": 8000,
-              "name": "Offering to Ulrich",
-              "type": "Resource",
-              "amount": 5
-            },
-            {
-              "rarity": 2,
-              "shares": 3600,
-              "name": "Winter Wreath",
-              "type": "Equipment",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 3600,
-              "name": "Candy Cane Crest",
-              "type": "Equipment",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 3200,
-              "name": "Winter market",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 3200,
-              "name": "Winter flour mill",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 3200,
-              "name": "Winter quarry",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 3200,
-              "name": "Winter research tower",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 3200,
-              "name": "Winter siege workshop",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 3200,
-              "name": "Winter stonemason",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 3200,
-              "name": "Winter storehouse",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 3200,
-              "name": "Winter farm",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 3200,
-              "name": "Winter hospital",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 3200,
-              "name": "Winter keep",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 2700,
-              "name": "Winter estate",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 2700,
-              "name": "Exalted Purple Christmas Pyramid",
+              "shares": 7000,
+              "name": "Gingerbread house",
               "type": "Decoration",
               "amount": 1
             },
             {
               "rarity": 2,
-              "shares": 2700,
-              "name": "Winter bakery",
+              "shares": 6500,
+              "name": "Christmas Archer",
+              "type": "Units",
+              "amount": 1500
+            },
+            {
+              "rarity": 2,
+              "shares": 6500,
+              "name": "Christmas Huntress",
+              "type": "Units",
+              "amount": 1500
+            },
+            {
+              "rarity": 2,
+              "shares": 6500,
+              "name": "Christmas Warrior",
+              "type": "Units",
+              "amount": 1500
+            },
+            {
+              "rarity": 2,
+              "shares": 6500,
+              "name": "Christmas Guardian",
+              "type": "Units",
+              "amount": 1500
+            },
+            {
+              "rarity": 1,
+              "shares": 5800,
+              "name": "Offering to Ulrich",
+              "type": "Resource",
+              "amount": 10
+            },
+            {
+              "rarity": 1,
+              "shares": 5800,
+              "name": "1,000 generals XP",
+              "type": "Resource",
+              "amount": 10
+            },
+            {
+              "rarity": 2,
+              "shares": 4300,
+              "name": "Valenta's Offering to Ludwig",
+              "type": "Resource",
+              "amount": 5
+            },
+            {
+              "rarity": 1,
+              "shares": 4300,
+              "name": "Offering to Beatrice",
+              "type": "Resource",
+              "amount": 5
+            },
+            {
+              "rarity": 2,
+              "shares": 4300,
+              "name": "Hasan's Offering to Ludwig",
+              "type": "Resource",
+              "amount": 5
+            },
+            {
+              "rarity": 3,
+              "shares": 2900,
+              "name": "Sasaki's Offering to Beatrice",
+              "type": "Resource",
+              "amount": 1
+            },
+            {
+              "rarity": 1,
+              "shares": 2200,
+              "name": "Exalted Purple Taming of the wild",
+              "type": "Decoration",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 2200,
+              "name": "Wintertide siege workshop",
               "type": "Construction",
               "amount": 1
             },
             {
               "rarity": 2,
-              "shares": 2700,
-              "name": "Winter barracks",
+              "shares": 2200,
+              "name": "Wintertide defense workshop",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 2200,
+              "name": "Wintertide Bakery",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 2200,
+              "name": "Winter Stronghold",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 2200,
+              "name": "Christmas Relic Woodcutter",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 2200,
+              "name": "Christmas Greenhouse",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 2200,
+              "name": "Christmas Dwelling",
               "type": "Construction",
               "amount": 1
             },
             {
               "rarity": 3,
-              "shares": 1800,
+              "shares": 1900,
               "name": "Nutcracker's snow globe",
               "type": "Equipment",
               "amount": 1
             },
             {
               "rarity": 3,
-              "shares": 1800,
+              "shares": 1900,
+              "name": "Candy Cane Crest",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
+              "shares": 1700,
               "name": "Giftwrapped Garrison",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
+              "shares": 1700,
+              "name": "Winter Wreath",
               "type": "Equipment",
               "amount": 1
             },
             {
               "rarity": 4,
               "shares": 600,
-              "name": "Exalted Purple Christmas Fountain",
+              "name": "Christmas Dwelling",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 4,
+              "shares": 100,
+              "name": "Exalted Purple Cave of the Winter Polar Bear",
+              "type": "Decoration",
+              "amount": 1
+            },
+            {
+              "rarity": 4,
+              "shares": 100,
+              "name": "Exalted Purple Cave of the Winter Fox",
               "type": "Decoration",
               "amount": 1
             }
@@ -8764,180 +9562,257 @@
             "what": "FrozenCarrot",
             "amount": 100
           },
-          "total": 99600,
+          "total": 100400,
           "entries": [
             {
               "rarity": 1,
-              "shares": 10500,
-              "name": "Candy Cane Protector",
-              "type": "Units",
-              "amount": 1000
+              "shares": 5700,
+              "name": "Relic splinters",
+              "type": "Resource",
+              "amount": 2000
             },
             {
               "rarity": 1,
-              "shares": 10500,
-              "name": "Jolly Gingerbread Sniper",
-              "type": "Units",
-              "amount": 1000
-            },
-            {
-              "rarity": 1,
-              "shares": 6800,
+              "shares": 5700,
               "name": "Offering to Ludwig",
+              "type": "Resource",
+              "amount": 15
+            },
+            {
+              "rarity": 1,
+              "shares": 5700,
+              "name": "Gingerbread house",
+              "type": "Decoration",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 5300,
+              "name": "Christmas Archer",
+              "type": "Units",
+              "amount": 1500
+            },
+            {
+              "rarity": 2,
+              "shares": 5300,
+              "name": "Christmas Huntress",
+              "type": "Units",
+              "amount": 1500
+            },
+            {
+              "rarity": 2,
+              "shares": 5300,
+              "name": "Christmas Warrior",
+              "type": "Units",
+              "amount": 1500
+            },
+            {
+              "rarity": 2,
+              "shares": 5300,
+              "name": "Christmas Guardian",
+              "type": "Units",
+              "amount": 1500
+            },
+            {
+              "rarity": 1,
+              "shares": 4700,
+              "name": "Offering to Ulrich",
               "type": "Resource",
               "amount": 10
             },
             {
               "rarity": 1,
-              "shares": 6800,
-              "name": "Offering to Ulrich",
+              "shares": 4700,
+              "name": "1,000 generals XP",
+              "type": "Resource",
+              "amount": 10
+            },
+            {
+              "rarity": 1,
+              "shares": 4700,
+              "name": "5,000 generals XP",
+              "type": "Resource",
+              "amount": 10
+            },
+            {
+              "rarity": 2,
+              "shares": 3600,
+              "name": "Valenta's Offering to Ludwig",
               "type": "Resource",
               "amount": 5
             },
             {
               "rarity": 1,
-              "shares": 6800,
+              "shares": 3600,
               "name": "Offering to Beatrice",
+              "type": "Resource",
+              "amount": 5
+            },
+            {
+              "rarity": 2,
+              "shares": 3600,
+              "name": "Hasan's Offering to Ludwig",
+              "type": "Resource",
+              "amount": 5
+            },
+            {
+              "rarity": 2,
+              "shares": 3600,
+              "name": "Exalted Green Taming of the wild",
+              "type": "Decoration",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 2700,
+              "name": "Tizi's Offering to Ulrich",
               "type": "Resource",
               "amount": 2
             },
             {
               "rarity": 2,
-              "shares": 4200,
-              "name": "Winter Wreath",
-              "type": "Equipment",
+              "shares": 2700,
+              "name": "Diana's Offering to Ulrich",
+              "type": "Resource",
+              "amount": 2
+            },
+            {
+              "rarity": 2,
+              "shares": 2700,
+              "name": "Barin's Offering to Ulrich",
+              "type": "Resource",
+              "amount": 2
+            },
+            {
+              "rarity": 3,
+              "shares": 2400,
+              "name": "Sasaki's Offering to Beatrice",
+              "type": "Resource",
+              "amount": 1
+            },
+            {
+              "rarity": 1,
+              "shares": 1800,
+              "name": "Exalted Purple Taming of the wild",
+              "type": "Decoration",
               "amount": 1
             },
             {
               "rarity": 2,
-              "shares": 4200,
-              "name": "Candy Cane Crest",
-              "type": "Equipment",
+              "shares": 1800,
+              "name": "Wintertide siege workshop",
+              "type": "Construction",
               "amount": 1
             },
             {
               "rarity": 2,
-              "shares": 4200,
+              "shares": 1800,
+              "name": "Wintertide defense workshop",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 1800,
+              "name": "Wintertide Bakery",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 1800,
+              "name": "Winter Stronghold",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 1800,
+              "name": "Christmas Relic Woodcutter",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 1800,
+              "name": "Christmas Greenhouse",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 1800,
               "name": "Christmas Dwelling",
               "type": "Construction",
               "amount": 1
             },
             {
               "rarity": 2,
-              "shares": 3100,
-              "name": "Winter market",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 3100,
-              "name": "Winter flour mill",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 3100,
-              "name": "Winter quarry",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 3100,
-              "name": "Winter research tower",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 3100,
-              "name": "Winter siege workshop",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 3100,
-              "name": "Winter stonemason",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 3100,
-              "name": "Winter storehouse",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 3100,
-              "name": "Winter farm",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 3100,
-              "name": "Winter hospital",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 3100,
-              "name": "Winter keep",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 2400,
-              "name": "Winter estate",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 2400,
-              "name": "Exalted Purple Christmas Pyramid",
-              "type": "Decoration",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 2400,
-              "name": "Winter bakery",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 2400,
-              "name": "Winter barracks",
+              "shares": 1800,
+              "name": "Christmas Greenhouse",
               "type": "Construction",
               "amount": 1
             },
             {
               "rarity": 3,
-              "shares": 2100,
+              "shares": 1600,
               "name": "Nutcracker's snow globe",
               "type": "Equipment",
               "amount": 1
             },
             {
               "rarity": 3,
-              "shares": 2100,
+              "shares": 1600,
+              "name": "Candy Cane Crest",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
+              "shares": 1400,
               "name": "Giftwrapped Garrison",
               "type": "Equipment",
               "amount": 1
             },
             {
+              "rarity": 3,
+              "shares": 1400,
+              "name": "Winter Wreath",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
               "rarity": 4,
-              "shares": 800,
-              "name": "Exalted Purple Christmas Fountain",
+              "shares": 500,
+              "name": "Christmas Dwelling",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 4,
+              "shares": 100,
+              "name": "Exalted Purple Cave of the Winter Polar Bear",
+              "type": "Decoration",
+              "amount": 1
+            },
+            {
+              "rarity": 4,
+              "shares": 100,
+              "name": "Exalted Purple Cave of the Winter Fox",
+              "type": "Decoration",
+              "amount": 1
+            },
+            {
+              "rarity": 4,
+              "shares": 100,
+              "name": "Exalted Green Cave of the Winter Fox",
+              "type": "Decoration",
+              "amount": 1
+            },
+            {
+              "rarity": 4,
+              "shares": 100,
+              "name": "Exalted Green Cave of the Winter Polar Bear",
               "type": "Decoration",
               "amount": 1
             }
@@ -8949,201 +9824,320 @@
             "what": "FrozenCarrot",
             "amount": 100
           },
-          "total": 100600,
+          "total": 100000,
           "entries": [
             {
               "rarity": 1,
-              "shares": 9900,
-              "name": "Candy Cane Protector",
-              "type": "Units",
-              "amount": 1000
-            },
-            {
-              "rarity": 1,
-              "shares": 9900,
-              "name": "Jolly Gingerbread Sniper",
-              "type": "Units",
-              "amount": 1000
-            },
-            {
-              "rarity": 1,
-              "shares": 6700,
-              "name": "Offering to Beatrice",
+              "shares": 5300,
+              "name": "Relic splinters",
               "type": "Resource",
-              "amount": 2
+              "amount": 4000
             },
             {
               "rarity": 1,
-              "shares": 4900,
+              "shares": 5300,
               "name": "Offering to Ludwig",
+              "type": "Resource",
+              "amount": 15
+            },
+            {
+              "rarity": 1,
+              "shares": 5300,
+              "name": "Gingerbread house",
+              "type": "Decoration",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 5000,
+              "name": "Christmas Archer",
+              "type": "Units",
+              "amount": 1500
+            },
+            {
+              "rarity": 2,
+              "shares": 5000,
+              "name": "Christmas Huntress",
+              "type": "Units",
+              "amount": 1500
+            },
+            {
+              "rarity": 2,
+              "shares": 5000,
+              "name": "Christmas Warrior",
+              "type": "Units",
+              "amount": 1500
+            },
+            {
+              "rarity": 2,
+              "shares": 5000,
+              "name": "Christmas Guardian",
+              "type": "Units",
+              "amount": 1500
+            },
+            {
+              "rarity": 1,
+              "shares": 4500,
+              "name": "Offering to Ulrich",
               "type": "Resource",
               "amount": 10
             },
             {
               "rarity": 1,
-              "shares": 4900,
-              "name": "Offering to Ulrich",
+              "shares": 4500,
+              "name": "1,000 generals XP",
+              "type": "Resource",
+              "amount": 10
+            },
+            {
+              "rarity": 1,
+              "shares": 4500,
+              "name": "5,000 generals XP",
+              "type": "Resource",
+              "amount": 10
+            },
+            {
+              "rarity": 2,
+              "shares": 3300,
+              "name": "Valenta's Offering to Ludwig",
+              "type": "Resource",
+              "amount": 5
+            },
+            {
+              "rarity": 1,
+              "shares": 3300,
+              "name": "Offering to Beatrice",
               "type": "Resource",
               "amount": 5
             },
             {
               "rarity": 2,
-              "shares": 3900,
-              "name": "Winter Wreath",
-              "type": "Equipment",
-              "amount": 1
+              "shares": 3300,
+              "name": "Hasan's Offering to Ludwig",
+              "type": "Resource",
+              "amount": 5
             },
             {
               "rarity": 2,
-              "shares": 3900,
-              "name": "Candy Cane Crest",
-              "type": "Equipment",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 3900,
-              "name": "Christmas Dwelling",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 3000,
-              "name": "Christmas Dwelling",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 3000,
-              "name": "Winter market",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 3000,
-              "name": "Winter flour mill",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 3000,
-              "name": "Winter quarry",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 3000,
-              "name": "Winter research tower",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 3000,
-              "name": "Winter siege workshop",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 3000,
-              "name": "Winter stonemason",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 3000,
-              "name": "Winter storehouse",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 3000,
-              "name": "Christmas Dwelling",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 3000,
-              "name": "Christmas Dwelling",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 2500,
-              "name": "Winter farm",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 2500,
-              "name": "Winter hospital",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 2500,
-              "name": "Winter keep",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 2500,
-              "name": "Winter estate",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 2500,
-              "name": "Exalted Purple Christmas Pyramid",
+              "shares": 3300,
+              "name": "Exalted Green Taming of the wild",
               "type": "Decoration",
               "amount": 1
             },
             {
               "rarity": 2,
               "shares": 2500,
-              "name": "Winter bakery",
+              "name": "Tizi's Offering to Ulrich",
+              "type": "Resource",
+              "amount": 2
+            },
+            {
+              "rarity": 2,
+              "shares": 2500,
+              "name": "Diana's Offering to Ulrich",
+              "type": "Resource",
+              "amount": 2
+            },
+            {
+              "rarity": 2,
+              "shares": 2500,
+              "name": "Barin's Offering to Ulrich",
+              "type": "Resource",
+              "amount": 2
+            },
+            {
+              "rarity": 3,
+              "shares": 2200,
+              "name": "Sasaki's Offering to Beatrice",
+              "type": "Resource",
+              "amount": 1
+            },
+            {
+              "rarity": 1,
+              "shares": 1700,
+              "name": "Exalted Purple Taming of the wild",
+              "type": "Decoration",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 1700,
+              "name": "Wintertide siege workshop",
               "type": "Construction",
               "amount": 1
             },
             {
               "rarity": 2,
-              "shares": 2500,
-              "name": "Winter barracks",
+              "shares": 1700,
+              "name": "Wintertide defense workshop",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 1700,
+              "name": "Wintertide Bakery",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 1700,
+              "name": "Winter Stronghold",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 1700,
+              "name": "Christmas Relic Woodcutter",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 1700,
+              "name": "Christmas Greenhouse",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 1700,
+              "name": "Christmas Dwelling",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 1700,
+              "name": "Christmas Greenhouse",
               "type": "Construction",
               "amount": 1
             },
             {
               "rarity": 3,
-              "shares": 2000,
+              "shares": 1500,
               "name": "Nutcracker's snow globe",
               "type": "Equipment",
               "amount": 1
             },
             {
               "rarity": 3,
-              "shares": 2000,
+              "shares": 1500,
+              "name": "Candy Cane Crest",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 1400,
+              "name": "10,000 generals XP",
+              "type": "Resource",
+              "amount": 10
+            },
+            {
+              "rarity": 3,
+              "shares": 1300,
               "name": "Giftwrapped Garrison",
               "type": "Equipment",
               "amount": 1
             },
             {
+              "rarity": 3,
+              "shares": 1300,
+              "name": "Winter Wreath",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
+              "shares": 1200,
+              "name": "Christmas Greenhouse",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
+              "shares": 1200,
+              "name": "Christmas Greenhouse",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 1000,
+              "name": "Exalted Red Taming of the wild",
+              "type": "Decoration",
+              "amount": 1
+            },
+            {
               "rarity": 4,
-              "shares": 1100,
-              "name": "Exalted Purple Christmas Fountain",
+              "shares": 500,
+              "name": "Christmas Dwelling",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
+              "shares": 500,
+              "name": "Kaelrith's Offering to Beatrice",
+              "type": "Resource",
+              "amount": 1
+            },
+            {
+              "rarity": 4,
+              "shares": 200,
+              "name": "Exalted Purple Cave of the Winter Polar Bear",
+              "type": "Decoration",
+              "amount": 1
+            },
+            {
+              "rarity": 4,
+              "shares": 200,
+              "name": "Exalted Purple Cave of the Winter Fox",
+              "type": "Decoration",
+              "amount": 1
+            },
+            {
+              "rarity": 4,
+              "shares": 100,
+              "name": "Exalted Green Cave of the Winter Fox",
+              "type": "Decoration",
+              "amount": 1
+            },
+            {
+              "rarity": 4,
+              "shares": 100,
+              "name": "Exalted Green Cave of the Winter Polar Bear",
+              "type": "Decoration",
+              "amount": 1
+            },
+            {
+              "rarity": 4,
+              "shares": 100,
+              "name": "Exalted Red Cave of the Winter Fox",
+              "type": "Decoration",
+              "amount": 1
+            },
+            {
+              "rarity": 4,
+              "shares": 100,
+              "name": "Exalted Red Cave of the Winter Polar Bear",
+              "type": "Decoration",
+              "amount": 1
+            },
+            {
+              "rarity": 4,
+              "shares": 100,
+              "name": "Exalted Purple Christmas Pyramid Candle Powered",
+              "type": "Decoration",
+              "amount": 1
+            },
+            {
+              "rarity": 4,
+              "shares": 100,
+              "name": "Exalted Purple Christmas Pyramid Watermill Powered",
               "type": "Decoration",
               "amount": 1
             }
@@ -9155,222 +10149,369 @@
             "what": "FrozenCarrot",
             "amount": 100
           },
-          "total": 100300,
+          "total": 100100,
           "entries": [
             {
               "rarity": 1,
-              "shares": 9500,
-              "name": "Candy Cane Protector",
-              "type": "Units",
-              "amount": 1000
-            },
-            {
-              "rarity": 1,
-              "shares": 9500,
-              "name": "Jolly Gingerbread Sniper",
-              "type": "Units",
-              "amount": 1000
-            },
-            {
-              "rarity": 1,
-              "shares": 5700,
+              "shares": 5000,
               "name": "Offering to Ludwig",
               "type": "Resource",
-              "amount": 10
+              "amount": 15
             },
             {
               "rarity": 1,
-              "shares": 5700,
-              "name": "Offering to Beatrice",
-              "type": "Resource",
-              "amount": 2
-            },
-            {
-              "rarity": 1,
-              "shares": 5700,
-              "name": "Offering to Ulrich",
-              "type": "Resource",
-              "amount": 5
-            },
-            {
-              "rarity": 2,
-              "shares": 3800,
-              "name": "Winter Wreath",
-              "type": "Equipment",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 3800,
-              "name": "Candy Cane Crest",
-              "type": "Equipment",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 3800,
-              "name": "Christmas Dwelling",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 2800,
-              "name": "Christmas Dwelling",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 2800,
-              "name": "Christmas Dwelling",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 2800,
-              "name": "Christmas Dwelling",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 2400,
-              "name": "Winter market",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 2400,
-              "name": "Winter flour mill",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 2400,
-              "name": "Winter quarry",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 2400,
-              "name": "Winter research tower",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 2400,
-              "name": "Winter siege workshop",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 2400,
-              "name": "Winter stonemason",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 2400,
-              "name": "Winter storehouse",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 2400,
-              "name": "Winter farm",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 2400,
-              "name": "Winter hospital",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 2400,
-              "name": "Winter keep",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 2400,
-              "name": "Winter estate",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 2400,
-              "name": "Exalted Purple Christmas Pyramid",
+              "shares": 5000,
+              "name": "Gingerbread house",
               "type": "Decoration",
               "amount": 1
             },
             {
               "rarity": 2,
+              "shares": 5000,
+              "name": "Christmas Archer",
+              "type": "Units",
+              "amount": 1500
+            },
+            {
+              "rarity": 2,
+              "shares": 4700,
+              "name": "Christmas Huntress",
+              "type": "Units",
+              "amount": 1500
+            },
+            {
+              "rarity": 2,
+              "shares": 4700,
+              "name": "Christmas Warrior",
+              "type": "Units",
+              "amount": 1500
+            },
+            {
+              "rarity": 2,
+              "shares": 4700,
+              "name": "Christmas Guardian",
+              "type": "Units",
+              "amount": 1500
+            },
+            {
+              "rarity": 1,
+              "shares": 4700,
+              "name": "Offering to Ulrich",
+              "type": "Resource",
+              "amount": 10
+            },
+            {
+              "rarity": 1,
+              "shares": 4200,
+              "name": "1,000 generals XP",
+              "type": "Resource",
+              "amount": 10
+            },
+            {
+              "rarity": 1,
+              "shares": 4200,
+              "name": "5,000 generals XP",
+              "type": "Resource",
+              "amount": 10
+            },
+            {
+              "rarity": 2,
+              "shares": 4200,
+              "name": "Valenta's Offering to Ludwig",
+              "type": "Resource",
+              "amount": 5
+            },
+            {
+              "rarity": 1,
+              "shares": 3100,
+              "name": "Offering to Beatrice",
+              "type": "Resource",
+              "amount": 5
+            },
+            {
+              "rarity": 2,
+              "shares": 3100,
+              "name": "Hasan's Offering to Ludwig",
+              "type": "Resource",
+              "amount": 5
+            },
+            {
+              "rarity": 2,
+              "shares": 3100,
+              "name": "Exalted Green Taming of the wild",
+              "type": "Decoration",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 3100,
+              "name": "12,500 generals XP",
+              "type": "Resource",
+              "amount": 10
+            },
+            {
+              "rarity": 2,
               "shares": 2400,
-              "name": "Winter bakery",
+              "name": "Tizi's Offering to Ulrich",
+              "type": "Resource",
+              "amount": 2
+            },
+            {
+              "rarity": 2,
+              "shares": 2400,
+              "name": "Diana's Offering to Ulrich",
+              "type": "Resource",
+              "amount": 2
+            },
+            {
+              "rarity": 2,
+              "shares": 2400,
+              "name": "Barin's Offering to Ulrich",
+              "type": "Resource",
+              "amount": 2
+            },
+            {
+              "rarity": 3,
+              "shares": 2100,
+              "name": "Sasaki's Offering to Beatrice",
+              "type": "Resource",
+              "amount": 1
+            },
+            {
+              "rarity": 1,
+              "shares": 1600,
+              "name": "Exalted Purple Taming of the wild",
+              "type": "Decoration",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 1600,
+              "name": "Wintertide siege workshop",
               "type": "Construction",
               "amount": 1
             },
             {
               "rarity": 2,
-              "shares": 2400,
-              "name": "Winter barracks",
+              "shares": 1600,
+              "name": "Wintertide defense workshop",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 1600,
+              "name": "Wintertide Bakery",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 1600,
+              "name": "Winter Stronghold",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 1600,
+              "name": "Christmas Relic Woodcutter",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 1600,
+              "name": "Christmas Greenhouse",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 1600,
+              "name": "Christmas Dwelling",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 1600,
+              "name": "Christmas Greenhouse",
               "type": "Construction",
               "amount": 1
             },
             {
               "rarity": 3,
-              "shares": 1900,
+              "shares": 1400,
               "name": "Nutcracker's snow globe",
               "type": "Equipment",
               "amount": 1
             },
             {
               "rarity": 3,
-              "shares": 1900,
+              "shares": 1400,
+              "name": "Candy Cane Crest",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 1300,
+              "name": "10,000 generals XP",
+              "type": "Resource",
+              "amount": 10
+            },
+            {
+              "rarity": 3,
+              "shares": 1300,
               "name": "Giftwrapped Garrison",
               "type": "Equipment",
               "amount": 1
             },
             {
               "rarity": 3,
-              "shares": 1900,
-              "name": "Exalted Green Christmas Present Stash",
-              "type": "Decoration",
+              "shares": 1300,
+              "name": "Winter Wreath",
+              "type": "Equipment",
               "amount": 1
             },
             {
               "rarity": 3,
-              "shares": 1900,
-              "name": "Exalted Green Christmas Present Stash",
-              "type": "Decoration",
+              "shares": 1100,
+              "name": "Christmas Greenhouse",
+              "type": "Construction",
               "amount": 1
             },
             {
               "rarity": 3,
-              "shares": 1900,
-              "name": "Exalted Green Christmas Present Stash",
+              "shares": 1100,
+              "name": "Christmas Greenhouse",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 1,
+              "shares": 900,
+              "name": "Relic splinters",
+              "type": "Resource",
+              "amount": 4000
+            },
+            {
+              "rarity": 2,
+              "shares": 900,
+              "name": "Exalted Red Taming of the wild",
+              "type": "Decoration",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 900,
+              "name": "Exalted Green Taming of the wild",
+              "type": "Decoration",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 900,
+              "name": "Exalted Green Taming of the wild",
+              "type": "Decoration",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 900,
+              "name": "Exalted Green Frozen tarantula spring",
+              "type": "Decoration",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 900,
+              "name": "Christmas Greenhouse",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 4,
+              "shares": 600,
+              "name": "Christmas Dwelling",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
+              "shares": 500,
+              "name": "Kaelrith's Offering to Beatrice",
+              "type": "Resource",
+              "amount": 1
+            },
+            {
+              "rarity": 4,
+              "shares": 300,
+              "name": "Exalted Purple Cave of the Winter Polar Bear",
               "type": "Decoration",
               "amount": 1
             },
             {
               "rarity": 4,
-              "shares": 1300,
-              "name": "Exalted Purple Christmas Fountain",
+              "shares": 300,
+              "name": "Exalted Purple Cave of the Winter Fox",
+              "type": "Decoration",
+              "amount": 1
+            },
+            {
+              "rarity": 4,
+              "shares": 300,
+              "name": "Exalted Green Cave of the Winter Fox",
+              "type": "Decoration",
+              "amount": 1
+            },
+            {
+              "rarity": 4,
+              "shares": 300,
+              "name": "Exalted Green Cave of the Winter Polar Bear",
+              "type": "Decoration",
+              "amount": 1
+            },
+            {
+              "rarity": 4,
+              "shares": 200,
+              "name": "Exalted Red Cave of the Winter Fox",
+              "type": "Decoration",
+              "amount": 1
+            },
+            {
+              "rarity": 4,
+              "shares": 200,
+              "name": "Exalted Red Cave of the Winter Polar Bear",
+              "type": "Decoration",
+              "amount": 1
+            },
+            {
+              "rarity": 4,
+              "shares": 200,
+              "name": "Exalted Purple Christmas Pyramid Candle Powered",
+              "type": "Decoration",
+              "amount": 1
+            },
+            {
+              "rarity": 4,
+              "shares": 200,
+              "name": "Exalted Purple Christmas Pyramid Watermill Powered",
+              "type": "Decoration",
+              "amount": 1
+            },
+            {
+              "rarity": 4,
+              "shares": 100,
+              "name": "Exalted Green Christmas Pyramid Candle Powered",
+              "type": "Decoration",
+              "amount": 1
+            },
+            {
+              "rarity": 4,
+              "shares": 100,
+              "name": "Exalted Green Christmas Pyramid Watermill Powered",
               "type": "Decoration",
               "amount": 1
             }
@@ -9382,271 +10523,369 @@
             "what": "FrozenCarrot",
             "amount": 100
           },
-          "total": 100000,
+          "total": 199900,
           "entries": [
             {
               "rarity": 1,
-              "shares": 8700,
-              "name": "Candy Cane Protector",
-              "type": "Units",
-              "amount": 1000
-            },
-            {
-              "rarity": 1,
-              "shares": 8700,
-              "name": "Jolly Gingerbread Sniper",
-              "type": "Units",
-              "amount": 1000
-            },
-            {
-              "rarity": 1,
-              "shares": 6500,
+              "shares": 12300,
               "name": "Offering to Ludwig",
+              "type": "Resource",
+              "amount": 15
+            },
+            {
+              "rarity": 1,
+              "shares": 12300,
+              "name": "Offering to Ulrich",
               "type": "Resource",
               "amount": 10
             },
             {
               "rarity": 1,
-              "shares": 6500,
-              "name": "Offering to Beatrice",
+              "shares": 9900,
+              "name": "Relic splinters",
               "type": "Resource",
-              "amount": 2
+              "amount": 6000
             },
             {
-              "rarity": 1,
-              "shares": 6500,
-              "name": "Offering to Ulrich",
+              "rarity": 2,
+              "shares": 9200,
+              "name": "Valenta's Offering to Ludwig",
               "type": "Resource",
               "amount": 5
             },
             {
               "rarity": 2,
-              "shares": 4300,
+              "shares": 9200,
+              "name": "Hasan's Offering to Ludwig",
+              "type": "Resource",
+              "amount": 5
+            },
+            {
+              "rarity": 1,
+              "shares": 8200,
+              "name": "1,000 generals XP",
+              "type": "Resource",
+              "amount": 10
+            },
+            {
+              "rarity": 1,
+              "shares": 8200,
+              "name": "5,000 generals XP",
+              "type": "Resource",
+              "amount": 10
+            },
+            {
+              "rarity": 1,
+              "shares": 8200,
+              "name": "Offering to Beatrice",
+              "type": "Resource",
+              "amount": 5
+            },
+            {
+              "rarity": 2,
+              "shares": 6200,
+              "name": "Christmas Archer",
+              "type": "Units",
+              "amount": 1500
+            },
+            {
+              "rarity": 2,
+              "shares": 6200,
+              "name": "Christmas Huntress",
+              "type": "Units",
+              "amount": 1500
+            },
+            {
+              "rarity": 2,
+              "shares": 6200,
+              "name": "Christmas Warrior",
+              "type": "Units",
+              "amount": 1500
+            },
+            {
+              "rarity": 2,
+              "shares": 6200,
+              "name": "Christmas Guardian",
+              "type": "Units",
+              "amount": 1500
+            },
+            {
+              "rarity": 2,
+              "shares": 6200,
+              "name": "Exalted Green Taming of the wild",
+              "type": "Decoration",
+              "amount": 1
+            },
+            {
+              "rarity": 1,
+              "shares": 6200,
+              "name": "Exalted Purple Taming of the wild",
+              "type": "Decoration",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 4600,
+              "name": "Tizi's Offering to Ulrich",
+              "type": "Resource",
+              "amount": 2
+            },
+            {
+              "rarity": 2,
+              "shares": 4600,
+              "name": "Diana's Offering to Ulrich",
+              "type": "Resource",
+              "amount": 2
+            },
+            {
+              "rarity": 2,
+              "shares": 4600,
+              "name": "Barin's Offering to Ulrich",
+              "type": "Resource",
+              "amount": 2
+            },
+            {
+              "rarity": 3,
+              "shares": 4100,
               "name": "Sasaki's Offering to Beatrice",
               "type": "Resource",
               "amount": 1
             },
             {
               "rarity": 2,
-              "shares": 2900,
-              "name": "Winter Wreath",
-              "type": "Equipment",
+              "shares": 3100,
+              "name": "Wintertide siege workshop",
+              "type": "Construction",
               "amount": 1
             },
             {
               "rarity": 2,
-              "shares": 2900,
+              "shares": 3100,
+              "name": "Wintertide defense workshop",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 3100,
+              "name": "Wintertide Bakery",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 3100,
+              "name": "Winter Stronghold",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 3100,
+              "name": "Christmas Relic Woodcutter",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 3100,
+              "name": "Christmas Greenhouse",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 3100,
+              "name": "Christmas Dwelling",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 3100,
+              "name": "Christmas Greenhouse",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
+              "shares": 2700,
+              "name": "Nutcracker's snow globe",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
+              "shares": 2700,
               "name": "Candy Cane Crest",
               "type": "Equipment",
               "amount": 1
             },
             {
               "rarity": 2,
-              "shares": 2900,
-              "name": "Christmas Dwelling",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 2200,
-              "name": "Relic splinters",
+              "shares": 2600,
+              "name": "10,000 generals XP",
               "type": "Resource",
-              "amount": 5000
+              "amount": 10
             },
             {
-              "rarity": 2,
-              "shares": 2200,
-              "name": "Christmas Dwelling",
-              "type": "Construction",
+              "rarity": 3,
+              "shares": 2500,
+              "name": "Giftwrapped Garrison",
+              "type": "Equipment",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
+              "shares": 2500,
+              "name": "Winter Wreath",
+              "type": "Equipment",
               "amount": 1
             },
             {
               "rarity": 2,
-              "shares": 2200,
-              "name": "Christmas Dwelling",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 2200,
-              "name": "Christmas Dwelling",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 2200,
-              "name": "Winter market",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 2200,
-              "name": "Winter flour mill",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 2200,
-              "name": "Winter quarry",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 2200,
-              "name": "Winter research tower",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 2200,
-              "name": "Winter siege workshop",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 2200,
-              "name": "Winter stonemason",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 2200,
-              "name": "Winter storehouse",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 2200,
+              "shares": 2500,
               "name": "Winter farm",
               "type": "Construction",
               "amount": 1
             },
             {
               "rarity": 2,
+              "shares": 2500,
+              "name": "Winter farm",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 2500,
+              "name": "Winter farm",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 2,
+              "shares": 2500,
+              "name": "Winter farm",
+              "type": "Construction",
+              "amount": 1
+            },
+            {
+              "rarity": 3,
               "shares": 2200,
-              "name": "Winter hospital",
+              "name": "Christmas Greenhouse",
               "type": "Construction",
               "amount": 1
             },
             {
-              "rarity": 2,
+              "rarity": 3,
               "shares": 2200,
-              "name": "Winter keep",
+              "name": "Christmas Greenhouse",
               "type": "Construction",
               "amount": 1
             },
             {
               "rarity": 2,
-              "shares": 2100,
-              "name": "Winter estate",
-              "type": "Construction",
-              "amount": 1
+              "shares": 1800,
+              "name": "12,500 generals XP",
+              "type": "Resource",
+              "amount": 10
             },
             {
               "rarity": 2,
-              "shares": 2100,
-              "name": "Exalted Purple Christmas Pyramid",
+              "shares": 1800,
+              "name": "Exalted Red Taming of the wild",
               "type": "Decoration",
               "amount": 1
             },
             {
               "rarity": 2,
-              "shares": 2100,
-              "name": "Winter bakery",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 2100,
-              "name": "Winter barracks",
-              "type": "Construction",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 1400,
-              "name": "Nutcracker's snow globe",
-              "type": "Equipment",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 1400,
-              "name": "Giftwrapped Garrison",
-              "type": "Equipment",
-              "amount": 1
-            },
-            {
-              "rarity": 2,
-              "shares": 1400,
-              "name": "Exalted Green Christmas Present Stash",
+              "shares": 1800,
+              "name": "Exalted Green Taming of the wild",
               "type": "Decoration",
               "amount": 1
             },
             {
               "rarity": 2,
-              "shares": 1400,
-              "name": "Exalted Green Christmas Present Stash",
+              "shares": 1800,
+              "name": "Exalted Green Taming of the wild",
               "type": "Decoration",
               "amount": 1
             },
             {
               "rarity": 2,
-              "shares": 1400,
-              "name": "Exalted Green Christmas Present Stash",
+              "shares": 1800,
+              "name": "Exalted Green Frozen tarantula spring",
               "type": "Decoration",
               "amount": 1
             },
             {
-              "rarity": 3,
-              "shares": 1000,
-              "name": "Exalted Red Christmas Stall",
-              "type": "Decoration",
-              "amount": 1
-            },
-            {
-              "rarity": 3,
-              "shares": 700,
+              "rarity": 2,
+              "shares": 1800,
               "name": "Christmas Greenhouse",
               "type": "Construction",
               "amount": 1
             },
             {
               "rarity": 3,
-              "shares": 700,
-              "name": "Christmas Greenhouse",
+              "shares": 1200,
+              "name": "Kaelrith's Offering to Beatrice",
+              "type": "Resource",
+              "amount": 1
+            },
+            {
+              "rarity": 4,
+              "shares": 900,
+              "name": "Christmas Dwelling",
               "type": "Construction",
               "amount": 1
             },
             {
               "rarity": 3,
-              "shares": 700,
-              "name": "Christmas Greenhouse",
-              "type": "Construction",
+              "shares": 600,
+              "name": "15,000 generals XP",
+              "type": "Resource",
+              "amount": 20
+            },
+            {
+              "rarity": 4,
+              "shares": 400,
+              "name": "Exalted Purple Christmas Pyramid Candle Powered",
+              "type": "Decoration",
               "amount": 1
             },
             {
-              "rarity": 3,
-              "shares": 700,
-              "name": "Christmas Greenhouse",
-              "type": "Construction",
+              "rarity": 4,
+              "shares": 400,
+              "name": "Exalted Purple Christmas Pyramid Watermill Powered",
+              "type": "Decoration",
+              "amount": 1
+            },
+            {
+              "rarity": 4,
+              "shares": 300,
+              "name": "Exalted Green Christmas Pyramid Candle Powered",
+              "type": "Decoration",
+              "amount": 1
+            },
+            {
+              "rarity": 4,
+              "shares": 300,
+              "name": "Exalted Green Christmas Pyramid Watermill Powered",
+              "type": "Decoration",
               "amount": 1
             },
             {
               "rarity": 4,
               "shares": 100,
-              "name": "Exalted Green Christmas Fountain",
+              "name": "Exalted Red Christmas Pyramid Candle Powered",
+              "type": "Decoration",
+              "amount": 1
+            },
+            {
+              "rarity": 4,
+              "shares": 100,
+              "name": "Exalted Red Christmas Pyramid Watermill Powered",
               "type": "Decoration",
               "amount": 1
             }
