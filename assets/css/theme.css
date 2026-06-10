@@ -655,3 +655,41 @@ body.dash .topbar .wrap { max-width: 1320px; }
     display: flex; align-items: center; gap: 7px;
     letter-spacing: .18em;
 }
+
+/* ---- Browse page head ---- */
+.browse-head { padding: 30px 0 4px; }
+.browse-head h1 {
+    margin: 0 0 6px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.7rem, 3.4vw, 2.4rem);
+    letter-spacing: .02em;
+}
+.browse-head p { margin: 0; color: var(--text-dim); }
+
+/* ---- "Browse the full archive" CTA (home) ---- */
+.browse-cta {
+    display: flex; align-items: center; justify-content: center; gap: 12px;
+    margin: 26px 0 10px;
+    padding: 15px 22px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: linear-gradient(160deg, var(--bg-elev), var(--bg));
+    color: var(--gold-bright);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.05rem;
+    letter-spacing: .04em;
+    transition: .15s;
+}
+.browse-cta:hover {
+    text-decoration: none;
+    border-color: var(--gold);
+    box-shadow: 0 0 16px rgba(217, 178, 90, .18);
+}
+.browse-cta .arr { transition: transform .15s; }
+.browse-cta:hover .arr { transform: translateX(4px); }
+
+/* refined card titles (engraved serif, like the Stitch tool browser) */
+.card h3 { font-family: var(--font-display); font-size: 1.14rem; font-weight: 600; letter-spacing: .01em; }
+.section-label { font-size: .92rem; letter-spacing: .12em; }

@@ -1,42 +1,72 @@
-/* Shared styling for guide articles. Pair with theme.css. */
+/* Shared styling for guide articles. Pair with theme.css.
+   Tuned for long-form reading: ~70ch measure, generous leading,
+   engraved EB Garamond headings, gold-marked lists. */
 
 .guide {
-  max-width: 760px;
+  max-width: 740px;
   margin: 0 auto;
 }
 
 .guide-meta {
   display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
-  margin: 0 0 18px; font-size: .78rem; color: var(--text-faint);
+  margin: 0 0 24px; font-size: .78rem; color: var(--text-faint);
 }
 .guide-tag {
-  padding: 2px 9px; border-radius: 99px;
-  background: var(--bg-elev-2); border: 1px solid var(--border); color: var(--text-dim);
+  padding: 3px 11px; border-radius: 99px; letter-spacing: .04em;
+  background: rgba(217, 178, 90, .08); border: 1px solid var(--border); color: var(--text-dim);
 }
-.guide-read { margin-left: auto; }
+.guide-read { margin-left: auto; font-style: italic; }
 
-.guide article { font-size: .96rem; line-height: 1.7; color: var(--text); }
+.guide article { font-size: 1.02rem; line-height: 1.75; color: var(--text); }
+
 .guide article h2 {
-  margin: 30px 0 10px; font-size: 1.2rem; color: var(--gold);
-  padding-bottom: 6px; border-bottom: 1px solid var(--border);
+  margin: 40px 0 14px;
+  font-family: var(--font-display);
+  font-size: 1.55rem;
+  font-weight: 600;
+  letter-spacing: .015em;
+  color: var(--gold-bright, var(--gold));
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
 }
-.guide article h3 { margin: 22px 0 6px; font-size: 1.02rem; color: var(--text); }
-.guide article p { margin: 0 0 14px; color: var(--text-dim); }
-.guide article ul, .guide article ol { margin: 0 0 14px; padding-left: 22px; color: var(--text-dim); }
-.guide article li { margin-bottom: 6px; }
-.guide article b, .guide article strong { color: var(--text); }
-.guide article a { color: var(--accent); }
+.guide article h2::after {
+  content: "";
+  position: absolute; left: 0; bottom: -1px;
+  width: 64px; height: 1px;
+  background: var(--gold);
+}
+.guide article h3 {
+  margin: 26px 0 8px; font-family: var(--font-display);
+  font-size: 1.18rem; font-weight: 600; color: var(--text);
+}
+.guide article p { margin: 0 0 16px; color: var(--text-dim); }
+.guide article ul, .guide article ol { margin: 0 0 18px; padding-left: 6px; color: var(--text-dim); list-style: none; }
+.guide article ol { padding-left: 22px; list-style: decimal; }
+.guide article ul > li {
+  margin-bottom: 10px; padding-left: 20px; position: relative;
+}
+.guide article ul > li::before {
+  content: "▸";
+  position: absolute; left: 0; top: 0;
+  color: var(--gold); font-size: .9em;
+}
+.guide article b, .guide article strong { color: var(--text); font-weight: 600; }
+.guide article a { color: var(--gold-bright, var(--gold)); text-decoration: none; border-bottom: 1px solid rgba(217, 178, 90, .35); }
+.guide article a:hover { border-bottom-color: var(--gold); }
 
 .guide-lead {
-  font-size: 1.05rem !important; color: var(--text) !important;
-  line-height: 1.6; margin-bottom: 22px !important;
+  font-size: 1.14rem !important; color: var(--text) !important;
+  line-height: 1.7; margin-bottom: 26px !important;
+  font-family: var(--font-display);
+  letter-spacing: .005em;
 }
 
 /* Callout / tip box */
 .tip {
-  margin: 18px 0; padding: 12px 16px; border-radius: var(--radius-sm);
+  margin: 20px 0; padding: 14px 18px; border-radius: var(--radius-sm);
   background: rgba(217, 178, 90,.07); border-left: 3px solid var(--gold);
-  font-size: .9rem; color: var(--text-dim);
+  font-size: .92rem; color: var(--text-dim);
 }
 .tip b { color: var(--gold); }
 .tip.warn { background: rgba(248,81,73,.07); border-left-color: var(--bad); }
@@ -45,31 +75,38 @@
 /* "Use the tool" cross-links */
 .guide-tool-link {
   display: inline-flex; align-items: center; gap: 8px;
-  margin: 4px 8px 4px 0; padding: 8px 14px; border-radius: var(--radius-sm);
+  margin: 4px 8px 4px 0; padding: 9px 16px; border-radius: var(--radius-sm);
   background: var(--bg-elev-2); border: 1px solid var(--border);
   color: var(--text); font-size: .88rem; font-weight: 600;
-  text-decoration: none; transition: border-color .15s;
+  text-decoration: none; transition: .15s;
 }
-.guide-tool-link:hover { border-color: var(--gold); text-decoration: none; }
+.guide-tool-link:hover {
+  border-color: var(--gold); text-decoration: none;
+  box-shadow: 0 0 12px rgba(217, 178, 90, .18);
+}
 .guide-tool-link .ico { font-size: 1.1rem; }
 
 /* Simple data table inside guides */
-.guide-table { width: 100%; border-collapse: collapse; margin: 0 0 18px; font-size: .88rem; }
-.guide-table th, .guide-table td { text-align: left; padding: 7px 12px; border-bottom: 1px solid var(--border); }
-.guide-table th { color: var(--text-dim); font-size: .72rem; text-transform: uppercase; letter-spacing: .05em; }
+.guide-table { width: 100%; border-collapse: collapse; margin: 0 0 20px; font-size: .9rem; }
+.guide-table th, .guide-table td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--border-soft); }
+.guide-table th { color: var(--gold-dim); font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; }
 .guide-table td { color: var(--text-dim); }
 .guide-table td:first-child { color: var(--text); font-weight: 500; }
+.guide-table tbody tr:hover td { background: rgba(217, 178, 90, .04); }
 
 /* Footer nav between guides */
 .guide-nav {
-  display: flex; flex-wrap: wrap; gap: 10px; margin-top: 32px; padding-top: 20px;
+  display: flex; flex-wrap: wrap; gap: 10px; margin-top: 40px; padding-top: 22px;
   border-top: 1px solid var(--border);
 }
 
 /* ---- Guide screenshots ---- */
-.guide-fig { margin: 14px 0 18px; }
+.guide-fig { margin: 18px 0 24px; }
 .guide-fig img {
   max-width: 100%; border-radius: var(--radius-sm);
-  border: 1px solid var(--border); box-shadow: 0 4px 18px rgba(0,0,0,.35);
+  border: 1px solid var(--border); box-shadow: 0 6px 22px rgba(0,0,0,.4);
 }
-.guide-fig figcaption { margin-top: 6px; font-size: .78rem; color: var(--text-faint); }
+.guide-fig figcaption {
+  margin-top: 8px; font-size: .8rem; color: var(--text-faint);
+  font-style: italic; line-height: 1.5;
+}

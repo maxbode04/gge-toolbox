@@ -274,19 +274,8 @@ window.TOOLS = [
     tags: ["event", "rewards", "milestones", "points", "rift raid", "nomad", "samurai"],
   },
 
-  // ---- Rankings & stats --------------------------------------------------
-  {
-    slug: "rankings",
-    img: "assets/img/tool-art/rankings.webp",
-    cat: "rankings",
-    name: "Player & Alliance Rankings",
-    desc: "Live might, glory and event rankings for GGE and E4K.",
-    icon: "📊",
-    status: "soon",
-    tags: ["rankings", "leaderboard", "might", "glory", "alliance"],
-  },
-
   // ---- Chemie's VIP Corner (access-gated) --------------------------------
+  // (Rankings live inside the VIP corner — no public rankings entry.)
   {
     slug: "vip",
     cat: "vip",

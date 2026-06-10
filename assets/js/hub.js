@@ -1,69 +1,63 @@
-/* Maxy's Empire Toolkit — hub renderer. Builds the searchable, filterable tool grid
-   from window.TOOLS. No dependencies, no build step. */
+/* Maxy's Empire Toolkit — hub renderer.
+   Drives the sidebar archive nav + tool grids on the home page (data-page="home")
+   and the Tool Browser (data-page="browse", reads ?cat=). No build step. */
 (function () {
-  const CATS = [
-    { id: "all", label: "All" },
-    { id: "featured", label: "Feature Guides" },
-    { id: "guides", label: "Guides" },
-    { id: "calculators", label: "Calculators" },
-    { id: "simulators", label: "Simulators" },
-    { id: "rankings", label: "Rankings" },
-    { id: "overviews", label: "Overviews" },
-    { id: "vip", label: "VIP" },
+  // Sidebar destinations — every entry is its own page.
+  const NAV = [
+    { id: "home",        label: "Home",           icon: "🏰", href: "index.html" },
+    { id: "all",         label: "All Tools",      icon: "🗂️", href: "browse.html" },
+    { id: "featured",    label: "Feature Guides", icon: "⭐", href: "browse.html?cat=featured" },
+    { id: "guides",      label: "Guides",         icon: "📖", href: "browse.html?cat=guides" },
+    { id: "calculators", label: "Calculators",    icon: "🧮", href: "browse.html?cat=calculators" },
+    { id: "simulators",  label: "Simulators",     icon: "⚔️", href: "browse.html?cat=simulators" },
+    { id: "overviews",   label: "Overviews",      icon: "👁️", href: "browse.html?cat=overviews" },
+    { id: "vip",         label: "VIP Corner",     icon: "🔒", href: "tools/vip/" },
   ];
   const CAT_LABEL = {
     featured: "⭐ Feature Guides",
-    guides: "Guides",
-    calculators: "Calculators",
-    simulators: "Simulators",
-    rankings: "Rankings & Stats",
-    overviews: "Overviews",
-    vip: "Chemie's VIP Corner 🔒",
+    guides: "📖 Guides",
+    calculators: "🧮 Calculators",
+    simulators: "⚔️ Simulators",
+    overviews: "👁️ Overviews",
+    vip: "🔒 Chemie's VIP Corner",
   };
-  // Sidebar archive-nav icons, keyed by category id
-  const CAT_ICON = {
-    all: "🗂️",
-    featured: "⭐",
-    guides: "📖",
-    calculators: "🧮",
-    simulators: "⚔️",
-    rankings: "🏆",
-    overviews: "👁️",
-    vip: "🔒",
-  };
+  const ORDER = ["featured", "guides", "calculators", "simulators", "overviews", "vip"];
 
-  let activeCat = "all";
+  const page = document.body.dataset.page || "home";
+  const params = new URLSearchParams(location.search);
+  const cat = params.get("cat");
+  const activeNav = page === "home" ? "home" : (cat || "all");
+
   let query = "";
-
   const navEl = document.getElementById("side-nav");
   const gridHost = document.getElementById("grid-host");
   const searchEl = document.getElementById("search");
 
-  // Build the sidebar archive nav (drives category filtering)
-  CATS.forEach((c) => {
-    const el = document.createElement("div");
-    el.className = "side-link" + (c.id === "all" ? " active" : "");
-    el.dataset.cat = c.id;
-    el.innerHTML = '<span class="si">' + (CAT_ICON[c.id] || "•") + "</span><span>" + c.label + "</span>";
-    el.onclick = () => {
-      activeCat = c.id;
-      [...navEl.children].forEach((x) => x.classList.toggle("active", x.dataset.cat === c.id));
-      render();
-    };
-    navEl.appendChild(el);
-  });
+  // ---- Sidebar -----------------------------------------------------------
+  if (navEl) {
+    NAV.forEach((n) => {
+      const el = document.createElement("a");
+      el.className = "side-link" + (n.id === activeNav ? " active" : "");
+      el.href = n.href;
+      el.innerHTML = '<span class="si">' + n.icon + "</span><span>" + n.label + "</span>";
+      navEl.appendChild(el);
+    });
+  }
 
-  // Hero "Access Archives" → jump to the tool grid
+  // Hero "Access Archives" → the Tool Browser
   const heroCta = document.getElementById("hero-cta");
-  if (heroCta) heroCta.onclick = () => gridHost.scrollIntoView({ behavior: "smooth", block: "start" });
+  if (heroCta) heroCta.onclick = () => { location.href = "browse.html"; };
 
-  searchEl.addEventListener("input", () => {
-    query = searchEl.value.trim().toLowerCase();
-    render();
-  });
+  // ---- Browse heading ------------------------------------------------------
+  const browseHead = document.getElementById("browse-title");
+  if (browseHead && cat) {
+    browseHead.textContent = (CAT_LABEL[cat] || cat).replace(/^[^ ]+ /, "");
+  }
 
+  // ---- Grid rendering ------------------------------------------------------
   function matches(t) {
-    if (activeCat !== "all" && t.cat !== activeCat) return false;
+    if (page === "home" && !query && t.cat !== "featured") return false; // searching home searches everything
+    if (page === "browse" && cat && t.cat !== cat) return false;
     if (!query) return true;
     const hay = (t.name + " " + t.desc + " " + (t.tags || []).join(" ")).toLowerCase();
     return hay.includes(query);
@@ -73,8 +67,6 @@
     const live = t.status === "live";
     const el = document.createElement(live ? "a" : "div");
     el.className = "card" + (live ? "" : " disabled");
-    // Guides (and any entry with an explicit url) link straight to a page;
-    // everything else follows the folder-per-tool convention.
     if (live) el.href = t.url || "tools/" + t.slug + "/";
     const art = t.img
       ? '<div class="ico art"><img src="' + t.img + '" alt="" loading="lazy" ' +
@@ -89,25 +81,38 @@
   }
 
   function render() {
+    if (!gridHost) return;
     gridHost.innerHTML = "";
     const visible = window.TOOLS.filter(matches);
     if (!visible.length) {
       gridHost.innerHTML = '<div class="empty">No tools match “' + query + "”.</div>";
       return;
     }
-    // Group by category, preserving registry order
-    const order = ["featured", "guides", "calculators", "simulators", "rankings", "overviews", "vip"];
-    order.forEach((cat) => {
-      const items = visible.filter((t) => t.cat === cat);
+    ORDER.forEach((c) => {
+      const items = visible.filter((t) => t.cat === c);
       if (!items.length) return;
       const label = document.createElement("div");
       label.className = "section-label";
-      label.textContent = CAT_LABEL[cat] || cat;
+      label.textContent = CAT_LABEL[c] || c;
       const grid = document.createElement("div");
       grid.className = "grid";
       items.forEach((t) => grid.appendChild(cardFor(t)));
       gridHost.appendChild(label);
       gridHost.appendChild(grid);
+    });
+    if (page === "home") {
+      const cta = document.createElement("a");
+      cta.className = "browse-cta";
+      cta.href = "browse.html";
+      cta.innerHTML = "<span>Browse the full archive</span><span class='arr'>→</span>";
+      gridHost.appendChild(cta);
+    }
+  }
+
+  if (searchEl) {
+    searchEl.addEventListener("input", () => {
+      query = searchEl.value.trim().toLowerCase();
+      render();
     });
   }
 
