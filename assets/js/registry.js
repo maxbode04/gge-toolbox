@@ -100,10 +100,10 @@ window.TOOLS = [
     img: "assets/img/event-icons/riftraid.webp",
     cat: "calculators",
     name: "Rift Raid Points",
-    desc: "Plan the points you can score in the Rift Raid event.",
+    desc: "Real per-area score multipliers — how many courtyard clears it takes to qualify for the Boss Defeat reward.",
     icon: "🌀",
-    status: "soon",
-    tags: ["rift", "raid", "points", "event"],
+    status: "live",
+    tags: ["rift", "raid", "points", "event", "eligibility", "boss defeat", "activity"],
   },
   {
     slug: "rift-wall-break",

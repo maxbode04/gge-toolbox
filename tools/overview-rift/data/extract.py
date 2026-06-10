@@ -116,11 +116,15 @@ def main():
             reserve_total = sum(u["count"] for u in reserve)
 
             stages_out = []
+            wall_pf = court_pf = 0
             for s in sorted(stages_by_level.get(lid, []), key=lambda x: -int(x.get("health", 0))):
                 left  = parse_units(s.get("leftWallUnits", ""))
                 front = parse_units(s.get("frontWallUnits", ""))
                 right = parse_units(s.get("rightWallUnits", ""))
                 wall_total = sum(u["count"] for seg in (left, front, right) for u in seg)
+                # Point factors are constant within a level; capture them.
+                wall_pf  = int(s.get("wallPointFactor", 0) or 0) or wall_pf
+                court_pf = int(s.get("courtyardPointFactor", 0) or 0) or court_pf
                 stages_out.append({
                     "health": int(s.get("health", 0)),
                     "left": left,
@@ -139,6 +143,8 @@ def main():
                 "courtyardMeleePct": int(l.get("courtyardMeleePercent", 0) or 0),
                 "reserveTotal": reserve_total,
                 "minPointsForRewards": int(l.get("minPointsForBossRewards", 0) or 0),
+                "wallPointFactor": wall_pf,
+                "courtyardPointFactor": court_pf,
                 "stages": stages_out,
             })
 
