@@ -3,7 +3,7 @@
 (function () {
   const CATS = [
     { id: "all", label: "All" },
-    { id: "featured", label: "Featured" },
+    { id: "featured", label: "Feature Guides" },
     { id: "guides", label: "Guides" },
     { id: "calculators", label: "Calculators" },
     { id: "simulators", label: "Simulators" },
@@ -12,7 +12,7 @@
     { id: "vip", label: "VIP 🔒" },
   ];
   const CAT_LABEL = {
-    featured: "⭐ Featured",
+    featured: "⭐ Feature Guides",
     guides: "Guides",
     calculators: "Calculators",
     simulators: "Simulators",
