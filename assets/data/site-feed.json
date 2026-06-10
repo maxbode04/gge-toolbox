@@ -3,6 +3,16 @@
   "changelog": [
     {
       "date": "Jun 2026",
+      "title": "All overviews complete",
+      "body": "Four new overviews: Troops & Tools (461 units + 255 tools with real stats), Generals (full ability kits), Loot Boxes (46 boxes with real drop chances) and Event Rewards (milestone tracks for 20 events)."
+    },
+    {
+      "date": "Jun 2026",
+      "title": "Auto-updating data",
+      "body": "All tool data now refreshes automatically every day — and after game maintenances — straight from the community data cache."
+    },
+    {
+      "date": "Jun 2026",
       "title": "Chemie's VIP Corner",
       "body": "New access-gated members area for advanced tools (fortress tracker, search & analyse, score tools, live rankings). Enter the code to unlock."
     },
