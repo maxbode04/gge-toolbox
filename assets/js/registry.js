@@ -64,6 +64,17 @@ window.TOOLS = [
     tags: ["guide", "bth", "beyond the horizon", "event", "temp server", "influence", "capital", "city state", "materials", "build items"],
   },
   {
+    slug: "guide-outer-realms",
+    img: "assets/img/event-icons/outerrealms.webp",
+    cat: "guides",
+    name: "Outer Realms",
+    desc: "The level-70+ temp-server event: variants, entry castles, the F2P route — and the only place to get the food district item.",
+    icon: "🌌",
+    status: "live",
+    url: "tools/guides/outer-realms.html",
+    tags: ["guide", "outer realms", "event", "temp server", "heritage hunter", "snappy swap", "masters of might", "food district", "tokens"],
+  },
+  {
     slug: "guide-recruitment",
     img: "assets/img/tool-art/troops.webp",
     cat: "guides",
