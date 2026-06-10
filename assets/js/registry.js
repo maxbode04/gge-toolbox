@@ -186,10 +186,10 @@ window.TOOLS = [
     slug: "overview-troops-tools",
     cat: "overviews",
     name: "Troops & Tools",
-    desc: "Every unit and siege tool with attack/defence stats.",
+    desc: "461 units and 255 siege tools with real attack/defence stats, speed, loot and effects.",
     icon: "⚔️",
-    status: "soon",
-    tags: ["troops", "units", "tools", "siege", "attack", "defence"],
+    status: "live",
+    tags: ["troops", "units", "tools", "siege", "attack", "defence", "speed", "loot"],
   },
   {
     slug: "overview-loot-box",

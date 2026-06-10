@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Troops &amp; Tools Overview — Maxy's Empire Toolkit</title>
+  <meta name="description" content="Every Goodgame Empire unit and siege tool with attack, defence, speed, loot and effects." />
+  <link rel="stylesheet" href="../../assets/css/theme.css" />
+  <style>
+    .kind-tabs { display: flex; gap: 8px; margin-bottom: 16px; }
+    .kind-tab {
+      padding: 9px 22px; border-radius: var(--radius-sm); font: inherit; font-weight: 700;
+      background: var(--bg-elev-2); border: 1px solid var(--border); color: var(--text-dim); cursor: pointer;
+    }
+    .kind-tab:hover { border-color: var(--gold-dim); color: var(--text); }
+    .kind-tab.active { background: var(--gold); border-color: var(--gold); color: #1a1000; }
+    .stat-pair { white-space: nowrap; }
+    .stat-pair b { color: var(--text); }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap">
+      <a class="brand" href="../../"><span class="crest">🛡️</span> Maxy's Empire <b>Toolkit</b></a>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="tool-head">
+      <a class="back" href="../../">← All tools</a>
+      <h1>⚔️ Troops &amp; Tools</h1>
+      <p>Every unit and siege tool with real combat stats. Troops show melee/ranged
+         attack and defence; tools show exactly what they do to walls, gates, moat
+         and unit strength. <b>Attack</b> tools weaken the defence, <b>Defence</b>
+         tools strengthen it.</p>
+    </div>
+
+    <section class="panel">
+      <div class="kind-tabs">
+        <button class="kind-tab active" data-kind="troops">Troops</button>
+        <button class="kind-tab" data-kind="tools">Tools</button>
+      </div>
+      <div id="ov"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap"><p>Stats extracted from the community game-data cache. Images from the Goodgame asset CDN.</p></div>
+  </footer>
+
+  <script src="../../assets/js/corrections.js"></script>
+  <script src="../../assets/js/overview.js"></script>
+  <script>
+    const esc = (s) => String(s == null ? "" : s).replace(/[&<>"]/g, (c) =>
+      ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+    const num = (v) => (v || 0).toLocaleString();
+
+    let DATA = null;
+    let kind = "troops";
+
+    function show() {
+      const mount = document.getElementById("ov");
+      mount.innerHTML = "";
+      const fix = window.ggeFixName || ((s) => s);
+
+      if (kind === "troops") {
+        const data = DATA.troops.map((t) => ({ ...t, name: fix(t.name) }));
+        EmpireOverview({
+          mount, data,
+          layout: "cards",
+          searchKeys: ["name", "role"],
+          defaultSort: { key: "atk", dir: -1 },
+          placeholder: "Search " + data.length + " troops…",
+          sortOptions: [
+            { key: "atk",   label: "Attack",  num: true },
+            { key: "def",   label: "Defence", num: true },
+            { key: "speed", label: "Speed",   num: true },
+            { key: "loot",  label: "Loot",    num: true },
+            { key: "might", label: "Might",   num: true },
+            { key: "name",  label: "Name" },
+          ],
+          card: {
+            title: (r) => r.name,
+            img: (r) => r.img || null,
+            corner: (r) => r.role,
+            placeholder: "⚔️",
+            stats: [
+              { label: "Attack",  key: "atk", num: true,
+                fmt: (v, r) => '<span class="stat-pair">⚔️ <b>' + num(r.meleeAtk) + "</b> / 🏹 <b>" + num(r.rangeAtk) + "</b></span>" },
+              { label: "Defence", key: "def", num: true,
+                fmt: (v, r) => '<span class="stat-pair">⚔️ <b>' + num(r.meleeDef) + "</b> / 🏹 <b>" + num(r.rangeDef) + "</b></span>" },
+              { label: "Speed", key: "speed", num: true, fmt: num },
+              { label: "Loot",  key: "loot",  num: true, fmt: num },
+            ],
+          },
+        });
+      } else {
+        const data = DATA.tools.map((t) => ({ ...t, name: fix(t.name) }));
+        EmpireOverview({
+          mount, data,
+          layout: "cards",
+          searchKeys: ["name", "side", "cat"],
+          defaultSort: { key: "name", dir: 1 },
+          placeholder: "Search " + data.length + " tools (name, attack/defence)…",
+          sortOptions: [
+            { key: "name",  label: "Name" },
+            { key: "side",  label: "Attack / Defence" },
+            { key: "cat",   label: "Category" },
+            { key: "speed", label: "Speed", num: true },
+          ],
+          card: {
+            title: (r) => r.name,
+            img: (r) => r.img || null,
+            corner: (r) => r.side,
+            badge: (r) => r.cat,
+            placeholder: "🛠️",
+            stats: [
+              { label: "Speed", key: "speed", num: true, fmt: num },
+            ],
+            extra: (r) =>
+              r.effects && r.effects.length
+                ? '<div class="effects">' + r.effects.map((e) => '<span class="eff">' + esc(e) + "</span>").join("") + "</div>"
+                : "",
+          },
+        });
+      }
+    }
+
+    document.querySelectorAll(".kind-tab").forEach((b) =>
+      b.addEventListener("click", () => {
+        kind = b.dataset.kind;
+        document.querySelectorAll(".kind-tab").forEach((x) => x.classList.toggle("active", x === b));
+        show();
+      }));
+
+    fetch("./data/troops-tools.json")
+      .then((r) => r.json())
+      .then((d) => { DATA = d; show(); })
+      .catch((e) => {
+        document.getElementById("ov").innerHTML = '<p class="muted">Could not load troops &amp; tools data.</p>';
+        console.error(e);
+      });
+  </script>
+</body>
+</html>

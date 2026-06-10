@@ -1,0 +1,154 @@
+#!/usr/bin/env python3
+"""
+Troops & Tools extractor — Maxy's Empire Toolkit.
+Units with combat stats + siege/defence tools, names from lang, images from the
+DLL asset map (itemassets/Units/<building>/<building>_Unit_<type>/).
+Run: python3 extract.py [ggs.dll.js path]
+"""
+import json, sys, os, re, urllib.request
+
+ITEMS_URL = "https://raw.githubusercontent.com/GeneralsCamp/ggempire-data-cache/main/public/data/empire/items_latest.json"
+LANG_URL  = "https://raw.githubusercontent.com/GeneralsCamp/ggempire-data-cache/main/public/data/lang/en.json"
+DLL_URL   = "https://raw.githubusercontent.com/GeneralsCamp/ggempire-data-cache/main/public/data/empire/dll/ggs.dll.latest.js"
+CDN       = "https://empire-html5.goodgamestudios.com/default/assets/"
+OUT       = os.path.join(os.path.dirname(__file__), "troops-tools.json")
+
+
+def fetch(url, label):
+    print(f"  Downloading {label}…", file=sys.stderr)
+    with urllib.request.urlopen(url) as r:
+        return r.read().decode("utf-8")
+
+
+def num(v):
+    try:
+        return float(v)
+    except (TypeError, ValueError):
+        return 0
+
+
+def main():
+    d    = json.loads(fetch(ITEMS_URL, "items_latest.json"))
+    lang = {k.lower(): v for k, v in json.loads(fetch(LANG_URL, "lang/en.json")).items()
+            if isinstance(v, str)}
+
+    dll_path = sys.argv[1] if len(sys.argv) > 1 else None
+    if dll_path and os.path.exists(dll_path):
+        dll = open(dll_path, encoding="utf-8", errors="ignore").read()
+    else:
+        dll = fetch(DLL_URL, "ggs.dll.latest.js")
+
+    # type (lowercased) -> full asset path
+    img_idx = {}
+    for m in re.finditer(r"itemassets/Units/[A-Za-z0-9]+/[A-Za-z0-9]+_Unit_([A-Za-z0-9]+)/[A-Za-z0-9_]+--\d+", dll):
+        img_idx.setdefault(m.group(1).lower(), m.group(0))
+
+    def name_of(u):
+        return lang.get(u.get("type", "").lower() + "_name", "")
+
+    def img_of(u):
+        p = img_idx.get(u.get("type", "").lower())
+        return CDN + p + ".webp" if p else ""
+
+    troops, tools = [], []
+
+    # Attack tools REDUCE the defender's wall/gate/moat protection;
+    # defence tools INCREASE protection / unit strength. Phrasing matches in-game text.
+    TOOL_EFFECTS = [
+        ("wallBonus",     "atk", "-{v}% wall protection"),
+        ("gateBonus",     "atk", "-{v}% gate protection"),
+        ("moatBonus",     "atk", "-{v}% moat protection"),
+        ("wallBonus",     "def", "+{v}% wall protection"),
+        ("gateBonus",     "def", "+{v}% gate protection"),
+        ("moatBonus",     "def", "+{v}% moat protection"),
+        ("offMeleeBonus", "atk", "+{v}% melee attack strength"),
+        ("offRangeBonus", "atk", "+{v}% ranged attack strength"),
+        ("defMeleeBonus", "def", "+{v}% melee defence strength"),
+        ("defRangeBonus", "def", "+{v}% ranged defence strength"),
+        ("offMeleeBonus", "def", "+{v}% melee strength"),
+        ("offRangeBonus", "def", "+{v}% ranged strength"),
+        ("fameBonus",      "*",  "+{v}% glory points"),
+        ("pointBonus",     "*",  "+{v}% event points"),
+        ("ragePointBonus", "*",  "+{v}% rage points"),
+        ("khanTabletBooster", "*", "+{v}% Khan tablets"),
+        ("samuraiTokenBooster", "*", "+{v}% Samurai tokens"),
+        ("pearlBooster",   "*",  "+{v}% pearls"),
+    ]
+
+    for u in d["units"]:
+        name = name_of(u)
+        if not name:
+            continue
+        is_tool = bool(u.get("toolCategory"))
+        if is_tool:
+            side = "atk" if u.get("typ") == "Attack" else "def"
+            lines = []
+            for field, want, tpl in TOOL_EFFECTS:
+                if want != "*" and want != side:
+                    continue
+                v = num(u.get(field))
+                if v:
+                    lines.append(tpl.format(v=int(v) if v == int(v) else v))
+            tools.append({
+                "id":    u["wodID"],
+                "name":  name,
+                "kind":  "Tool",
+                "side":  "Attack" if side == "atk" else "Defence",
+                "cat":   u.get("toolCategory", ""),
+                "speed": int(num(u.get("speed"))),
+                "might": int(num(u.get("mightValue"))),
+                "effects": lines,
+                "img":   img_of(u),
+            })
+        else:
+            ma, ra = num(u.get("meleeAttack")), num(u.get("rangeAttack"))
+            md, rd = num(u.get("meleeDefence")), num(u.get("rangeDefence"))
+            if not (ma or ra or md or rd):
+                continue
+            troops.append({
+                "id":    u["wodID"],
+                "name":  name,
+                "kind":  "Troop",
+                "role":  (u.get("role") or "").capitalize(),
+                "meleeAtk": int(ma), "rangeAtk": int(ra),
+                "meleeDef": int(md), "rangeDef": int(rd),
+                "atk":   int(max(ma, ra)),
+                "def":   int(max(md, rd)),
+                "speed": int(num(u.get("speed"))),
+                "loot":  int(num(u.get("lootValue"))),
+                "food":  int(num(u.get("foodSupply"))),
+                "might": int(num(u.get("mightValue"))),
+                "img":   img_of(u),
+            })
+
+    # De-duplicate identical name+stats rows (same unit appears per building level)
+    seen, troops_out = set(), []
+    for t in sorted(troops, key=lambda x: int(x["id"])):
+        key = (t["name"], t["meleeAtk"], t["rangeAtk"], t["meleeDef"], t["rangeDef"])
+        if key in seen:
+            continue
+        seen.add(key)
+        troops_out.append(t)
+
+    seen, tools_out = set(), []
+    for t in sorted(tools, key=lambda x: int(x["id"])):
+        key = (t["name"], t["side"], tuple(t["effects"]))
+        if key in seen:
+            continue
+        seen.add(key)
+        tools_out.append(t)
+
+    out = {
+        "generated": __import__("datetime").date.today().isoformat(),
+        "troops": troops_out,
+        "tools":  tools_out,
+    }
+    with open(OUT, "w") as f:
+        json.dump(out, f, separators=(",", ":"))
+    imgs = sum(1 for x in troops_out + tools_out if x["img"])
+    print(f"Wrote troops-tools.json — {len(troops_out)} troops, {len(tools_out)} tools, "
+          f"{imgs}/{len(troops_out)+len(tools_out)} images.", file=sys.stderr)
+
+
+if __name__ == "__main__":
+    main()
