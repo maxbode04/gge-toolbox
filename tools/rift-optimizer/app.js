@@ -133,20 +133,55 @@
 
   /* ---- Optimizer ---- */
   /* `pool` maps id -> remaining count, so multi-commander builds consume gear. */
+  /* Gems are universal: any owned gem can sit in any of the 4 sockets, regardless
+     of its "gemType" or which set it belongs to. So we build a single flat gem
+     pool (one entry per owned copy) rather than four type-locked socket lists.
+     A gem still counts toward its own set's bonus wherever it's socketed. */
   function buildCandidates(pool) {
     const bySlot = {};
     for (const slot of EQUIP_SLOTS) bySlot[slot] = [];
-    const byGem = [[], [], [], []];
+    let gemPool = [];
 
     for (const set of allSets) {
       for (const item of set.items) {
         if ((pool[String(item.id)] || 0) > 0) bySlot[item.slot].push({ setID: set.setID, item, set });
       }
       for (const gem of set.gems) {
-        if ((pool[String(gem.id)] || 0) > 0) byGem[gem.gemType].push({ setID: set.setID, gem, set });
+        const owned = pool[String(gem.id)] || 0;
+        for (let k = 0; k < Math.min(owned, 4); k++) {
+          gemPool.push({ setID: set.setID, gem, set, gid: String(gem.id) });
+        }
       }
     }
-    return { bySlot, byGem };
+
+    // Only 4 sockets exist — if the player owns a huge gem pool, keep the most
+    // valuable gems (by standalone weighted effect) so the combination search
+    // stays fast. Typical pools are small and untouched by this.
+    const GEM_CAP = 16;
+    if (gemPool.length > GEM_CAP) {
+      const w = (g) => addEffects(g.gem.effects, {});
+      gemPool = gemPool.sort((a, b) => w(b) - w(a)).slice(0, GEM_CAP);
+    }
+    return { bySlot, gemPool };
+  }
+
+  /* All distinct gem loadouts: every combination of 0–4 gems from the pool
+     (sockets are interchangeable, so combinations not permutations; index order
+     also guarantees the same physical gem isn't reused beyond what's owned). */
+  function gemCombos(pool) {
+    const out = [[]];
+    const n = pool.length;
+    for (let a = 0; a < n; a++) {
+      out.push([pool[a]]);
+      for (let b = a + 1; b < n; b++) {
+        out.push([pool[a], pool[b]]);
+        for (let c = b + 1; c < n; c++) {
+          out.push([pool[a], pool[b], pool[c]]);
+          for (let d = c + 1; d < n; d++) out.push([pool[a], pool[b], pool[c], pool[d]]);
+        }
+      }
+    }
+    return out;
   }
 
   /* Sum weighted effect value into a totals object (by category) and return
@@ -193,8 +228,8 @@
   }
 
   function runOptimizer(pool) {
-    const { bySlot, byGem } = buildCandidates(pool);
-    const ALL_SLOT_KEYS = [...EQUIP_SLOTS, "gem0", "gem1", "gem2", "gem3"];
+    const { bySlot, gemPool } = buildCandidates(pool);
+    const gemSubsets = gemCombos(gemPool);
 
     const candidates = {
       Armor: bySlot.Armor,
@@ -202,67 +237,62 @@
       Helmet: bySlot.Helmet,
       Artifact: bySlot.Artifact,
       Hero: bySlot.Hero,
-      gem0: byGem[0],
-      gem1: byGem[1],
-      gem2: byGem[2],
-      gem3: byGem[3],
     };
-
-    /* Count combinations (each slot: N choices + 1 "empty") */
-    let combos = 1;
-    for (const key of ALL_SLOT_KEYS) combos *= (candidates[key].length + 1);
 
     let best = null;
     let bestScore = -1;
 
-    if (combos <= 500000) {
-      /* Full exhaustive search */
-      function search(idx, assign) {
-        if (idx === ALL_SLOT_KEYS.length) {
-          const s = scoreAssignment(assign);
-          if (s > bestScore) { bestScore = s; best = { ...assign }; }
-          return;
-        }
-        const key = ALL_SLOT_KEYS[idx];
-        const cands = candidates[key];
-        for (const c of cands) { assign[key] = c; search(idx + 1, assign); }
+    /* Write a gem subset into the gem0..gem3 keys (extra sockets cleared). */
+    function placeGems(assign, subset) {
+      for (let i = 0; i < 4; i++) assign["gem" + i] = subset[i] || null;
+    }
+    /* Score an equipment assignment paired with its best gem loadout. */
+    function withBestGems(assign) {
+      let bs = -1, bestSub = [];
+      for (const subset of gemSubsets) {
+        placeGems(assign, subset);
+        const s = scoreAssignment(assign);
+        if (s > bs) { bs = s; bestSub = subset; }
+      }
+      placeGems(assign, bestSub);
+      if (bs > bestScore) { bestScore = bs; best = { ...assign }; }
+    }
+
+    /* Equipment combinations only (gems handled per-leaf above). */
+    let eqCombos = 1;
+    for (const key of EQUIP_SLOTS) eqCombos *= (candidates[key].length + 1);
+    const totalWork = eqCombos * gemSubsets.length;
+
+    if (totalWork <= 800000) {
+      /* Full exhaustive search over equipment × best gems */
+      (function search(idx, assign) {
+        if (idx === EQUIP_SLOTS.length) { withBestGems(assign); return; }
+        const key = EQUIP_SLOTS[idx];
+        for (const c of candidates[key]) { assign[key] = c; search(idx + 1, assign); }
         assign[key] = null;
         search(idx + 1, assign);
-      }
-      search(0, {});
+      })(0, {});
     } else {
-      /* Greedy: try every possible "primary set" with best fill for each slot */
-      const tryAssign = (assign) => {
-        const s = scoreAssignment(assign);
-        if (s > bestScore) { bestScore = s; best = { ...assign }; }
-      };
-
+      /* Greedy: try each set as primary (and each pair) filling the 5 equipment
+         slots, then attach the best gem loadout. */
       const setIDs = allSets.map((s) => s.setID);
 
-      /* Pure single-set solutions */
       for (const sid of setIDs) {
         const assign = {};
-        for (const key of ALL_SLOT_KEYS) {
-          const c = candidates[key].find((x) => x.setID === sid);
-          assign[key] = c || null;
-        }
-        tryAssign(assign);
+        for (const key of EQUIP_SLOTS) assign[key] = candidates[key].find((x) => x.setID === sid) || null;
+        withBestGems(assign);
       }
-
-      /* Two-set solutions: for each pair, try both orderings of slot priority */
       for (let i = 0; i < setIDs.length; i++) {
         for (let j = i + 1; j < setIDs.length; j++) {
           const sA = setIDs[i], sB = setIDs[j];
           for (const primary of [sA, sB]) {
             const secondary = primary === sA ? sB : sA;
             const assign = {};
-            for (const key of ALL_SLOT_KEYS) {
-              const c = candidates[key].find((x) => x.setID === primary)
-                     || candidates[key].find((x) => x.setID === secondary)
-                     || null;
-              assign[key] = c;
+            for (const key of EQUIP_SLOTS) {
+              assign[key] = candidates[key].find((x) => x.setID === primary)
+                         || candidates[key].find((x) => x.setID === secondary) || null;
             }
-            tryAssign(assign);
+            withBestGems(assign);
           }
         }
       }
