@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Increasing Mead Production — Maxy's Empire Toolkit</title>
-  <meta name="description" content="How to push net mead in the Everwinter Glacier: taverns, decoration bonuses, build items, storage and keeping consumption under control." />
-  <link rel="stylesheet" href="../../assets/css/theme.css?v=12" />
+  <title>Mead Optimisation — Maxy's Empire Toolkit</title>
+  <meta name="description" content="Mead optimisation for Goodgame Empire: the brewery + honey chain, every building level that matters, overseers, research and build items." />
+  <link rel="stylesheet" href="../../assets/css/theme.css?v=13" />
   <link rel="stylesheet" href="./guide.css" />
 </head>
 <body>
@@ -18,72 +18,103 @@
   <main class="wrap">
     <div class="tool-head guide">
       <a class="back" href="../../">← All tools</a>
-      <h1>🍺 Increasing Mead Production</h1>
+      <h1>🍺 Mead Optimisation</h1>
       <div class="guide-meta">
-        <span class="guide-tag">Guide</span>
+        <span class="guide-tag">Optimisation</span>
         <span class="guide-tag">Economy</span>
-        <span class="guide-tag">Everwinter Glacier</span>
-        <span class="guide-read">~4 min read</span>
+        <span class="guide-tag">Sovereign Troops</span>
+        <span class="guide-read">~6 min read</span>
       </div>
     </div>
 
     <div class="guide">
       <article>
-        <p class="guide-lead">Mead is the <b>Everwinter Glacier's version of food</b>. Every soldier and
-          tool you keep in a Glacier castle drinks mead each hour instead of eating food, and
-          your <b>net mead</b> (production − consumption) decides whether you can hold troops up
-          there or watch them desert. The mechanics mirror food almost exactly — same logic, just
-          a different resource and a different kingdom.</p>
+        <p class="guide-lead">Mead is what keeps your <b>Sovereign troops</b> alive — the elite
+          units unlocked through the Hall of Legends. Four of the eight sovereign unit types
+          drink mead (the other four eat beef), and if a castle runs out, those soldiers
+          <b>die</b>. Mead isn't farmed directly: your <b>Relic Brewery converts food + honey
+          into mead</b>, so optimising mead really means optimising a three-resource chain.</p>
 
-        <h2>How mead actually works</h2>
+        <h2>How the chain works</h2>
         <ul>
-          <li><b>It's a Glacier-only resource.</b> Mead is produced and consumed inside the
-            Everwinter Glacier. Your Great Empire farms and food bonuses don't touch it, and mead
-            can't feed troops sitting in your green-kingdom castles.</li>
-          <li><b>Taverns are your base production.</b> Taverns are to mead what farmhouses are to
-            food — build the full row and keep them maxed for your Glacier castle / outpost.</li>
-          <li><b>Production is base × (1 + bonuses).</b> Taverns set the base mead/hour; decorations,
-            build items and a few buildings multiply it.</li>
-          <li><b>Consumption scales with what's parked there.</b> Troops and tools stationed in the
-            Glacier each have a mead upkeep. A heavy defensive stack up there can out-drink a maxed
-            tavern row, so the fastest fix is often moving or thinning the garrison, not building
-            more taverns.</li>
-          <li><b>Negative net mead isn't instant death.</b> You burn stored mead first; only when the
-            store hits zero do units start leaving. That buffer is a resource you can spend on
-            purpose during Glacier events.</li>
+          <li><b>Relic Brewery</b> (unlock: Hall of Legends legendary level 45, "Master Brewer").
+            One per castle, 5×5. Converts <b>5 food + 3 honey → 1 mead</b> at base ratio —
+            upgrading the brewery improves the ratio, so levels pay twice (more output <i>and</i>
+            cheaper input). 30 levels since the March 2024 update.</li>
+          <li><b>The slider:</b> the brewery has a % slider — lower it to produce less mead and
+            consume less food/honey. Use it to throttle the drain when your food balance is
+            struggling.</li>
+          <li><b>Honey</b> comes from <b>Apiaries</b> (unlock: legendary level 40, "Beekeeper") —
+            up to 15 per castle, 5×5 each.</li>
+          <li><b>Food feeds the brewery too.</b> Every point of mead production leans on your food
+            economy — a weak food setup caps your mead no matter how good the brewery is. Do the
+            <a href="./food-production.html">food optimisation</a> alongside this.</li>
+          <li><b>Net mead per hour</b> = production − sovereign troop consumption. Negative net
+            drains the storehouse; at zero stored mead, sovereign troops start dying.</li>
         </ul>
 
-        <h2>The quick version — push production up</h2>
+        <h2>The optimisation checklist — buildings</h2>
         <ul>
-          <li><b>Taverns:</b> your foundation. Full row, max level for the castle. This is the single
-            biggest lever — everything else is a multiplier on top of it.</li>
-          <li><b>Decorations:</b> mead-production decos stack toward a cap, the same way food decos
-            do. Fill toward that cap with your biggest mead-bonus decos before chasing smaller
-            sources. <i>(Exact cap % — verify in-game against your current version.)</i></li>
-          <li><b>Build items:</b> permanent mead-production items from offers/events, plus temporary
-            gatsha boosts (big % mead for a few days). Slot the temporary ones right before heavy
-            consumption — a defence wave or a recruit dump in the Glacier.</li>
-          <li><b>Storage:</b> upgrading your mead storage doesn't make mead, but a bigger buffer is
-            exactly what lets you run net-negative through an event without losing troops.</li>
+          <li><b>Relic Brewery → level 14–15</b> as the efficient stopping point; push to
+            <b>30 in one go</b> if you have the resources banked (each level also improves the
+            food/honey ratio).</li>
+          <li><b>Relic Mead Distillery → level 8</b> (construction-token building, boosts mead).</li>
+          <li><b>Barrel Workshop → level 6</b> (construction-token building, mead production).</li>
+          <li><b>Honey Gardens → level 6</b> (construction-token building, honey production).</li>
+          <li><b>Apiaries</b> — build them out and pair with the <b>relic honey production build
+            item</b> (level 1 is the value pick; upgrading both is whale territory).</li>
+          <li><b>Granaries → level 30</b> and <b>2× Relic Greenhouse per castle → level 20</b> —
+            this is the food side that feeds the brewery. Relic Conservatories ×2 only if you
+            spend big.</li>
+          <li><b>Buy the Mead District</b> — it lets you tuck the mead buildings away off your
+            castle grid, freeing plots for decorations.</li>
         </ul>
 
-        <h2>The other half — cut consumption</h2>
+        <h2>The optimisation checklist — boosts</h2>
         <ul>
-          <li><b>Don't over-garrison the Glacier.</b> Keep only the troops you actually need up there;
-            park the rest in a green-kingdom castle where they eat food (which is far easier to
-            mass-produce) instead of mead.</li>
-          <li><b>Tools drink too.</b> Stacks of unused siege tools sitting in a Glacier castle still
-            pull mead upkeep — store or use them.</li>
-          <li><b>Use the buffer for events.</b> Before a big Glacier defence or recruit push, let mead
-            go net-negative on purpose, ride the stored buffer down, then top taverns / slot a temp
-            mead item to recover.</li>
+          <li><b>Overseers</b> (Kings Market, weekly): <b>Mead 563 rubies</b>, <b>Honey 563</b>,
+            <b>Food 157</b>. Cheap for what they give — set a reminder so they don't lapse.</li>
+          <li><b>Coat of arms:</b> the <b>+20% mead</b> emblem is the standout; 15% mead or
+            15–20% food variants are also viable.</li>
+          <li><b>Research (Hall of Legends):</b> <b>Northman Tankards = +20% mead</b>,
+            <b>Honey Pots lv 5 = +20% honey</b>, <b>Three-Field Crop Rotation lv 5 = +20% food</b>.</li>
+          <li><b>Castellan hero with a mead % bonus</b> — but only if the hero's defence effects
+            are still good. A castle that gets wiped because of a bad castellan loses you more
+            than the production gain. Defence first, production second.</li>
+          <li><b>Public-order decorations:</b> place your highest-PO decos where they cover the
+            most production. If your mead buildings are fully built in outposts, the boost lands
+            bigger there than in the main castle. Golden rule — your best decos should never sit
+            in inventory.</li>
+          <li><b>Districts:</b> buy the military/trade districts and level them, always moving the
+            biggest buildings in first — every plot freed is deco space.</li>
+          <li><b>Build items (Beyond the Horizon):</b> the brewery primary slot goes
+            <b>+70 mead at lv 1 → +1,350 at lv 30</b>; the relic brewery slot is the monster —
+            <b>+10,200 at lv 1 → +15,000 at lv 30</b>. Honey items: primary +30 → +418 (lv 25),
+            relic +2,200 → +7,000 (lv 25). Top BTH rewards also include temp honey/mead items.</li>
+          <li><b>Hall expansions + Berimond titles</b> — more castle space = more decorations.
+            Delete buildings you don't need.</li>
         </ul>
 
-        <p class="guide-lead" style="margin-top:18px">Rule of thumb: keep taverns maxed, fill the mead
-          deco cap, and treat your mead store as something you spend during events — and remember the
-          cheapest mead is the troop you <i>didn't</i> garrison in the Glacier in the first place.</p>
+        <h2>Priorities if you're starting from zero</h2>
+        <ul>
+          <li><b>1.</b> Unlock the chain: Beekeeper (leg. 40) → apiaries; Master Brewer (leg. 45)
+            → brewery.</li>
+          <li><b>2.</b> Brewery to 14–15, apiaries built, granaries/greenhouses up — the
+            structural base.</li>
+          <li><b>3.</b> Cheap permanent boosts: research lines, coat of arms, CT buildings
+            (distillery 8 / barrel workshop 6 / honey gardens 6).</li>
+          <li><b>4.</b> Weekly upkeep: the three overseers.</li>
+          <li><b>5.</b> Long game: relic brewery build item, PO deco quality, district levels,
+            brewery → 30.</li>
+        </ul>
+
+        <p class="guide-lead" style="margin-top:18px">Rule of thumb: the brewery ratio means
+          <b>every mead is really ~5 food + 3 honey</b> — so a mead problem is usually a food or
+          honey problem in disguise. Fix the chain in that order: food base → honey supply →
+          brewery level → % boosts.</p>
 
         <div class="guide-nav">
+          <a class="guide-tool-link" href="./food-production.html">Food Optimisation →</a>
           <a class="guide-tool-link" href="../../">← All tools</a>
         </div>
       </article>
@@ -91,7 +122,7 @@
   </main>
 
   <footer class="footer">
-    <div class="wrap"><p>Community guide — mechanics mirror food production; exact cap percentages are version-dependent, verify in-game after major updates.</p></div>
+    <div class="wrap"><p>Sources: alliance wiki ("the bible"), the CZ-EN Empire wiki and the GGE Fandom wiki — current as of mid-2026; verify ruby prices and levels in-game after major updates.</p></div>
   </footer>
 </body>
 </html>
