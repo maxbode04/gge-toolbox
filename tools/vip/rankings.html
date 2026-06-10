@@ -3,10 +3,32 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rankings — Chemie's VIP Corner</title>
   <meta name="robots" content="noindex" />
-  <link rel="stylesheet" href="../../assets/css/theme.css" />
+  <title>Chemie's VIP Corner — Locked</title>
+  <link rel="stylesheet" href="../../assets/css/theme.css?v=15" />
   <link rel="stylesheet" href="./vip.css" />
+  <style>
+    .lock-wrap { max-width: 460px; margin: 12vh auto 0; text-align: center; padding: 0 20px; }
+    .lock-crest { font-size: 3rem; filter: drop-shadow(0 2px 6px rgba(0,0,0,.5)); }
+    .lock-wrap h1 { font-family: var(--font-display); color: var(--gold); margin: 14px 0 6px; font-size: 1.7rem; }
+    .lock-wrap p { color: var(--text-dim); margin: 0 0 22px; }
+    .lock-form { display: flex; gap: 10px; }
+    .lock-form input {
+      flex: 1; padding: 12px 14px; font: inherit; font-size: 1rem;
+      background: var(--bg-elev); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); color: var(--text); outline: none;
+    }
+    .lock-form input:focus { border-color: var(--gold); box-shadow: 0 0 12px rgba(217,178,90,.2); }
+    .lock-form button {
+      padding: 12px 22px; font: inherit; font-weight: 700; cursor: pointer;
+      background: var(--gold); color: #1a1206; border: none; border-radius: var(--radius-sm);
+      letter-spacing: .04em; transition: .15s;
+    }
+    .lock-form button:hover { filter: brightness(1.1); }
+    .lock-form button:disabled { opacity: .55; cursor: default; }
+    .lock-err { color: var(--bad); font-size: .9rem; min-height: 1.2em; margin-top: 12px; }
+    .lock-note { color: var(--text-faint); font-size: .78rem; margin-top: 18px; line-height: 1.5; }
+  </style>
 </head>
 <body>
   <header class="topbar">
@@ -15,139 +37,83 @@
     </div>
   </header>
 
-  <main class="wrap">
-    <div class="tool-head">
-      <a class="back" href="./index.html">← VIP Corner</a>
-      <h1>📊 Player &amp; Alliance Rankings</h1>
-      <p>Live server rankings. Click a column to sort; use the filters to narrow down.</p>
+  <main>
+    <div class="lock-wrap" id="lock-ui" hidden>
+      <div class="lock-crest">🔐</div>
+      <h1>Chemie's VIP Corner</h1>
+      <p>Members only. Enter your access code to unlock.</p>
+      <form class="lock-form" id="lock-form">
+        <input type="password" id="lock-code" placeholder="Access code" autocomplete="off"
+               autocapitalize="characters" spellcheck="false" autofocus />
+        <button type="submit" id="lock-btn">Unlock</button>
+      </form>
+      <div class="lock-err" id="lock-err"></div>
+      <p class="lock-note">These pages are AES-256 encrypted — the code is required to read them,
+         and it isn't stored on the server. Ask Chemie for access; please don't share the code.</p>
     </div>
-
-    <section class="panel">
-      <div class="vip-nav">
-        <a href="./rankings.html" class="active">Rankings</a>
-        <a href="./empire-rankings.html">Live Event Rankings</a>
-        <a href="./fortress.html">Fortress Tracker</a>
-        <a href="./search.html">Search &amp; Analyse</a>
-        <a href="./scores.html">Score Tools</a>
-        <a href="./wall-break.html">Wall-Break Sim</a>
-      </div>
-
-      <div class="vip-toolbar" id="toolbar">
-        <button class="vip-btn" id="tab-players">Players</button>
-        <button class="vip-btn ghost" id="tab-alliances">Alliances</button>
-        <input class="vip-input" id="f-alliance" placeholder="Filter: alliance name" />
-        <input class="vip-input" id="f-minlevel" placeholder="Min level" style="min-width:90px" type="number" />
-        <button class="vip-btn ghost" id="apply">Apply</button>
-      </div>
-
-      <div class="vip-status" id="status"></div>
-      <div style="overflow-x:auto"><table class="vip-table" id="tbl"></table></div>
-      <div class="vip-pager">
-        <button class="vip-btn ghost" id="prev">← Prev</button>
-        <span id="pageinfo"></span>
-        <button class="vip-btn ghost" id="next">Next →</button>
-      </div>
-
-      <p class="vip-credit">Data: <a href="https://gge-tracker.com" target="_blank" rel="noopener">gge-tracker.com</a> public API.</p>
-    </section>
   </main>
 
-  <script src="./vip-shared.js"></script>
   <script>
-    const { api, esc, num, mountServerPicker } = window.VIP;
-    mountServerPicker(document.getElementById("toolbar"));
+    const SALT = "xx0qJgChFqeXQG1K5OzyvA==", ITER = 600000, PAYLOAD = "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", SKEY = "vip_k";
+    const b64dec = (s) => Uint8Array.from(atob(s), (c) => c.charCodeAt(0));
+    const b64enc = (u) => btoa(String.fromCharCode(...u));
 
-    let mode = "players", page = 1, totalPages = 1;
-    let orderBy = "might_current", orderType = "DESC";
+    async function deriveKey(pass) {
+      const km = await crypto.subtle.importKey("raw", new TextEncoder().encode(pass), "PBKDF2", false, ["deriveKey"]);
+      return crypto.subtle.deriveKey(
+        { name: "PBKDF2", salt: b64dec(SALT), iterations: ITER, hash: "SHA-256" },
+        km, { name: "AES-GCM", length: 256 }, true, ["decrypt"]);
+    }
+    async function decryptWith(key) {
+      const data = b64dec(PAYLOAD), iv = data.slice(0, 12), ct = data.slice(12);
+      const pt = await crypto.subtle.decrypt({ name: "AES-GCM", iv }, key, ct);
+      return new TextDecoder().decode(pt);
+    }
+    function render(html) { document.open(); document.write(html); document.close(); }
 
-    const PLAYER_COLS = [
-      { key: "player_name",    label: "Player",   cls: "nm" },
-      { key: "alliance_name",  label: "Alliance" },
-      { key: "level",          label: "Lvl",      cls: "r", sort: "level" },
-      { key: "legendary_level",label: "Leg.",     cls: "r" },
-      { key: "might_current",  label: "Might",    cls: "r", sort: "might_current", num: true },
-      { key: "loot_current",   label: "Loot",     cls: "r", sort: "loot_current",  num: true },
-      { key: "honor",          label: "Honor",    cls: "r", sort: "honor",         num: true },
-      { key: "current_fame",   label: "Fame",     cls: "r", sort: "current_fame",  num: true },
-    ];
-    const ALLIANCE_COLS = [
-      { key: "alliance_name",      label: "Alliance", cls: "nm" },
-      { key: "player_count",       label: "Members",  cls: "r" },
-      { key: "might_current",      label: "Might",    cls: "r", sort: "might_current", num: true },
-      { key: "loot_current",       label: "Loot",     cls: "r", sort: "loot_current",  num: true },
-      { key: "current_fame",       label: "Fame",     cls: "r", sort: "current_fame",  num: true },
-      { key: "highest_fame",       label: "Best fame",cls: "r", num: true },
-    ];
+    async function unlock(pass) {
+      const key = await deriveKey(pass);
+      let html;
+      try { html = await decryptWith(key); } catch (e) { return false; }
+      const raw = await crypto.subtle.exportKey("raw", key);
+      try { sessionStorage.setItem(SKEY, b64enc(new Uint8Array(raw))); } catch (e) {}
+      render(html);
+      return true;
+    }
 
-    async function load() {
-      const status = document.getElementById("status");
-      status.textContent = "Loading…"; status.className = "vip-status";
-      try {
-        let rows, cols;
-        if (mode === "players") {
-          const params = { page, orderBy, orderType };
-          const fa = document.getElementById("f-alliance").value.trim();
-          const ml = document.getElementById("f-minlevel").value.trim();
-          if (fa) params.alliance = fa;
-          if (ml) params.minLevel = ml;
-          const d = await api("players", params);
-          rows = d.players || []; cols = PLAYER_COLS;
-          totalPages = d.pagination ? d.pagination.total_pages : 1;
-          status.textContent = d.pagination ? num(d.pagination.total_items_count) + " players" : "";
-        } else {
-          const d = await api("alliances", { page, orderBy, orderType });
-          rows = d.alliances || []; cols = ALLIANCE_COLS;
-          totalPages = d.pagination ? d.pagination.total_pages : 1;
-          status.textContent = d.pagination ? num(d.pagination.total_items_count) + " alliances" : "";
-        }
-        renderTable(rows, cols);
-        document.getElementById("pageinfo").textContent = "Page " + page + " / " + totalPages;
-      } catch (e) {
-        status.textContent = "Error: " + e.message; status.className = "vip-status vip-error";
+    async function runGate() {
+      // Already unlocked this session on another VIP page? Reuse the key silently.
+      const stored = sessionStorage.getItem(SKEY);
+      if (stored) {
+        try {
+          const key = await crypto.subtle.importKey("raw", b64dec(stored), { name: "AES-GCM" }, true, ["decrypt"]);
+          render(await decryptWith(key));
+          return;
+        } catch (e) { sessionStorage.removeItem(SKEY); }
       }
-    }
-
-    function renderTable(rows, cols) {
-      const tbl = document.getElementById("tbl");
-      tbl.innerHTML = "<thead><tr>" + cols.map((c) =>
-        '<th class="' + (c.sort ? "sortable" : "") + '" data-sort="' + (c.sort || "") + '">' +
-        c.label + (c.sort === orderBy ? (orderType === "DESC" ? " ↓" : " ↑") : "") + "</th>"
-      ).join("") + "</tr></thead>";
-      const tb = document.createElement("tbody");
-      rows.forEach((r) => {
-        const tr = document.createElement("tr");
-        tr.innerHTML = cols.map((c) => {
-          const v = r[c.key];
-          return '<td class="' + (c.cls || "") + '">' + (c.num ? num(v) : esc(v ?? "—")) + "</td>";
-        }).join("");
-        tb.appendChild(tr);
+      const ui = document.getElementById("lock-ui");
+      ui.hidden = false;
+      const form = document.getElementById("lock-form"),
+            input = document.getElementById("lock-code"),
+            err = document.getElementById("lock-err"),
+            btn = document.getElementById("lock-btn");
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const code = (input.value || "").trim();
+        if (!code) return;
+        err.textContent = ""; btn.disabled = true; btn.textContent = "Unlocking…";
+        const ok = await unlock(code);
+        if (!ok) {
+          btn.disabled = false; btn.textContent = "Unlock";
+          err.textContent = "Wrong code — ask Chemie for access.";
+          input.select();
+        }
       });
-      tbl.appendChild(tb);
-      tbl.querySelectorAll("th.sortable").forEach((th) =>
-        th.addEventListener("click", () => {
-          const s = th.dataset.sort;
-          if (!s) return;
-          if (orderBy === s) orderType = orderType === "DESC" ? "ASC" : "DESC";
-          else { orderBy = s; orderType = "DESC"; }
-          page = 1; load();
-        }));
     }
-
-    document.getElementById("tab-players").addEventListener("click", function () {
-      mode = "players"; page = 1; orderBy = "might_current";
-      this.className = "vip-btn"; document.getElementById("tab-alliances").className = "vip-btn ghost";
-      load();
-    });
-    document.getElementById("tab-alliances").addEventListener("click", function () {
-      mode = "alliances"; page = 1; orderBy = "might_current";
-      this.className = "vip-btn"; document.getElementById("tab-players").className = "vip-btn ghost";
-      load();
-    });
-    document.getElementById("apply").addEventListener("click", () => { page = 1; load(); });
-    document.getElementById("prev").addEventListener("click", () => { if (page > 1) { page--; load(); } });
-    document.getElementById("next").addEventListener("click", () => { if (page < totalPages) { page++; load(); } });
-
-    load();
+    // Run after full load so document.open()/write() cleanly replaces the page
+    // (during initial parse, document.write would append instead of replace).
+    if (document.readyState === "complete") runGate();
+    else window.addEventListener("load", runGate);
   </script>
 </body>
 </html>

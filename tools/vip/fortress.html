@@ -3,10 +3,32 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fortress Tracker — Chemie's VIP Corner</title>
   <meta name="robots" content="noindex" />
-  <link rel="stylesheet" href="../../assets/css/theme.css" />
+  <title>Chemie's VIP Corner — Locked</title>
+  <link rel="stylesheet" href="../../assets/css/theme.css?v=15" />
   <link rel="stylesheet" href="./vip.css" />
+  <style>
+    .lock-wrap { max-width: 460px; margin: 12vh auto 0; text-align: center; padding: 0 20px; }
+    .lock-crest { font-size: 3rem; filter: drop-shadow(0 2px 6px rgba(0,0,0,.5)); }
+    .lock-wrap h1 { font-family: var(--font-display); color: var(--gold); margin: 14px 0 6px; font-size: 1.7rem; }
+    .lock-wrap p { color: var(--text-dim); margin: 0 0 22px; }
+    .lock-form { display: flex; gap: 10px; }
+    .lock-form input {
+      flex: 1; padding: 12px 14px; font: inherit; font-size: 1rem;
+      background: var(--bg-elev); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); color: var(--text); outline: none;
+    }
+    .lock-form input:focus { border-color: var(--gold); box-shadow: 0 0 12px rgba(217,178,90,.2); }
+    .lock-form button {
+      padding: 12px 22px; font: inherit; font-weight: 700; cursor: pointer;
+      background: var(--gold); color: #1a1206; border: none; border-radius: var(--radius-sm);
+      letter-spacing: .04em; transition: .15s;
+    }
+    .lock-form button:hover { filter: brightness(1.1); }
+    .lock-form button:disabled { opacity: .55; cursor: default; }
+    .lock-err { color: var(--bad); font-size: .9rem; min-height: 1.2em; margin-top: 12px; }
+    .lock-note { color: var(--text-faint); font-size: .78rem; margin-top: 18px; line-height: 1.5; }
+  </style>
 </head>
 <body>
   <header class="topbar">
@@ -15,119 +37,83 @@
     </div>
   </header>
 
-  <main class="wrap">
-    <div class="tool-head">
-      <a class="back" href="./index.html">← VIP Corner</a>
-      <h1>🏰 Fortress Tracker</h1>
-      <p>NPC fortresses on the map — Barbarian, Desert and Dragon forts. Each fort has a
-         <b>24h cooldown after anyone attacks it</b> (shown here), plus a longer
-         personal cooldown (~72h) for the player who attacked it. "Last attacker"
-         is who hit it most recently — not an owner.</p>
+  <main>
+    <div class="lock-wrap" id="lock-ui" hidden>
+      <div class="lock-crest">🔐</div>
+      <h1>Chemie's VIP Corner</h1>
+      <p>Members only. Enter your access code to unlock.</p>
+      <form class="lock-form" id="lock-form">
+        <input type="password" id="lock-code" placeholder="Access code" autocomplete="off"
+               autocapitalize="characters" spellcheck="false" autofocus />
+        <button type="submit" id="lock-btn">Unlock</button>
+      </form>
+      <div class="lock-err" id="lock-err"></div>
+      <p class="lock-note">These pages are AES-256 encrypted — the code is required to read them,
+         and it isn't stored on the server. Ask Chemie for access; please don't share the code.</p>
     </div>
-
-    <section class="panel">
-      <div class="vip-nav">
-        <a href="./rankings.html">Rankings</a>
-        <a href="./empire-rankings.html">Live Event Rankings</a>
-        <a href="./fortress.html" class="active">Fortress Tracker</a>
-        <a href="./search.html">Search &amp; Analyse</a>
-        <a href="./scores.html">Score Tools</a>
-        <a href="./wall-break.html">Wall-Break Sim</a>
-      </div>
-
-      <div class="vip-toolbar" id="toolbar">
-        <select class="vip-server-pick" id="f-kid">
-          <option value="">All fort types</option>
-          <option value="0">Barbarian fort (Great Empire)</option>
-          <option value="2">Desert fort (Burning Sands)</option>
-          <option value="3">Dragon fort (Fire Peaks)</option>
-        </select>
-        <select class="vip-server-pick" id="f-cd">
-          <option value="">Any cooldown</option>
-          <option value="true">Attackable now</option>
-          <option value="false">On cooldown</option>
-        </select>
-        <input class="vip-input" id="f-near" placeholder="Near player (name)…" />
-        <input class="vip-input" id="f-owner" placeholder="Last attacker…" style="min-width:130px" />
-        <button class="vip-btn" id="apply">Search</button>
-      </div>
-
-      <div class="vip-status" id="status"></div>
-      <div style="overflow-x:auto"><table class="vip-table" id="tbl"></table></div>
-      <div class="vip-pager">
-        <button class="vip-btn ghost" id="prev">← Prev</button>
-        <span id="pageinfo"></span>
-        <button class="vip-btn ghost" id="next">Next →</button>
-      </div>
-
-      <p class="vip-credit">Data: <a href="https://gge-tracker.com" target="_blank" rel="noopener">gge-tracker.com</a> public API.</p>
-    </section>
   </main>
 
-  <script src="./vip-shared.js"></script>
   <script>
-    const { api, esc, num, ago, dur, mountServerPicker } = window.VIP;
-    mountServerPicker(document.getElementById("toolbar"));
+    const SALT = "xx0qJgChFqeXQG1K5OzyvA==", ITER = 600000, PAYLOAD = "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", SKEY = "vip_k";
+    const b64dec = (s) => Uint8Array.from(atob(s), (c) => c.charCodeAt(0));
+    const b64enc = (u) => btoa(String.fromCharCode(...u));
 
-    const FORT_NAMES = { 0: "Barbarian fort", 1: "Ice fort", 2: "Desert fort", 3: "Dragon fort" };
-    let page = 1, hasMore = true;
+    async function deriveKey(pass) {
+      const km = await crypto.subtle.importKey("raw", new TextEncoder().encode(pass), "PBKDF2", false, ["deriveKey"]);
+      return crypto.subtle.deriveKey(
+        { name: "PBKDF2", salt: b64dec(SALT), iterations: ITER, hash: "SHA-256" },
+        km, { name: "AES-GCM", length: 256 }, true, ["decrypt"]);
+    }
+    async function decryptWith(key) {
+      const data = b64dec(PAYLOAD), iv = data.slice(0, 12), ct = data.slice(12);
+      const pt = await crypto.subtle.decrypt({ name: "AES-GCM", iv }, key, ct);
+      return new TextDecoder().decode(pt);
+    }
+    function render(html) { document.open(); document.write(html); document.close(); }
 
-    async function load() {
-      const status = document.getElementById("status");
-      status.textContent = "Loading…"; status.className = "vip-status";
-      try {
-        const params = { page, size: 25 };
-        const kid = document.getElementById("f-kid").value;
-        const cd  = document.getElementById("f-cd").value;
-        const near = document.getElementById("f-near").value.trim();
-        const owner = document.getElementById("f-owner").value.trim();
-        if (kid !== "") params.filterByKid = kid;
-        if (cd !== "") params.filterByAttackCooldown = cd;
-        if (near) params.nearPlayerName = near;
-        if (owner) params.filterByPlayerName = owner;
+    async function unlock(pass) {
+      const key = await deriveKey(pass);
+      let html;
+      try { html = await decryptWith(key); } catch (e) { return false; }
+      const raw = await crypto.subtle.exportKey("raw", key);
+      try { sessionStorage.setItem(SKEY, b64enc(new Uint8Array(raw))); } catch (e) {}
+      render(html);
+      return true;
+    }
 
-        const d = await api("dungeons", params);
-        const rows = d.dungeons || [];
-        hasMore = rows.length >= 25;
-        status.textContent = rows.length + " fortresses on this page";
-        render(rows);
-        document.getElementById("pageinfo").textContent = "Page " + page;
-      } catch (e) {
-        status.textContent = "Error: " + e.message; status.className = "vip-status vip-error";
+    async function runGate() {
+      // Already unlocked this session on another VIP page? Reuse the key silently.
+      const stored = sessionStorage.getItem(SKEY);
+      if (stored) {
+        try {
+          const key = await crypto.subtle.importKey("raw", b64dec(stored), { name: "AES-GCM" }, true, ["decrypt"]);
+          render(await decryptWith(key));
+          return;
+        } catch (e) { sessionStorage.removeItem(SKEY); }
       }
-    }
-
-    function render(rows) {
-      const tbl = document.getElementById("tbl");
-      tbl.innerHTML = `<thead><tr>
-        <th>Fort</th><th>Position</th><th>Last attacker</th><th>Lvl</th><th>Might</th>
-        <th>Total attacks</th><th>Attackable</th><th>Last attacked</th>${rows[0] && rows[0].distance != null ? "<th>Distance</th>" : ""}
-      </tr></thead>`;
-      const tb = document.createElement("tbody");
-      rows.forEach((r) => {
-        const availIn = r.effective_cooldown_until
-          ? Math.max(0, Math.round((new Date(r.effective_cooldown_until) - Date.now()) / 1000))
-          : 0;
-        const tr = document.createElement("tr");
-        tr.innerHTML =
-          '<td class="nm">' + (FORT_NAMES[r.kid] || "Fort") + "</td>" +
-          '<td class="r">' + r.position_x + ":" + r.position_y + "</td>" +
-          "<td>" + esc(r.player_name || "—") + "</td>" +
-          '<td class="r">' + esc(r.player_level) + (r.player_legendary_level ? "/" + esc(r.player_legendary_level) : "") + "</td>" +
-          '<td class="r">' + num(r.player_might) + "</td>" +
-          '<td class="r">' + num(r.total_attack_count) + "</td>" +
-          "<td>" + (availIn === 0 ? "✅ now" : "⏳ " + dur(availIn)) + "</td>" +
-          "<td>" + ago(r.last_attack) + "</td>" +
-          (r.distance != null ? '<td class="r">' + num(r.distance) + "</td>" : "");
-        tb.appendChild(tr);
+      const ui = document.getElementById("lock-ui");
+      ui.hidden = false;
+      const form = document.getElementById("lock-form"),
+            input = document.getElementById("lock-code"),
+            err = document.getElementById("lock-err"),
+            btn = document.getElementById("lock-btn");
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const code = (input.value || "").trim();
+        if (!code) return;
+        err.textContent = ""; btn.disabled = true; btn.textContent = "Unlocking…";
+        const ok = await unlock(code);
+        if (!ok) {
+          btn.disabled = false; btn.textContent = "Unlock";
+          err.textContent = "Wrong code — ask Chemie for access.";
+          input.select();
+        }
       });
-      tbl.appendChild(tb);
     }
-
-    document.getElementById("apply").addEventListener("click", () => { page = 1; load(); });
-    document.getElementById("prev").addEventListener("click", () => { if (page > 1) { page--; load(); } });
-    document.getElementById("next").addEventListener("click", () => { if (hasMore) { page++; load(); } });
-    load();
+    // Run after full load so document.open()/write() cleanly replaces the page
+    // (during initial parse, document.write would append instead of replace).
+    if (document.readyState === "complete") runGate();
+    else window.addEventListener("load", runGate);
   </script>
 </body>
 </html>

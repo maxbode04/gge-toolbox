@@ -3,13 +3,31 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Live Event Rankings — Chemie's VIP Corner</title>
   <meta name="robots" content="noindex" />
+  <title>Chemie's VIP Corner — Locked</title>
   <link rel="stylesheet" href="../../assets/css/theme.css?v=15" />
   <link rel="stylesheet" href="./vip.css" />
   <style>
-    .er-row-you td { background: rgba(217, 178, 90,.08); }
-    .er-title { color: var(--text-faint); font-size: .72rem; margin-left: 4px; }
+    .lock-wrap { max-width: 460px; margin: 12vh auto 0; text-align: center; padding: 0 20px; }
+    .lock-crest { font-size: 3rem; filter: drop-shadow(0 2px 6px rgba(0,0,0,.5)); }
+    .lock-wrap h1 { font-family: var(--font-display); color: var(--gold); margin: 14px 0 6px; font-size: 1.7rem; }
+    .lock-wrap p { color: var(--text-dim); margin: 0 0 22px; }
+    .lock-form { display: flex; gap: 10px; }
+    .lock-form input {
+      flex: 1; padding: 12px 14px; font: inherit; font-size: 1rem;
+      background: var(--bg-elev); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); color: var(--text); outline: none;
+    }
+    .lock-form input:focus { border-color: var(--gold); box-shadow: 0 0 12px rgba(217,178,90,.2); }
+    .lock-form button {
+      padding: 12px 22px; font: inherit; font-weight: 700; cursor: pointer;
+      background: var(--gold); color: #1a1206; border: none; border-radius: var(--radius-sm);
+      letter-spacing: .04em; transition: .15s;
+    }
+    .lock-form button:hover { filter: brightness(1.1); }
+    .lock-form button:disabled { opacity: .55; cursor: default; }
+    .lock-err { color: var(--bad); font-size: .9rem; min-height: 1.2em; margin-top: 12px; }
+    .lock-note { color: var(--text-faint); font-size: .78rem; margin-top: 18px; line-height: 1.5; }
   </style>
 </head>
 <body>
@@ -19,243 +37,83 @@
     </div>
   </header>
 
-  <main class="wrap">
-    <div class="tool-head">
-      <a class="back" href="./index.html">← VIP Corner</a>
-      <h1>🏆 Live Event Rankings</h1>
-      <p>The game's <b>own live leaderboards</b> for every event — might, honor,
-         invasions, contests — straight off the game servers. Search a rank number or
-         a name. Functionality mirrors danadum's empire-rankings.</p>
+  <main>
+    <div class="lock-wrap" id="lock-ui" hidden>
+      <div class="lock-crest">🔐</div>
+      <h1>Chemie's VIP Corner</h1>
+      <p>Members only. Enter your access code to unlock.</p>
+      <form class="lock-form" id="lock-form">
+        <input type="password" id="lock-code" placeholder="Access code" autocomplete="off"
+               autocapitalize="characters" spellcheck="false" autofocus />
+        <button type="submit" id="lock-btn">Unlock</button>
+      </form>
+      <div class="lock-err" id="lock-err"></div>
+      <p class="lock-note">These pages are AES-256 encrypted — the code is required to read them,
+         and it isn't stored on the server. Ask Chemie for access; please don't share the code.</p>
     </div>
-
-    <section class="panel">
-      <div class="vip-nav">
-        <a href="./rankings.html">Rankings</a>
-        <a href="./empire-rankings.html" class="active">Live Event Rankings</a>
-        <a href="./fortress.html">Fortress Tracker</a>
-        <a href="./search.html">Search &amp; Analyse</a>
-        <a href="./scores.html">Score Tools</a>
-        <a href="./wall-break.html">Wall-Break Sim</a>
-      </div>
-
-      <div class="vip-toolbar" id="toolbar">
-        <select class="vip-server-pick" id="server"></select>
-        <select class="vip-server-pick" id="event"></select>
-        <select class="vip-server-pick" id="category"></select>
-        <button class="vip-btn ghost" id="mode-toggle">👤 Players</button>
-        <input class="vip-input" id="q" placeholder="Rank # or name…" style="min-width:150px" />
-        <button class="vip-btn" id="go">Search</button>
-      </div>
-
-      <div class="vip-status" id="status"></div>
-      <div style="overflow-x:auto"><table class="vip-table" id="tbl"></table></div>
-      <div class="vip-pager">
-        <button class="vip-btn ghost" id="prev">← Prev</button>
-        <span id="pageinfo"></span>
-        <button class="vip-btn ghost" id="next">Next →</button>
-      </div>
-
-      <p class="vip-credit">Live data over the game protocol via
-        <a href="https://github.com/danadum/empire-api" target="_blank" rel="noopener">danadum's empire-api</a> —
-        functionality mirrors <a href="https://danadum.github.io/empire-rankings/" target="_blank" rel="noopener">empire-rankings</a>.</p>
-    </section>
   </main>
 
   <script>
-    /* Gate (same as vip-shared, but this page manages its own API) */
-    if (localStorage.getItem("vip_unlocked_v1") !== "1") location.replace("./index.html");
+    const SALT = "xx0qJgChFqeXQG1K5OzyvA==", ITER = 600000, PAYLOAD = "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", SKEY = "vip_k";
+    const b64dec = (s) => Uint8Array.from(atob(s), (c) => c.charCodeAt(0));
+    const b64enc = (u) => btoa(String.fromCharCode(...u));
 
-    const API = "https://empire-api.fly.dev";
-    const EVENTS_URL = "https://raw.githubusercontent.com/danadum/ggs-assets/main/gge/events.json";
+    async function deriveKey(pass) {
+      const km = await crypto.subtle.importKey("raw", new TextEncoder().encode(pass), "PBKDF2", false, ["deriveKey"]);
+      return crypto.subtle.deriveKey(
+        { name: "PBKDF2", salt: b64dec(SALT), iterations: ITER, hash: "SHA-256" },
+        km, { name: "AES-GCM", length: 256 }, true, ["decrypt"]);
+    }
+    async function decryptWith(key) {
+      const data = b64dec(PAYLOAD), iv = data.slice(0, 12), ct = data.slice(12);
+      const pt = await crypto.subtle.decrypt({ name: "AES-GCM", iv }, key, ct);
+      return new TextDecoder().decode(pt);
+    }
+    function render(html) { document.open(); document.write(html); document.close(); }
 
-    /* GGE worlds: zone -> display name (from the GGS network configs). */
-    const SERVERS = {
-      "EmpireEx_22": "Australia (AU1)", "EmpireEx": "International 1", "EmpireEx_7": "International 2",
-      "EmpireEx_43": "International 3", "EmpireEx_46": "World 1", "EmpireEx_49": "World 2",
-      "EmpireEx_2": "Germany", "EmpireEx_3": "France", "EmpireEx_19": "Great Britain",
-      "EmpireEx_21": "USA", "EmpireEx_20": "Brazil", "EmpireEx_8": "Spain", "EmpireEx_38": "Spain 2",
-      "EmpireEx_9": "Italy", "EmpireEx_10": "Turkey", "EmpireEx_11": "Netherlands",
-      "EmpireEx_12": "Hungary", "EmpireEx_17": "Hungary 2", "EmpireEx_5": "Poland",
-      "EmpireEx_6": "Portuguese", "EmpireEx_4": "Czechia", "EmpireEx_18": "Slovakia",
-      "EmpireEx_13": "Scandinavia", "EmpireEx_14": "Russia", "EmpireEx_15": "Romania",
-      "EmpireEx_16": "Bulgaria", "EmpireEx_28": "Greece", "EmpireEx_29": "Lithuania",
-      "EmpireEx_24": "Japan", "EmpireEx_26": "India", "EmpireEx_27": "China",
-      "EmpireEx_25": "Hispanic", "EmpireEx_32": "Saudi Arabia", "EmpireEx_33": "UAE",
-      "EmpireEx_34": "Egypt", "EmpireEx_35": "Arab", "EmpireEx_36": "Asia", "EmpireEx_37": "HANT",
-    };
-
-    /* Event display names (resolved from the game lang files at build time). */
-    const TITLES = {
-      "allianceHonor": "Average honor", "allianceMight": "Alliance might", "cargo_points": "Cargo points",
-      "dialog_BeggingKnights_nobilityPoints": "Plunder points",
-      "dialog_longPointsEvent_seasonalPoints": "Season points",
-      "dialog_playerInfo_infoAchievements": "Achievement points",
-      "dialog_redAlienInvasion_message_header": "War of the Bloodcrows",
-      "dialog_tempServer_scoring_header_might": "Outer Realms might",
-      "dialog_title_gachadeco2x2": "Fatal Flora Trap", "dominionPoints": "Command points",
-      "eventBuilding_DonationEvent": "Imperial Patronage",
-      "event_title_113": "Beyond the Horizon", "event_title_127": "The Enchanted Snowglobe",
-      "event_title_128": "Summoning of the Hollow Moon", "event_title_130": "Sands of Fortune",
-      "event_title_131": "King's Banquet", "event_title_134": "Midnight Market",
-      "event_title_3": "Battle for Berimond", "event_title_60": "Nobility Contest",
-      "event_title_601": "Kingdom's League", "event_title_71": "War of the Realms",
-      "event_title_72": "Nomad Invasion", "event_title_80": "Samurai Invasion",
-      "event_title_85": "Berimond Invasion", "event_title_89": "Wheel of Unimaginable Affluence",
-      "event_title_97": "Attack of the Shapeshifters", "honorPoints": "Honor",
-      "legendLevel": "Legendary level", "playerMight": "Might points", "temp_server_name": "Outer Realms",
-    };
-
-    const $ = (id) => document.getElementById(id);
-    const esc = (s) => String(s == null ? "" : s).replace(/[&<>"]/g, (c) =>
-      ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-    const num = (v) => (v == null ? "—" : Number(v).toLocaleString());
-
-    let EVENTS = null;          // { player: {...}, alliance: {...}, player_to_alliance: [...] }
-    let mode = "player";        // player | alliance
-    let curEventKey = "playerMight";
-    let curCatIdx = 0;
-    let curSearch = 1;          // rank number or name
-    let pageSize = 10;
-    let firstRank = 1, lastRank = 1;
-
-    function curEvent() { return EVENTS[mode][curEventKey]; }
-    function curCat() { return (curEvent().categories || [])[curCatIdx] || {}; }
-    function catLabel(c) {
-      if (c.name === "level_placeholder") return "Level " + c.value;
-      if (c.name === "dialog_ci_filter01_all") return "All";
-      return c.value ? c.name + " " + c.value : (TITLES[c.name] || c.name || "All");
+    async function unlock(pass) {
+      const key = await deriveKey(pass);
+      let html;
+      try { html = await decryptWith(key); } catch (e) { return false; }
+      const raw = await crypto.subtle.exportKey("raw", key);
+      try { sessionStorage.setItem(SKEY, b64enc(new Uint8Array(raw))); } catch (e) {}
+      render(html);
+      return true;
     }
 
-    function fillSelectors() {
-      $("event").innerHTML = Object.keys(EVENTS[mode]).map((k) =>
-        '<option value="' + esc(k) + '"' + (k === curEventKey ? " selected" : "") + ">" +
-        esc(TITLES[k] || k) + "</option>").join("");
-      const cats = curEvent().categories || [];
-      $("category").innerHTML = cats.map((c, i) =>
-        '<option value="' + i + '"' + (i === curCatIdx ? " selected" : "") + ">" + esc(catLabel(c)) + "</option>").join("");
-      $("category").style.display = cats.length > 1 ? "" : "none";
-    }
-
-    async function load() {
-      const status = $("status");
-      status.textContent = "Loading…"; status.className = "vip-status";
-      const ev = curEvent();
-      const lt = ev.id;
-      const lid = curCat().id;
-      const server = $("server").value;
-      const isRank = /^-?[0-9]+$/.test(String(curSearch));
-      let url;
-      if (ev.global) {
-        url = isRank
-          ? API + "/" + server + '/llsp/%22LT%22:' + lt + (lid ? ',%22LID%22:' + lid : "") + ',%22R%22:' + curSearch
-          : API + "/" + server + '/slse/%22LT%22:' + lt + ',%22SV%22:%22' + encodeURIComponent(curSearch) + '%22';
-      } else {
-        url = API + "/" + server + "/hgh/%22LT%22:" + lt + (lid ? ',%22LID%22:' + lid : "") +
-          ',%22SV%22:%22' + encodeURIComponent(curSearch) + '%22';
-      }
-      try {
-        let json = null;
-        for (let attempt = 0; attempt < 2 && !json; attempt++) {
-          const r = await fetch(url);
-          const j = await r.json();
-          if (j.return_code === 0 || j.return_code === "0") json = j;
-          else if (attempt === 1) {
-            // The game returns an error when an event has no live list
-            // (i.e. it isn't currently running) — say that instead of "retry".
-            throw new Error("no result — the name isn't on this leaderboard, or this event isn't running right now");
-          }
-          else await new Promise((res) => setTimeout(res, 600));
-        }
-        const rows = json.content.L || [];
-        lastRank = json.content.LR || json.content.T || (rows.length ? rows[rows.length - 1][0] : 1);
-        if (!rows.length) {
-          $("tbl").innerHTML = "";
-          status.textContent = "No results — check the name/rank or try another category.";
+    async function runGate() {
+      // Already unlocked this session on another VIP page? Reuse the key silently.
+      const stored = sessionStorage.getItem(SKEY);
+      if (stored) {
+        try {
+          const key = await crypto.subtle.importKey("raw", b64dec(stored), { name: "AES-GCM" }, true, ["decrypt"]);
+          render(await decryptWith(key));
           return;
-        }
-        firstRank = rows[0][0];
-        pageSize = Math.max(rows.length, 1);
-        render(rows);
-        status.textContent = (TITLES[curEventKey] || curEventKey) + " — " +
-          catLabel(curCat()) + " · highest tracked rank ~" + num(lastRank);
-        $("pageinfo").textContent = "Ranks " + num(firstRank) + "–" + num(rows[rows.length - 1][0]);
-      } catch (e) {
-        status.textContent = "⚠ " + e.message;
-        status.className = "vip-status vip-error";
+        } catch (e) { sessionStorage.removeItem(SKEY); }
       }
-    }
-
-    function render(rows) {
-      const isAlliance = mode === "alliance";
-      $("tbl").innerHTML = "<thead><tr><th>#</th><th>" + (isAlliance ? "Alliance" : "Player") + "</th>" +
-        (isAlliance ? "" : "<th>Level</th><th>Alliance</th>") + "<th style='text-align:right'>Score</th></tr></thead>";
-      const tb = document.createElement("tbody");
-      rows.forEach((row) => {
-        const [rank, score, info] = row;
-        const tr = document.createElement("tr");
-        if (isAlliance) {
-          tr.innerHTML = '<td class="r">' + num(rank) + '</td><td class="nm">' + esc(info.N || info.AN || "?") +
-            '</td><td class="r">' + num(score) + "</td>";
-        } else {
-          const lvl = info.LL ? info.L + "/" + info.LL : info.L;
-          tr.innerHTML = '<td class="r">' + num(rank) + '</td><td class="nm">' + esc(info.N || "?") + "</td>" +
-            '<td class="r">' + esc(lvl ?? "—") + "</td><td>" + esc(info.AN || "—") + "</td>" +
-            '<td class="r">' + num(score) + "</td>";
+      const ui = document.getElementById("lock-ui");
+      ui.hidden = false;
+      const form = document.getElementById("lock-form"),
+            input = document.getElementById("lock-code"),
+            err = document.getElementById("lock-err"),
+            btn = document.getElementById("lock-btn");
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const code = (input.value || "").trim();
+        if (!code) return;
+        err.textContent = ""; btn.disabled = true; btn.textContent = "Unlocking…";
+        const ok = await unlock(code);
+        if (!ok) {
+          btn.disabled = false; btn.textContent = "Unlock";
+          err.textContent = "Wrong code — ask Chemie for access.";
+          input.select();
         }
-        tb.appendChild(tr);
       });
-      $("tbl").appendChild(tb);
     }
-
-    /* ---- wiring ---- */
-    $("server").innerHTML = Object.entries(SERVERS).map(([z, n]) =>
-      '<option value="' + z + '">' + n + "</option>").join("");
-    $("server").value = localStorage.getItem("vip_er_server") || "EmpireEx_22";
-
-    $("server").addEventListener("change", () => {
-      localStorage.setItem("vip_er_server", $("server").value);
-      curSearch = 1; load();
-    });
-    function defaultCatIdx() {
-      // level-bracket events default to the TOP bracket (e.g. Level 70)
-      const cats = curEvent().categories || [];
-      return cats.length && cats[0].name === "level_placeholder" ? cats.length - 1 : 0;
-    }
-    $("event").addEventListener("change", () => {
-      curEventKey = $("event").value; curCatIdx = defaultCatIdx(); curSearch = 1; fillSelectors(); load();
-    });
-    $("category").addEventListener("change", () => {
-      curCatIdx = +$("category").value; curSearch = 1; load();
-    });
-    $("mode-toggle").addEventListener("click", () => {
-      mode = mode === "player" ? "alliance" : "player";
-      $("mode-toggle").textContent = mode === "player" ? "👤 Players" : "🛡️ Alliances";
-      // map between player/alliance variants of the same event when possible
-      const map = EVENTS.player_to_alliance || [];
-      const pair = map.find((e) => e[mode === "alliance" ? 0 : 1] === curEventKey);
-      curEventKey = pair ? pair[mode === "alliance" ? 1 : 0] : Object.keys(EVENTS[mode])[0];
-      curCatIdx = defaultCatIdx(); curSearch = 1; fillSelectors(); load();
-    });
-    $("go").addEventListener("click", () => {
-      const v = $("q").value.trim();
-      curSearch = v === "" ? 1 : (/^[0-9]+$/.test(v) ? +v : v);
-      load();
-    });
-    $("q").addEventListener("keydown", (e) => { if (e.key === "Enter") $("go").click(); });
-    $("prev").addEventListener("click", () => {
-      curSearch = Math.max(1, firstRank - pageSize); load();
-    });
-    $("next").addEventListener("click", () => {
-      curSearch = firstRank + pageSize; load();
-    });
-
-    fetch(EVENTS_URL)
-      .then((r) => r.json())
-      .then((d) => { EVENTS = d; curCatIdx = defaultCatIdx(); fillSelectors(); load(); })
-      .catch((e) => {
-        $("status").textContent = "Could not load the events list: " + e.message;
-        $("status").className = "vip-status vip-error";
-      });
+    // Run after full load so document.open()/write() cleanly replaces the page
+    // (during initial parse, document.write would append instead of replace).
+    if (document.readyState === "complete") runGate();
+    else window.addEventListener("load", runGate);
   </script>
 </body>
 </html>

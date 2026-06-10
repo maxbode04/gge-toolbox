@@ -3,10 +3,32 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Chemie's VIP Corner — Maxy's Empire Toolkit</title>
-  <meta name="description" content="Members-only GGE tools: fortress tracker, search & analyse, score tools and live rankings." />
-  <link rel="stylesheet" href="../../assets/css/theme.css" />
+  <meta name="robots" content="noindex" />
+  <title>Chemie's VIP Corner — Locked</title>
+  <link rel="stylesheet" href="../../assets/css/theme.css?v=15" />
   <link rel="stylesheet" href="./vip.css" />
+  <style>
+    .lock-wrap { max-width: 460px; margin: 12vh auto 0; text-align: center; padding: 0 20px; }
+    .lock-crest { font-size: 3rem; filter: drop-shadow(0 2px 6px rgba(0,0,0,.5)); }
+    .lock-wrap h1 { font-family: var(--font-display); color: var(--gold); margin: 14px 0 6px; font-size: 1.7rem; }
+    .lock-wrap p { color: var(--text-dim); margin: 0 0 22px; }
+    .lock-form { display: flex; gap: 10px; }
+    .lock-form input {
+      flex: 1; padding: 12px 14px; font: inherit; font-size: 1rem;
+      background: var(--bg-elev); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); color: var(--text); outline: none;
+    }
+    .lock-form input:focus { border-color: var(--gold); box-shadow: 0 0 12px rgba(217,178,90,.2); }
+    .lock-form button {
+      padding: 12px 22px; font: inherit; font-weight: 700; cursor: pointer;
+      background: var(--gold); color: #1a1206; border: none; border-radius: var(--radius-sm);
+      letter-spacing: .04em; transition: .15s;
+    }
+    .lock-form button:hover { filter: brightness(1.1); }
+    .lock-form button:disabled { opacity: .55; cursor: default; }
+    .lock-err { color: var(--bad); font-size: .9rem; min-height: 1.2em; margin-top: 12px; }
+    .lock-note { color: var(--text-faint); font-size: .78rem; margin-top: 18px; line-height: 1.5; }
+  </style>
 </head>
 <body>
   <header class="topbar">
@@ -15,88 +37,83 @@
     </div>
   </header>
 
-  <main class="wrap">
-    <div class="tool-head">
-      <a class="back" href="../../">← All tools</a>
-      <h1>🔒 Chemie's VIP Corner</h1>
-      <p>A members-only set of advanced tools. Enter the access code to unlock.</p>
-    </div>
-
-    <!-- Gate -->
-    <div class="vip-gate">
-      <div class="vip-gate-lock">🔐</div>
-      <h2>Members only</h2>
-      <p>Enter your access code to open the VIP Corner. It stays unlocked on this
-         device until you lock it again.</p>
-      <form class="vip-code-row" id="vip-form">
-        <input type="password" id="vip-code" placeholder="Access code" autocomplete="off"
-               autocapitalize="characters" spellcheck="false" />
-        <button type="submit">Unlock</button>
+  <main>
+    <div class="lock-wrap" id="lock-ui" hidden>
+      <div class="lock-crest">🔐</div>
+      <h1>Chemie's VIP Corner</h1>
+      <p>Members only. Enter your access code to unlock.</p>
+      <form class="lock-form" id="lock-form">
+        <input type="password" id="lock-code" placeholder="Access code" autocomplete="off"
+               autocapitalize="characters" spellcheck="false" autofocus />
+        <button type="submit" id="lock-btn">Unlock</button>
       </form>
-      <div class="vip-gate-err" id="vip-err"></div>
-    </div>
-
-    <!-- Unlocked content -->
-    <div class="vip-content">
-      <div class="vip-banner">
-        <span class="crest">👑</span>
-        <span>Welcome to <b>Chemie's VIP Corner</b>. These tools are members-only — please don't share the link or code.</span>
-        <button class="vip-lock-again" id="vip-lock">Lock again</button>
-      </div>
-
-      <div class="vip-section-grid">
-
-        <a class="vip-tool" href="./empire-rankings.html" style="text-decoration:none">
-          <div class="vip-tool-head"><span class="vip-tool-ico">🏆</span><h3>Live Event Rankings</h3></div>
-          <p>The game's own live leaderboards for every event — might, honor, invasions,
-             contests — fetched straight off the game servers. Search any rank or name.</p>
-          <span class="vip-tool-status live">Live</span>
-        </a>
-
-        <a class="vip-tool" href="./rankings.html" style="text-decoration:none">
-          <div class="vip-tool-head"><span class="vip-tool-ico">📊</span><h3>Player &amp; Alliance Rankings</h3></div>
-          <p>Live sortable might / loot / honor / fame boards for every server, with
-             alliance and level filters.</p>
-          <span class="vip-tool-status live">Live</span>
-        </a>
-
-        <a class="vip-tool" href="./fortress.html" style="text-decoration:none">
-          <div class="vip-tool-head"><span class="vip-tool-ico">🏰</span><h3>Fortress Tracker</h3></div>
-          <p>Every fortress on the map: owner, position, attack count and exactly when
-             it comes off cooldown. Filter by kingdom or near a player.</p>
-          <span class="vip-tool-status live">Live</span>
-        </a>
-
-        <a class="vip-tool" href="./search.html" style="text-decoration:none">
-          <div class="vip-tool-head"><span class="vip-tool-ico">🔎</span><h3>Search &amp; Analyse</h3></div>
-          <p>Player profile &amp; alliance history · alliance profile · castle scout
-             (keep/wall/gate/tower/moat per castle) · live movements &amp; renames.</p>
-          <span class="vip-tool-status live">Live</span>
-        </a>
-
-        <a class="vip-tool" href="./scores.html" style="text-decoration:none">
-          <div class="vip-tool-head"><span class="vip-tool-ico">🎯</span><h3>Score Tools</h3></div>
-          <p>Event score history per player (rank + points every run), might/loot trend
-             charts, and server-wide event participation.</p>
-          <span class="vip-tool-status live">Live</span>
-        </a>
-
-        <a class="vip-tool" href="./wall-break.html" style="text-decoration:none">
-          <div class="vip-tool-head"><span class="vip-tool-ico">🧱</span><h3>Rift Wall-Break Simulator</h3></div>
-          <p>Pick a boss stage and segment, set up your waves and tools, and see whether
-             the wall breaks — with projected losses and points. In calibration: send
-             Maxy battle reports.</p>
-          <span class="vip-tool-status live">Live (calibrating)</span>
-        </a>
-
-      </div>
+      <div class="lock-err" id="lock-err"></div>
+      <p class="lock-note">These pages are AES-256 encrypted — the code is required to read them,
+         and it isn't stored on the server. Ask Chemie for access; please don't share the code.</p>
     </div>
   </main>
 
-  <footer class="footer">
-    <div class="wrap"><p>Members-only area. Tools credited to their original authors — see the main credits.</p></div>
-  </footer>
+  <script>
+    const SALT = "xx0qJgChFqeXQG1K5OzyvA==", ITER = 600000, PAYLOAD = "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", SKEY = "vip_k";
+    const b64dec = (s) => Uint8Array.from(atob(s), (c) => c.charCodeAt(0));
+    const b64enc = (u) => btoa(String.fromCharCode(...u));
 
-  <script src="./vip.js"></script>
+    async function deriveKey(pass) {
+      const km = await crypto.subtle.importKey("raw", new TextEncoder().encode(pass), "PBKDF2", false, ["deriveKey"]);
+      return crypto.subtle.deriveKey(
+        { name: "PBKDF2", salt: b64dec(SALT), iterations: ITER, hash: "SHA-256" },
+        km, { name: "AES-GCM", length: 256 }, true, ["decrypt"]);
+    }
+    async function decryptWith(key) {
+      const data = b64dec(PAYLOAD), iv = data.slice(0, 12), ct = data.slice(12);
+      const pt = await crypto.subtle.decrypt({ name: "AES-GCM", iv }, key, ct);
+      return new TextDecoder().decode(pt);
+    }
+    function render(html) { document.open(); document.write(html); document.close(); }
+
+    async function unlock(pass) {
+      const key = await deriveKey(pass);
+      let html;
+      try { html = await decryptWith(key); } catch (e) { return false; }
+      const raw = await crypto.subtle.exportKey("raw", key);
+      try { sessionStorage.setItem(SKEY, b64enc(new Uint8Array(raw))); } catch (e) {}
+      render(html);
+      return true;
+    }
+
+    async function runGate() {
+      // Already unlocked this session on another VIP page? Reuse the key silently.
+      const stored = sessionStorage.getItem(SKEY);
+      if (stored) {
+        try {
+          const key = await crypto.subtle.importKey("raw", b64dec(stored), { name: "AES-GCM" }, true, ["decrypt"]);
+          render(await decryptWith(key));
+          return;
+        } catch (e) { sessionStorage.removeItem(SKEY); }
+      }
+      const ui = document.getElementById("lock-ui");
+      ui.hidden = false;
+      const form = document.getElementById("lock-form"),
+            input = document.getElementById("lock-code"),
+            err = document.getElementById("lock-err"),
+            btn = document.getElementById("lock-btn");
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const code = (input.value || "").trim();
+        if (!code) return;
+        err.textContent = ""; btn.disabled = true; btn.textContent = "Unlocking…";
+        const ok = await unlock(code);
+        if (!ok) {
+          btn.disabled = false; btn.textContent = "Unlock";
+          err.textContent = "Wrong code — ask Chemie for access.";
+          input.select();
+        }
+      });
+    }
+    // Run after full load so document.open()/write() cleanly replaces the page
+    // (during initial parse, document.write would append instead of replace).
+    if (document.readyState === "complete") runGate();
+    else window.addEventListener("load", runGate);
+  </script>
 </body>
 </html>

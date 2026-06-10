@@ -3,14 +3,31 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Score Tools — Chemie's VIP Corner</title>
   <meta name="robots" content="noindex" />
-  <link rel="stylesheet" href="../../assets/css/theme.css" />
+  <title>Chemie's VIP Corner — Locked</title>
+  <link rel="stylesheet" href="../../assets/css/theme.css?v=15" />
   <link rel="stylesheet" href="./vip.css" />
   <style>
-    .spark { width: 100%; height: 120px; margin: 6px 0 16px; }
-    .spark polyline { fill: none; stroke: var(--gold); stroke-width: 2; }
-    .spark-label { font-size: .72rem; color: var(--text-faint); text-transform: uppercase; letter-spacing: .05em; }
+    .lock-wrap { max-width: 460px; margin: 12vh auto 0; text-align: center; padding: 0 20px; }
+    .lock-crest { font-size: 3rem; filter: drop-shadow(0 2px 6px rgba(0,0,0,.5)); }
+    .lock-wrap h1 { font-family: var(--font-display); color: var(--gold); margin: 14px 0 6px; font-size: 1.7rem; }
+    .lock-wrap p { color: var(--text-dim); margin: 0 0 22px; }
+    .lock-form { display: flex; gap: 10px; }
+    .lock-form input {
+      flex: 1; padding: 12px 14px; font: inherit; font-size: 1rem;
+      background: var(--bg-elev); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); color: var(--text); outline: none;
+    }
+    .lock-form input:focus { border-color: var(--gold); box-shadow: 0 0 12px rgba(217,178,90,.2); }
+    .lock-form button {
+      padding: 12px 22px; font: inherit; font-weight: 700; cursor: pointer;
+      background: var(--gold); color: #1a1206; border: none; border-radius: var(--radius-sm);
+      letter-spacing: .04em; transition: .15s;
+    }
+    .lock-form button:hover { filter: brightness(1.1); }
+    .lock-form button:disabled { opacity: .55; cursor: default; }
+    .lock-err { color: var(--bad); font-size: .9rem; min-height: 1.2em; margin-top: 12px; }
+    .lock-note { color: var(--text-faint); font-size: .78rem; margin-top: 18px; line-height: 1.5; }
   </style>
 </head>
 <body>
@@ -20,133 +37,83 @@
     </div>
   </header>
 
-  <main class="wrap">
-    <div class="tool-head">
-      <a class="back" href="./index.html">← VIP Corner</a>
-      <h1>🎯 Score Tools</h1>
-      <p>Event score history per player (rank + points across every tracked event run),
-         might/loot trend lines, and the server-wide event participation list.</p>
+  <main>
+    <div class="lock-wrap" id="lock-ui" hidden>
+      <div class="lock-crest">🔐</div>
+      <h1>Chemie's VIP Corner</h1>
+      <p>Members only. Enter your access code to unlock.</p>
+      <form class="lock-form" id="lock-form">
+        <input type="password" id="lock-code" placeholder="Access code" autocomplete="off"
+               autocapitalize="characters" spellcheck="false" autofocus />
+        <button type="submit" id="lock-btn">Unlock</button>
+      </form>
+      <div class="lock-err" id="lock-err"></div>
+      <p class="lock-note">These pages are AES-256 encrypted — the code is required to read them,
+         and it isn't stored on the server. Ask Chemie for access; please don't share the code.</p>
     </div>
-
-    <section class="panel">
-      <div class="vip-nav">
-        <a href="./rankings.html">Rankings</a>
-        <a href="./empire-rankings.html">Live Event Rankings</a>
-        <a href="./fortress.html">Fortress Tracker</a>
-        <a href="./search.html">Search &amp; Analyse</a>
-        <a href="./scores.html" class="active">Score Tools</a>
-        <a href="./wall-break.html">Wall-Break Sim</a>
-      </div>
-
-      <div class="vip-toolbar" id="toolbar">
-        <select class="vip-server-pick" id="mode">
-          <option value="events">Player event scores</option>
-          <option value="trends">Player trends</option>
-          <option value="server">Server events</option>
-        </select>
-        <input class="vip-input" id="q" placeholder="Player name…" />
-        <button class="vip-btn" id="go">Load</button>
-      </div>
-
-      <div class="vip-status" id="status"></div>
-      <div id="out"></div>
-
-      <p class="vip-credit">Data: <a href="https://gge-tracker.com" target="_blank" rel="noopener">gge-tracker.com</a> public API.</p>
-    </section>
   </main>
 
-  <script src="./vip-shared.js"></script>
   <script>
-    const { api, esc, num, ago, mountServerPicker } = window.VIP;
-    mountServerPicker(document.getElementById("toolbar"));
+    const SALT = "xx0qJgChFqeXQG1K5OzyvA==", ITER = 600000, PAYLOAD = "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", SKEY = "vip_k";
+    const b64dec = (s) => Uint8Array.from(atob(s), (c) => c.charCodeAt(0));
+    const b64enc = (u) => btoa(String.fromCharCode(...u));
 
-    const out = document.getElementById("out");
-    const status = document.getElementById("status");
-    const modeSel = document.getElementById("mode");
-    const q = document.getElementById("q");
+    async function deriveKey(pass) {
+      const km = await crypto.subtle.importKey("raw", new TextEncoder().encode(pass), "PBKDF2", false, ["deriveKey"]);
+      return crypto.subtle.deriveKey(
+        { name: "PBKDF2", salt: b64dec(SALT), iterations: ITER, hash: "SHA-256" },
+        km, { name: "AES-GCM", length: 256 }, true, ["decrypt"]);
+    }
+    async function decryptWith(key) {
+      const data = b64dec(PAYLOAD), iv = data.slice(0, 12), ct = data.slice(12);
+      const pt = await crypto.subtle.decrypt({ name: "AES-GCM", iv }, key, ct);
+      return new TextDecoder().decode(pt);
+    }
+    function render(html) { document.open(); document.write(html); document.close(); }
 
-    function table(headers, rowsHtml) {
-      return '<div style="overflow-x:auto"><table class="vip-table"><thead><tr>' +
-        headers.map((h) => "<th>" + h + "</th>").join("") + "</tr></thead><tbody>" +
-        rowsHtml + "</tbody></table></div>";
+    async function unlock(pass) {
+      const key = await deriveKey(pass);
+      let html;
+      try { html = await decryptWith(key); } catch (e) { return false; }
+      const raw = await crypto.subtle.exportKey("raw", key);
+      try { sessionStorage.setItem(SKEY, b64enc(new Uint8Array(raw))); } catch (e) {}
+      render(html);
+      return true;
     }
 
-    function sparkline(label, series) {
-      if (!series || series.length < 2) return "";
-      const vals = series.map((p) => Number(p.point));
-      const min = Math.min(...vals), max = Math.max(...vals);
-      const W = 600, H = 110, pad = 5;
-      const pts = vals.map((v, i) => {
-        const x = pad + (i / (vals.length - 1)) * (W - 2 * pad);
-        const y = max === min ? H / 2 : pad + (1 - (v - min) / (max - min)) * (H - 2 * pad);
-        return x.toFixed(1) + "," + y.toFixed(1);
-      }).join(" ");
-      return '<div class="spark-label">' + esc(label) + " — " + num(min) + " → " + num(max) + "</div>" +
-        '<svg class="spark" viewBox="0 0 ' + W + " " + H + '" preserveAspectRatio="none"><polyline points="' + pts + '"/></svg>';
-    }
-
-    async function playerId(name) {
-      const p = await api("players/" + encodeURIComponent(name));
-      return { id: p.player_id, p };
-    }
-
-    async function run() {
-      const m = modeSel.value;
-      const name = q.value.trim();
-      out.innerHTML = "";
-      status.textContent = "Loading…"; status.className = "vip-status";
-      try {
-        if (m === "events") {
-          if (!name) { status.textContent = "Enter a player name."; return; }
-          const { id, p } = await playerId(name);
-          const d = await api("events/player/" + id);
-          const evs = d.events || [];
-          out.innerHTML = "<h3>" + esc(p.player_name) + " — event history</h3>" +
-            table(["Event", "Run #", "Rank", "Points", "When"],
-              evs.map((e) =>
-                '<tr><td class="nm">' + esc(e.type) + '</td><td class="r">' + esc(e.event_num) + "</td>" +
-                '<td class="r">#' + num(e.rank) + '</td><td class="r">' + num(e.point) + "</td>" +
-                "<td>" + ago(e.collect_date) + "</td></tr>").join(""));
-          status.textContent = evs.length + " tracked event entries.";
-        } else if (m === "trends") {
-          if (!name) { status.textContent = "Enter a player name."; return; }
-          const { id, p } = await playerId(name);
-          const d = await api("statistics/player/" + id);
-          const pts = d.points || {};
-          let html = "<h3>" + esc(p.player_name) + " — trends</h3>";
-          const SERIES = [
-            ["Might", pts.player_might_history], ["Loot", pts.player_loot_history],
-            ["Honor", pts.player_honor_history], ["Fame", pts.player_fame_history],
-          ];
-          let drew = 0;
-          for (const [label, s] of SERIES) {
-            if (s && s.length > 1) { html += sparkline(label, s); drew++; }
-          }
-          // fall back: draw whatever history arrays exist
-          if (!drew) {
-            for (const [k, s] of Object.entries(pts)) {
-              if (Array.isArray(s) && s.length > 1) { html += sparkline(k.replace(/player_|_history/g, ""), s); drew++; }
-            }
-          }
-          out.innerHTML = html || "<p class='muted'>No trend data.</p>";
-          status.textContent = drew + " series.";
-        } else {
-          const d = await api("events/list");
-          const evs = d.events || [];
-          out.innerHTML = table(["Event type", "Run #", "Players", "Collected"],
-            evs.map((e) =>
-              '<tr><td class="nm">' + esc(e.type) + '</td><td class="r">' + esc(e.event_num) + "</td>" +
-              '<td class="r">' + num(e.player_count) + "</td><td>" + ago(e.collect_date) + "</td></tr>").join(""));
-          status.textContent = evs.length + " tracked event runs on this server.";
-        }
-      } catch (e) {
-        status.textContent = "Error: " + e.message; status.className = "vip-status vip-error";
+    async function runGate() {
+      // Already unlocked this session on another VIP page? Reuse the key silently.
+      const stored = sessionStorage.getItem(SKEY);
+      if (stored) {
+        try {
+          const key = await crypto.subtle.importKey("raw", b64dec(stored), { name: "AES-GCM" }, true, ["decrypt"]);
+          render(await decryptWith(key));
+          return;
+        } catch (e) { sessionStorage.removeItem(SKEY); }
       }
+      const ui = document.getElementById("lock-ui");
+      ui.hidden = false;
+      const form = document.getElementById("lock-form"),
+            input = document.getElementById("lock-code"),
+            err = document.getElementById("lock-err"),
+            btn = document.getElementById("lock-btn");
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const code = (input.value || "").trim();
+        if (!code) return;
+        err.textContent = ""; btn.disabled = true; btn.textContent = "Unlocking…";
+        const ok = await unlock(code);
+        if (!ok) {
+          btn.disabled = false; btn.textContent = "Unlock";
+          err.textContent = "Wrong code — ask Chemie for access.";
+          input.select();
+        }
+      });
     }
-
-    document.getElementById("go").addEventListener("click", run);
-    q.addEventListener("keydown", (e) => { if (e.key === "Enter") run(); });
-    modeSel.addEventListener("change", () => { if (modeSel.value === "server") run(); });
+    // Run after full load so document.open()/write() cleanly replaces the page
+    // (during initial parse, document.write would append instead of replace).
+    if (document.readyState === "complete") runGate();
+    else window.addEventListener("load", runGate);
   </script>
 </body>
 </html>

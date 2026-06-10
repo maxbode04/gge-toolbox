@@ -3,10 +3,32 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Search &amp; Analyse — Chemie's VIP Corner</title>
   <meta name="robots" content="noindex" />
-  <link rel="stylesheet" href="../../assets/css/theme.css" />
+  <title>Chemie's VIP Corner — Locked</title>
+  <link rel="stylesheet" href="../../assets/css/theme.css?v=15" />
   <link rel="stylesheet" href="./vip.css" />
+  <style>
+    .lock-wrap { max-width: 460px; margin: 12vh auto 0; text-align: center; padding: 0 20px; }
+    .lock-crest { font-size: 3rem; filter: drop-shadow(0 2px 6px rgba(0,0,0,.5)); }
+    .lock-wrap h1 { font-family: var(--font-display); color: var(--gold); margin: 14px 0 6px; font-size: 1.7rem; }
+    .lock-wrap p { color: var(--text-dim); margin: 0 0 22px; }
+    .lock-form { display: flex; gap: 10px; }
+    .lock-form input {
+      flex: 1; padding: 12px 14px; font: inherit; font-size: 1rem;
+      background: var(--bg-elev); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); color: var(--text); outline: none;
+    }
+    .lock-form input:focus { border-color: var(--gold); box-shadow: 0 0 12px rgba(217,178,90,.2); }
+    .lock-form button {
+      padding: 12px 22px; font: inherit; font-weight: 700; cursor: pointer;
+      background: var(--gold); color: #1a1206; border: none; border-radius: var(--radius-sm);
+      letter-spacing: .04em; transition: .15s;
+    }
+    .lock-form button:hover { filter: brightness(1.1); }
+    .lock-form button:disabled { opacity: .55; cursor: default; }
+    .lock-err { color: var(--bad); font-size: .9rem; min-height: 1.2em; margin-top: 12px; }
+    .lock-note { color: var(--text-faint); font-size: .78rem; margin-top: 18px; line-height: 1.5; }
+  </style>
 </head>
 <body>
   <header class="topbar">
@@ -15,156 +37,83 @@
     </div>
   </header>
 
-  <main class="wrap">
-    <div class="tool-head">
-      <a class="back" href="./index.html">← VIP Corner</a>
-      <h1>🔎 Search &amp; Analyse</h1>
-      <p>Four lookup tools: player profile &amp; history, alliance profile, castle
-         scout (defence levels per castle), and live server movements &amp; renames.</p>
+  <main>
+    <div class="lock-wrap" id="lock-ui" hidden>
+      <div class="lock-crest">🔐</div>
+      <h1>Chemie's VIP Corner</h1>
+      <p>Members only. Enter your access code to unlock.</p>
+      <form class="lock-form" id="lock-form">
+        <input type="password" id="lock-code" placeholder="Access code" autocomplete="off"
+               autocapitalize="characters" spellcheck="false" autofocus />
+        <button type="submit" id="lock-btn">Unlock</button>
+      </form>
+      <div class="lock-err" id="lock-err"></div>
+      <p class="lock-note">These pages are AES-256 encrypted — the code is required to read them,
+         and it isn't stored on the server. Ask Chemie for access; please don't share the code.</p>
     </div>
-
-    <section class="panel">
-      <div class="vip-nav">
-        <a href="./rankings.html">Rankings</a>
-        <a href="./empire-rankings.html">Live Event Rankings</a>
-        <a href="./fortress.html">Fortress Tracker</a>
-        <a href="./search.html" class="active">Search &amp; Analyse</a>
-        <a href="./scores.html">Score Tools</a>
-        <a href="./wall-break.html">Wall-Break Sim</a>
-      </div>
-
-      <div class="vip-toolbar" id="toolbar">
-        <select class="vip-server-pick" id="mode">
-          <option value="player">Player profile</option>
-          <option value="alliance">Alliance profile</option>
-          <option value="castles">Castle scout</option>
-          <option value="movements">Movements</option>
-          <option value="renames">Renames</option>
-        </select>
-        <input class="vip-input" id="q" placeholder="Player name…" />
-        <button class="vip-btn" id="go">Search</button>
-      </div>
-
-      <div class="vip-status" id="status"></div>
-      <div id="out"></div>
-
-      <p class="vip-credit">Data: <a href="https://gge-tracker.com" target="_blank" rel="noopener">gge-tracker.com</a> public API.</p>
-    </section>
   </main>
 
-  <script src="./vip-shared.js"></script>
   <script>
-    const { api, esc, num, ago, mountServerPicker } = window.VIP;
-    mountServerPicker(document.getElementById("toolbar"));
+    const SALT = "xx0qJgChFqeXQG1K5OzyvA==", ITER = 600000, PAYLOAD = "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", SKEY = "vip_k";
+    const b64dec = (s) => Uint8Array.from(atob(s), (c) => c.charCodeAt(0));
+    const b64enc = (u) => btoa(String.fromCharCode(...u));
 
-    const out = document.getElementById("out");
-    const status = document.getElementById("status");
-    const modeSel = document.getElementById("mode");
-    const q = document.getElementById("q");
-
-    const CASTLE_TYPES = { 1: "Main castle", 4: "Outpost", 22: "Capital", 23: "Metro", 26: "Kingdom castle", 3: "Royal tower" };
-
-    modeSel.addEventListener("change", () => {
-      const m = modeSel.value;
-      q.placeholder = m === "alliance" ? "Alliance name…" : m === "movements" || m === "renames" ? "Optional: filter name…" : "Player name…";
-      q.style.display = "";
-      if (m === "movements" || m === "renames") run();
-    });
-
-    function kv(pairs) {
-      return '<div class="vip-kv">' + pairs.map(([k, v]) =>
-        '<div class="cell"><div class="k">' + k + '</div><div class="v">' + v + "</div></div>").join("") + "</div>";
+    async function deriveKey(pass) {
+      const km = await crypto.subtle.importKey("raw", new TextEncoder().encode(pass), "PBKDF2", false, ["deriveKey"]);
+      return crypto.subtle.deriveKey(
+        { name: "PBKDF2", salt: b64dec(SALT), iterations: ITER, hash: "SHA-256" },
+        km, { name: "AES-GCM", length: 256 }, true, ["decrypt"]);
     }
-    function table(headers, rowsHtml) {
-      return '<div style="overflow-x:auto"><table class="vip-table"><thead><tr>' +
-        headers.map((h) => "<th>" + h + "</th>").join("") + "</tr></thead><tbody>" +
-        rowsHtml + "</tbody></table></div>";
+    async function decryptWith(key) {
+      const data = b64dec(PAYLOAD), iv = data.slice(0, 12), ct = data.slice(12);
+      const pt = await crypto.subtle.decrypt({ name: "AES-GCM", iv }, key, ct);
+      return new TextDecoder().decode(pt);
+    }
+    function render(html) { document.open(); document.write(html); document.close(); }
+
+    async function unlock(pass) {
+      const key = await deriveKey(pass);
+      let html;
+      try { html = await decryptWith(key); } catch (e) { return false; }
+      const raw = await crypto.subtle.exportKey("raw", key);
+      try { sessionStorage.setItem(SKEY, b64enc(new Uint8Array(raw))); } catch (e) {}
+      render(html);
+      return true;
     }
 
-    async function run() {
-      const m = modeSel.value;
-      const name = q.value.trim();
-      out.innerHTML = "";
-      status.textContent = "Loading…"; status.className = "vip-status";
-      try {
-        if (m === "player") {
-          if (!name) { status.textContent = "Enter a player name."; return; }
-          const p = await api("players/" + encodeURIComponent(name));
-          out.innerHTML =
-            "<h3>" + esc(p.player_name) + (p.alliance_name ? ' <span style="color:var(--text-dim)">[' + esc(p.alliance_name) + "]</span>" : "") + "</h3>" +
-            kv([
-              ["Level", esc(p.level) + (p.legendary_level ? " / " + esc(p.legendary_level) : "")],
-              ["Might", num(p.might_current)], ["Might (best)", num(p.might_all_time)],
-              ["Loot", num(p.loot_current)], ["Loot (all time)", num(p.loot_all_time)],
-              ["Honor", num(p.honor)], ["Fame", num(p.current_fame)], ["Best fame", num(p.highest_fame)],
-              ["Updated", ago(p.updated_at)],
-            ]) +
-            (p.alliance_history && p.alliance_history.length
-              ? "<h4>Alliance history</h4>" + table(["Alliance", "Joined"],
-                  p.alliance_history.map((h) =>
-                    '<tr><td class="nm">' + esc(h.alliance_name || h.name || "?") + "</td><td>" +
-                    ago(h.created_at || h.date) + "</td></tr>").join(""))
-              : "");
-          status.textContent = "";
-        } else if (m === "alliance") {
-          if (!name) { status.textContent = "Enter an alliance name."; return; }
-          const a = await api("alliances/name/" + encodeURIComponent(name));
-          out.innerHTML = "<h3>" + esc(a.alliance_name) + "</h3>" +
-            kv([
-              ["Members", num(a.player_count)],
-              ["Might", num(a.might_current)], ["Might (best)", num(a.might_all_time)],
-              ["Loot", num(a.loot_current)], ["Loot (all time)", num(a.loot_all_time)],
-              ["Fame", num(a.current_fame)], ["Best fame", num(a.highest_fame)],
-            ]);
-          status.textContent = "";
-        } else if (m === "castles") {
-          if (!name) { status.textContent = "Enter a player name."; return; }
-          const list = await api("castle/search/" + encodeURIComponent(name));
-          if (!Array.isArray(list) || !list.length) { status.textContent = "No castles tracked for this player."; return; }
-          out.innerHTML = table(
-            ["Castle", "Type", "Kingdom", "Position", "Keep", "Wall", "Gate", "Towers", "Moat"],
-            list.map((c) =>
-              '<tr><td class="nm">' + esc(c.name) + "</td>" +
-              "<td>" + (CASTLE_TYPES[c.type] || "Type " + c.type) + "</td>" +
-              "<td>" + ["Green","Ice","Sands","Fire"][c.kingdomId] + "</td>" +
-              '<td class="r">' + c.positionX + ":" + c.positionY + "</td>" +
-              '<td class="r">' + esc(c.keepLevel) + '</td><td class="r">' + esc(c.wallLevel) + "</td>" +
-              '<td class="r">' + esc(c.gateLevel) + '</td><td class="r">' + esc(c.towerLevel) + "</td>" +
-              '<td class="r">' + esc(c.moatLevel) + "</td></tr>").join(""));
-          status.textContent = list.length + " castles — defence levels straight from the last scan.";
-        } else if (m === "movements") {
-          const params = { page: 1 };
-          if (name) { params.search = name; params.searchType = "player"; }
-          const d = await api("server/movements", params);
-          out.innerHTML = table(
-            ["When", "Player", "Alliance", "Might", "Move", "From", "To"],
-            (d.movements || []).map((r) =>
-              "<tr><td>" + ago(r.created_at) + '</td><td class="nm">' + esc(r.player_name) + "</td>" +
-              "<td>" + esc(r.alliance_name ?? "—") + '</td><td class="r">' + num(r.player_might) + "</td>" +
-              "<td>" + esc(r.movement_type) + " (type " + esc(r.castle_type) + ")</td>" +
-              '<td class="r">' + (r.position_x_old != null ? r.position_x_old + ":" + r.position_y_old : "—") + "</td>" +
-              '<td class="r">' + (r.position_x_new != null ? r.position_x_new + ":" + r.position_y_new : "—") + "</td></tr>").join(""));
-          status.textContent = "Latest castle movements (placements, relocations, removals).";
-        } else if (m === "renames") {
-          const d = await api("server/renames", { page: 1 });
-          let rows = d.renames || [];
-          if (name) rows = rows.filter((r) =>
-            (r.old_player_name + r.new_player_name).toLowerCase().includes(name.toLowerCase()));
-          out.innerHTML = table(
-            ["When", "Old name", "New name", "Alliance", "Might"],
-            rows.map((r) =>
-              "<tr><td>" + ago(r.date) + "</td><td>" + esc(r.old_player_name) + '</td><td class="nm">' +
-              esc(r.new_player_name) + "</td><td>" + esc(r.alliance_name ?? "—") + '</td><td class="r">' +
-              num(r.player_might) + "</td></tr>").join(""));
-          status.textContent = "Recent player renames — catch name-changers.";
-        }
-      } catch (e) {
-        status.textContent = "Error: " + e.message; status.className = "vip-status vip-error";
+    async function runGate() {
+      // Already unlocked this session on another VIP page? Reuse the key silently.
+      const stored = sessionStorage.getItem(SKEY);
+      if (stored) {
+        try {
+          const key = await crypto.subtle.importKey("raw", b64dec(stored), { name: "AES-GCM" }, true, ["decrypt"]);
+          render(await decryptWith(key));
+          return;
+        } catch (e) { sessionStorage.removeItem(SKEY); }
       }
+      const ui = document.getElementById("lock-ui");
+      ui.hidden = false;
+      const form = document.getElementById("lock-form"),
+            input = document.getElementById("lock-code"),
+            err = document.getElementById("lock-err"),
+            btn = document.getElementById("lock-btn");
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const code = (input.value || "").trim();
+        if (!code) return;
+        err.textContent = ""; btn.disabled = true; btn.textContent = "Unlocking…";
+        const ok = await unlock(code);
+        if (!ok) {
+          btn.disabled = false; btn.textContent = "Unlock";
+          err.textContent = "Wrong code — ask Chemie for access.";
+          input.select();
+        }
+      });
     }
-
-    document.getElementById("go").addEventListener("click", run);
-    q.addEventListener("keydown", (e) => { if (e.key === "Enter") run(); });
+    // Run after full load so document.open()/write() cleanly replaces the page
+    // (during initial parse, document.write would append instead of replace).
+    if (document.readyState === "complete") runGate();
+    else window.addEventListener("load", runGate);
   </script>
 </body>
 </html>
