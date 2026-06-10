@@ -19,8 +19,10 @@
     <div class="tool-head">
       <a class="back" href="./index.html">← VIP Corner</a>
       <h1>🏰 Fortress Tracker</h1>
-      <p>Player fortresses (dungeons) on the map: position, owner, attack count and
-         exactly when each one comes off cooldown. Sort by availability and plan hits.</p>
+      <p>NPC fortresses on the map — Barbarian, Desert and Dragon forts. Each fort has a
+         <b>24h cooldown after anyone attacks it</b> (shown here), plus a longer
+         personal cooldown (~72h) for the player who attacked it. "Last attacker"
+         is who hit it most recently — not an owner.</p>
     </div>
 
     <section class="panel">
@@ -33,11 +35,10 @@
 
       <div class="vip-toolbar" id="toolbar">
         <select class="vip-server-pick" id="f-kid">
-          <option value="">All kingdoms</option>
-          <option value="0">Green (Great Empire)</option>
-          <option value="2">Sands (Burning)</option>
-          <option value="1">Ice (Everwinter)</option>
-          <option value="3">Fire (Peaks)</option>
+          <option value="">All fort types</option>
+          <option value="0">Barbarian fort (Great Empire)</option>
+          <option value="2">Desert fort (Burning Sands)</option>
+          <option value="3">Dragon fort (Fire Peaks)</option>
         </select>
         <select class="vip-server-pick" id="f-cd">
           <option value="">Any cooldown</option>
@@ -45,7 +46,7 @@
           <option value="false">On cooldown</option>
         </select>
         <input class="vip-input" id="f-near" placeholder="Near player (name)…" />
-        <input class="vip-input" id="f-owner" placeholder="Owner name…" style="min-width:130px" />
+        <input class="vip-input" id="f-owner" placeholder="Last attacker…" style="min-width:130px" />
         <button class="vip-btn" id="apply">Search</button>
       </div>
 
@@ -66,7 +67,7 @@
     const { api, esc, num, ago, dur, mountServerPicker } = window.VIP;
     mountServerPicker(document.getElementById("toolbar"));
 
-    const KID_NAMES = { 0: "Green", 1: "Ice", 2: "Sands", 3: "Fire" };
+    const FORT_NAMES = { 0: "Barbarian fort", 1: "Ice fort", 2: "Desert fort", 3: "Dragon fort" };
     let page = 1, hasMore = true;
 
     async function load() {
@@ -97,8 +98,8 @@
     function render(rows) {
       const tbl = document.getElementById("tbl");
       tbl.innerHTML = `<thead><tr>
-        <th>Owner</th><th>Lvl</th><th>Might</th><th>Kingdom</th><th>Position</th>
-        <th>Attacks</th><th>Available</th><th>Last attacked</th>${rows[0] && rows[0].distance != null ? "<th>Distance</th>" : ""}
+        <th>Fort</th><th>Position</th><th>Last attacker</th><th>Lvl</th><th>Might</th>
+        <th>Total attacks</th><th>Attackable</th><th>Last attacked</th>${rows[0] && rows[0].distance != null ? "<th>Distance</th>" : ""}
       </tr></thead>`;
       const tb = document.createElement("tbody");
       rows.forEach((r) => {
@@ -107,11 +108,11 @@
           : 0;
         const tr = document.createElement("tr");
         tr.innerHTML =
-          '<td class="nm">' + esc(r.player_name) + "</td>" +
+          '<td class="nm">' + (FORT_NAMES[r.kid] || "Fort") + "</td>" +
+          '<td class="r">' + r.position_x + ":" + r.position_y + "</td>" +
+          "<td>" + esc(r.player_name || "—") + "</td>" +
           '<td class="r">' + esc(r.player_level) + (r.player_legendary_level ? "/" + esc(r.player_legendary_level) : "") + "</td>" +
           '<td class="r">' + num(r.player_might) + "</td>" +
-          "<td>" + (KID_NAMES[r.kid] || r.kid) + "</td>" +
-          '<td class="r">' + r.position_x + ":" + r.position_y + "</td>" +
           '<td class="r">' + num(r.total_attack_count) + "</td>" +
           "<td>" + (availIn === 0 ? "✅ now" : "⏳ " + dur(availIn)) + "</td>" +
           "<td>" + ago(r.last_attack) + "</td>" +

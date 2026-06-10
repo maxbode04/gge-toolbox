@@ -11,6 +11,7 @@ window.TOOLS = [
   // ---- Guides ------------------------------------------------------------
   {
     slug: "guide-getting-started",
+    img: "assets/img/tool-art/guides.webp",
     cat: "guides",
     name: "Getting Started",
     desc: "A no-nonsense first-week guide: what to build, what to spend rubies on, and what to ignore.",
@@ -21,6 +22,7 @@ window.TOOLS = [
   },
   {
     slug: "guide-combat-basics",
+    img: "assets/img/event-icons/waroftherealms.webp",
     cat: "guides",
     name: "Combat Basics",
     desc: "How battles resolve: front vs flanks, melee vs ranged, waves, tools and the wall.",
@@ -31,6 +33,7 @@ window.TOOLS = [
   },
   {
     slug: "guide-commander-setup",
+    img: "assets/img/tool-art/generals.webp",
     cat: "guides",
     name: "Attack Commander Setup",
     desc: "How equipment slots and gems work, and which stats to stack for courtyard, flanks and front.",
@@ -41,6 +44,7 @@ window.TOOLS = [
   },
   {
     slug: "guide-rift-raid",
+    img: "assets/img/event-icons/riftraid.webp",
     cat: "guides",
     name: "Rift Raid Basics",
     desc: "How the Rift Raid alliance event works: boss health, reserves, wall breaching and activity points.",
@@ -53,6 +57,7 @@ window.TOOLS = [
   // ---- Calculators -------------------------------------------------------
   {
     slug: "travel-speed",
+    img: "assets/img/tool-art/speed.webp",
     cat: "calculators",
     name: "Attack Speed & Detection",
     desc: "Land time, horse boosts and the exact moment your attack is detected.",
@@ -62,6 +67,7 @@ window.TOOLS = [
   },
   {
     slug: "wall-limit",
+    img: "assets/img/tool-art/wall.webp",
     cat: "calculators",
     name: "Wall & Gate Limit",
     desc: "Maximum wall and gate defence bonus for your castle setup.",
@@ -71,6 +77,7 @@ window.TOOLS = [
   },
   {
     slug: "food-production",
+    img: "assets/img/tool-art/food.webp",
     cat: "calculators",
     name: "Food Production",
     desc: "Net food output and consumption across your empire.",
@@ -80,6 +87,7 @@ window.TOOLS = [
   },
   {
     slug: "mead-production",
+    img: "assets/img/tool-art/mead.webp",
     cat: "calculators",
     name: "Mead Production",
     desc: "Mead output planning for your relic buildings.",
@@ -89,6 +97,7 @@ window.TOOLS = [
   },
   {
     slug: "rift-raid-points",
+    img: "assets/img/event-icons/riftraid.webp",
     cat: "calculators",
     name: "Rift Raid Points",
     desc: "Plan the points you can score in the Rift Raid event.",
@@ -98,6 +107,7 @@ window.TOOLS = [
   },
   {
     slug: "rift-wall-break",
+    img: "assets/img/event-icons/riftraid.webp",
     cat: "calculators",
     name: "Rift Wall-Break Simulator",
     desc: "Work out the units and tools needed to breach a boss wall segment on a given stage.",
@@ -108,6 +118,7 @@ window.TOOLS = [
 
   {
     slug: "rift-optimizer",
+    img: "assets/img/event-icons/riftraid.webp",
     cat: "calculators",
     name: "Rift Commander Maker",
     desc: "Mark the Rift equipment you own and get the optimal gear combo for maximum set bonuses.",
@@ -119,6 +130,7 @@ window.TOOLS = [
   // ---- Simulators --------------------------------------------------------
   {
     slug: "gacha-sim",
+    img: "assets/img/tool-art/gacha.webp",
     cat: "simulators",
     name: "Gacha Spin Simulator",
     desc: "Real drop rates for every gacha & loot box — then spin as much as you like.",
@@ -128,6 +140,7 @@ window.TOOLS = [
   },
   {
     slug: "battle-simulator",
+    img: "assets/img/event-icons/waroftherealms.webp",
     cat: "simulators",
     name: "Battle Simulator",
     desc: "Full attack-vs-castle combat sim: waves, tools, commander & castellan.",
@@ -146,6 +159,7 @@ window.TOOLS = [
   },
   {
     slug: "layout-editor",
+    img: "assets/img/tool-art/layout.webp",
     cat: "simulators",
     name: "Castle Layout Editor",
     desc: "Drag-and-drop planner for your castle building layout.",
@@ -157,6 +171,7 @@ window.TOOLS = [
   // ---- Overviews ---------------------------------------------------------
   {
     slug: "overview-decorations",
+    img: "assets/img/tool-art/decos.webp",
     cat: "overviews",
     name: "Decorations",
     desc: "Every decoration with might, deco points & size — sort by might-per-tile.",
@@ -166,6 +181,7 @@ window.TOOLS = [
   },
   {
     slug: "overview-generals",
+    img: "assets/img/tool-art/generals.webp",
     cat: "overviews",
     name: "Generals",
     desc: "Every obtainable general with rarity, level caps and full attack/defence ability kits.",
@@ -175,6 +191,7 @@ window.TOOLS = [
   },
   {
     slug: "overview-equipment",
+    img: "assets/img/tool-art/equipment.webp",
     cat: "overviews",
     name: "Equipment",
     desc: "Every gear piece with its set, slot, might and full effect list.",
@@ -184,6 +201,7 @@ window.TOOLS = [
   },
   {
     slug: "overview-troops-tools",
+    img: "assets/img/tool-art/troops.webp",
     cat: "overviews",
     name: "Troops & Tools",
     desc: "461 units and 255 siege tools with real attack/defence stats, speed, loot and effects.",
@@ -193,6 +211,7 @@ window.TOOLS = [
   },
   {
     slug: "overview-loot-box",
+    img: "assets/img/tool-art/lootbox.webp",
     cat: "overviews",
     name: "Loot Boxes",
     desc: "All 46 mystery & loot boxes with full contents and real drop chances.",
@@ -202,6 +221,7 @@ window.TOOLS = [
   },
   {
     slug: "overview-rift",
+    img: "assets/img/event-icons/riftraid.webp",
     cat: "overviews",
     name: "Rift Raid Bosses",
     desc: "Every Rift Raid boss, level and health stage: wall garrison, boss effects and reserve size.",
@@ -211,6 +231,7 @@ window.TOOLS = [
   },
   {
     slug: "overview-event-rewards",
+    img: "assets/img/event-icons/ltpe.webp",
     cat: "overviews",
     name: "Event Rewards",
     desc: "Point milestone tracks for 20 rotating events, per level bracket.",
@@ -222,6 +243,7 @@ window.TOOLS = [
   // ---- Rankings & stats --------------------------------------------------
   {
     slug: "rankings",
+    img: "assets/img/tool-art/rankings.webp",
     cat: "rankings",
     name: "Player & Alliance Rankings",
     desc: "Live might, glory and event rankings for GGE and E4K.",

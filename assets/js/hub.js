@@ -59,8 +59,12 @@
     // Guides (and any entry with an explicit url) link straight to a page;
     // everything else follows the folder-per-tool convention.
     if (live) el.href = t.url || "tools/" + t.slug + "/";
+    const art = t.img
+      ? '<div class="ico art"><img src="' + t.img + '" alt="" loading="lazy" ' +
+        "onerror=\"this.parentNode.classList.remove('art');this.parentNode.textContent='" + t.icon + "'\"></div>"
+      : '<div class="ico">' + t.icon + "</div>";
     el.innerHTML =
-      '<div class="ico">' + t.icon + "</div>" +
+      art +
       "<h3>" + t.name + "</h3>" +
       "<p>" + t.desc + "</p>" +
       '<span class="badge ' + (live ? "new" : "soon") + '">' + (live ? "Ready" : "Soon") + "</span>";
