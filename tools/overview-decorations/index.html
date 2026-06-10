@@ -39,13 +39,19 @@
       .then((r) => r.json())
       .then((d) => {
         const fix = window.ggeFixName || ((s) => s);
-        const data = d.items.map((it) => ({ ...it, name: fix(it.name) }));
+        const data = d.items.map((it) => ({
+          ...it,
+          name: fix(it.name),
+          fxText: (it.effects || []).map((e) => e.label).join(" "),
+        }));
         const num = (v) => (v || 0).toLocaleString();
+        const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+        const fxLine = (e) => "+" + e.v.toLocaleString() + (e.pct ? "%" : "") + " " + esc(e.label);
         EmpireOverview({
           mount: document.getElementById("ov"),
           data,
           layout: "cards",
-          searchKeys: ["name"],
+          searchKeys: ["name", "fxText"],
           defaultSort: { key: "po", dir: -1 },
           placeholder: "Search " + data.length + " decorations…",
           sortOptions: [
@@ -65,6 +71,10 @@
               { label: "Deco pts", key: "po", num: true, fmt: num },
               { label: "Might/tile", key: "mpt", num: true, fmt: num },
             ],
+            extra: (r) =>
+              r.effects && r.effects.length
+                ? '<div class="effects">' + r.effects.map((e) => '<span class="eff">' + fxLine(e) + "</span>").join("") + "</div>"
+                : "",
           },
         });
       })
