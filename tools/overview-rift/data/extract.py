@@ -40,20 +40,58 @@ def main():
     def unit_role(uid):
         return units.get(str(uid), {}).get("role", "")
 
+    def _num(v):
+        try:
+            return int(float(v))
+        except (TypeError, ValueError):
+            return 0
+
     def parse_units(s):
-        """'506+800#505+550' -> [{id, name, role, count}]"""
+        """'506+800#505+550' -> [{id, name, role, count, meleeDef, rangeDef}]"""
         out = []
         for pair in str(s or "").split("#"):
             pair = pair.strip()
             if "+" not in pair:
                 continue
             uid, cnt = pair.split("+", 1)
+            uid = uid.strip()
+            u = units.get(uid, {})
             out.append({
-                "id": uid.strip(),
-                "name": unit_name(uid.strip()),
-                "role": unit_role(uid.strip()),
+                "id": uid,
+                "name": unit_name(uid),
+                "role": unit_role(uid),
                 "count": int(cnt) if cnt.strip().isdigit() else 0,
+                "meleeDef": _num(u.get("meleeDefence")),
+                "rangeDef": _num(u.get("rangeDefence")),
             })
+        return out
+
+    # Structured per-stage combat numbers for the wall-break simulator.
+    # Maps the real effect names (via the effects table) to fields the sim uses.
+    FX_FIELDS = {
+        "raidbosswallbonus":        "wallProt",
+        "raidbossgatebonus":        "gateProt",
+        "defenseboostfront":        "frontStr",
+        "defenseboostflank":        "flankStr",
+        "defenseboostyard":         "yardStr",
+        "offensiverangemalus":      "atkRangedMalus",
+        "offensivemeleemalus":      "atkMeleeMalus",
+    }
+
+    def parse_combat_fx(s):
+        out = {}
+        for pair in str(s or "").split(","):
+            pair = pair.strip()
+            if "&" not in pair:
+                continue
+            eid, val = pair.split("&", 1)
+            name = effects.get(eid.strip(), "").lower()
+            field = FX_FIELDS.get(name)
+            if field:
+                try:
+                    out[field] = out.get(field, 0) + float(val)
+                except ValueError:
+                    pass
         return out
 
     def effect_label(eid, val):
@@ -125,6 +163,8 @@ def main():
                 # Point factors are constant within a level; capture them.
                 wall_pf  = int(s.get("wallPointFactor", 0) or 0) or wall_pf
                 court_pf = int(s.get("courtyardPointFactor", 0) or 0) or court_pf
+                combat = parse_combat_fx(s.get("defenderBattleEffects", ""))
+                combat.update(parse_combat_fx(s.get("attackerBattleEffects", "")))
                 stages_out.append({
                     "health": int(s.get("health", 0)),
                     "left": left,
@@ -134,6 +174,7 @@ def main():
                     "defenderEffects": parse_effects(s.get("defenderBattleEffects", "")),
                     "attackerEffects": parse_effects(s.get("attackerBattleEffects", "")),
                     "highlights": highlight_labels(s.get("HighlightEffectIcon", "")),
+                    "combat": combat,
                 })
 
             levels_out.append({

@@ -189,3 +189,51 @@
 /* no-results */
 .no-results-hint { color: var(--text-dim); font-size: .9rem; padding: 20px; text-align: center; }
 .no-results-hint a { color: var(--gold); }
+
+/* ---- Quantity steppers ---- */
+.qty-stepper { display: flex; align-items: center; gap: 5px; flex-shrink: 0; }
+.qty-btn {
+  width: 22px; height: 22px; border-radius: 5px; border: 1px solid var(--border);
+  background: var(--bg-elev-2); color: var(--text); font: inherit; font-size: .9rem;
+  cursor: pointer; line-height: 1; padding: 0;
+}
+.qty-btn:hover { border-color: var(--gold-dim); color: var(--gold); }
+.qty-val { min-width: 18px; text-align: center; font-size: .82rem; font-weight: 700; color: var(--text); font-variant-numeric: tabular-nums; }
+.item-toggle.owned .qty-val { color: var(--gold); }
+
+/* ---- Stat chips on items ---- */
+.stat-chips { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 3px; }
+.stat-chip {
+  font-size: .64rem; padding: 1px 6px; border-radius: 99px;
+  background: rgba(255,255,255,.04); border: 1px solid var(--border-soft); color: var(--text-dim);
+  white-space: nowrap;
+}
+
+/* ---- Set bulk buttons ---- */
+.set-bulk {
+  font: inherit; font-size: .66rem; font-weight: 700; padding: 2px 8px; border-radius: 99px;
+  background: var(--bg-elev-2); border: 1px solid var(--border); color: var(--text-dim); cursor: pointer;
+}
+.set-bulk:hover { border-color: var(--gold-dim); color: var(--gold); }
+
+/* ---- Optimize goal presets ---- */
+.opt-goal { margin-bottom: 14px; }
+.opt-goal-label { display: block; font-size: .7rem; text-transform: uppercase; letter-spacing: .06em; color: var(--text-faint); margin-bottom: 7px; }
+.preset-row { display: flex; flex-wrap: wrap; gap: 7px; }
+.preset-btn {
+  font: inherit; font-size: .82rem; font-weight: 600; padding: 7px 14px; border-radius: var(--radius-sm);
+  background: var(--bg-elev-2); border: 1px solid var(--border); color: var(--text-dim); cursor: pointer;
+}
+.preset-btn:hover { border-color: var(--gold-dim); color: var(--text); }
+.preset-btn.active { border-color: var(--gold); color: var(--gold); background: rgba(227,179,65,.08); }
+.opt-cmdrs { display: inline-flex; align-items: center; gap: 7px; font-size: .8rem; color: var(--text-dim); }
+.opt-cmdrs select {
+  padding: 7px 10px; font: inherit; background: var(--bg-elev-2);
+  border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text);
+}
+.opt-result-note { font-size: .82rem; color: var(--text-dim); margin: 0 0 14px; }
+.opt-result-note b { color: var(--gold); }
+
+/* ---- Multi-commander builds ---- */
+.cmdr-build { border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; margin-bottom: 16px; background: var(--bg-elev); }
+.cmdr-build-h { font-size: .9rem; text-transform: uppercase; letter-spacing: .05em; color: var(--gold); margin: 0 0 12px; font-family: var(--font-display); }

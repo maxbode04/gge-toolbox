@@ -63,6 +63,22 @@
   ];
   const ECON_WEIGHT = 0.05; // anything uncategorised
 
+  /* Optimisation goals — multipliers applied ON TOP of the base weights, so
+     you can tell the optimizer what this commander is FOR. */
+  const PRESETS = {
+    balanced:  { label: "⚖️ Balanced",        mult: {} },
+    ranged:    { label: "🏹 Ranged focus",    mult: { rangeAtk: 3, meleeAtk: 0.3 } },
+    melee:     { label: "⚔️ Melee focus",     mult: { meleeAtk: 3, rangeAtk: 0.3 } },
+    courtyard: { label: "🏯 Courtyard clear", mult: { courtyard: 3, waves: 1.5, reserveKill: 1.5 } },
+    wallbreak: { label: "🧱 Wall breaker",    mult: { breach: 6, limit: 1.5, frontFlankStr: 1.5, courtyard: 0.3, reserveKill: 0.3 } },
+  };
+  let curPreset = "balanced";
+
+  const CAT_EMOJI = {
+    rangeAtk: "🏹", meleeAtk: "⚔️", courtyard: "🏯", waves: "🌊", reserveKill: "💀",
+    limit: "👥", frontFlankStr: "💪", breach: "⏱️", protect: "🛡️", minor: "🐎",
+  };
+
   function effectCategory(name) {
     const n = (name || "").toLowerCase();
     for (const c of STAT_CATEGORIES) if (c.test(n)) return c;
@@ -70,52 +86,62 @@
   }
   function effectWeight(name) {
     const c = effectCategory(name);
-    return c ? c.weight : ECON_WEIGHT;
+    if (!c) return ECON_WEIGHT;
+    const m = (PRESETS[curPreset].mult[c.id] != null) ? PRESETS[curPreset].mult[c.id] : 1;
+    return c.weight * m;
   }
 
   let allSets = [];
-  let owned = new Set();
+  let qty = {};            // id -> owned count
 
-  /* ---- State ---- */
+  /* ---- State (quantities; migrates the old own/not-own set) ---- */
+  const QTY_KEY = "rift_qty_v3";
   function loadOwned() {
+    qty = {};
     try {
-      const s = localStorage.getItem(STORAGE_KEY);
-      if (s) owned = new Set(JSON.parse(s));
-    } catch (e) {
-      owned = new Set();
-    }
+      const s = localStorage.getItem(QTY_KEY);
+      if (s) { qty = JSON.parse(s) || {}; return; }
+      const old = localStorage.getItem(STORAGE_KEY);
+      if (old) {
+        for (const id of JSON.parse(old)) qty[String(id)] = 1;
+        saveOwned();
+      }
+    } catch (e) { qty = {}; }
   }
-
   function saveOwned() {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify([...owned]));
+    localStorage.setItem(QTY_KEY, JSON.stringify(qty));
   }
-
-  function toggleOwned(id) {
+  function getQty(id) { return qty[String(id)] || 0; }
+  function setQty(id, n) {
     id = String(id);
-    if (owned.has(id)) owned.delete(id);
-    else owned.add(id);
+    n = Math.max(0, Math.min(99, n | 0));
+    if (n === 0) delete qty[id]; else qty[id] = n;
     saveOwned();
   }
 
   function countOwnedInSet(set) {
     let n = 0;
-    for (const it of set.items) if (owned.has(String(it.id))) n++;
-    for (const g of set.gems) if (owned.has(String(g.id))) n++;
+    for (const it of set.items) if (getQty(it.id) > 0) n++;
+    for (const g of set.gems) if (getQty(g.id) > 0) n++;
     return n;
+  }
+  function totalOwnedPieces() {
+    return Object.values(qty).reduce((a, b) => a + b, 0);
   }
 
   /* ---- Optimizer ---- */
-  function buildCandidates() {
+  /* `pool` maps id -> remaining count, so multi-commander builds consume gear. */
+  function buildCandidates(pool) {
     const bySlot = {};
     for (const slot of EQUIP_SLOTS) bySlot[slot] = [];
     const byGem = [[], [], [], []];
 
     for (const set of allSets) {
       for (const item of set.items) {
-        if (owned.has(String(item.id))) bySlot[item.slot].push({ setID: set.setID, item, set });
+        if ((pool[String(item.id)] || 0) > 0) bySlot[item.slot].push({ setID: set.setID, item, set });
       }
       for (const gem of set.gems) {
-        if (owned.has(String(gem.id))) byGem[gem.gemType].push({ setID: set.setID, gem, set });
+        if ((pool[String(gem.id)] || 0) > 0) byGem[gem.gemType].push({ setID: set.setID, gem, set });
       }
     }
     return { bySlot, byGem };
@@ -164,8 +190,8 @@
     return evaluateAssignment(assignment).score;
   }
 
-  function runOptimizer() {
-    const { bySlot, byGem } = buildCandidates();
+  function runOptimizer(pool) {
+    const { bySlot, byGem } = buildCandidates(pool);
     const ALL_SLOT_KEYS = [...EQUIP_SLOTS, "gem0", "gem1", "gem2", "gem3"];
 
     const candidates = {
@@ -334,12 +360,12 @@
 
   /* ---- Gear tab ---- */
   function renderGear(container) {
-    const totalOwned = owned.size;
+    const totalOwned = totalOwnedPieces();
     const summary = document.createElement("p");
     summary.style.cssText = "font-size:.85rem;color:var(--text-dim);margin:0 0 16px";
     summary.innerHTML = totalOwned === 0
-      ? "Tick each piece you own — your inventory saves automatically in your browser."
-      : `<strong style="color:var(--text)">${totalOwned}</strong> piece${totalOwned === 1 ? "" : "s"} owned. Click a piece to toggle.`;
+      ? "Set how many of each piece you own — your inventory saves automatically."
+      : `<strong style="color:var(--text)">${totalOwned}</strong> piece${totalOwned === 1 ? "" : "s"} owned (duplicates count). Use − / + on each piece.`;
     container.appendChild(summary);
 
     const grid = document.createElement("div");
@@ -349,6 +375,22 @@
     for (const set of allSets) {
       grid.appendChild(makeSetCard(set));
     }
+  }
+
+  function bulkSet(set, n) {
+    for (const it of set.items) setQty(it.id, n);
+    for (const g of set.gems) setQty(g.id, n);
+    /* refresh that card's rows */
+    const card = document.querySelector('.set-card[data-set-id="' + set.setID + '"]');
+    if (card) {
+      card.querySelectorAll(".item-toggle").forEach((row) => {
+        const q = getQty(row.dataset.id);
+        row.classList.toggle("owned", q > 0);
+        const v = row.querySelector(".qty-val");
+        if (v) v.textContent = q;
+      });
+    }
+    refreshSetHeader(set);
   }
 
   function makeSetCard(set) {
@@ -365,8 +407,12 @@
     head.innerHTML = `
       <span class="set-card-name">${esc(set.name)}</span>
       <span class="wearer-tag">${esc(set.wearer)}</span>
+      <button class="set-bulk all">✓ All</button>
+      <button class="set-bulk none">✕ None</button>
       <span class="set-count" id="sc-${set.setID}">${ownedCount}/${total}</span>
     `;
+    head.querySelector(".set-bulk.all").addEventListener("click", () => bulkSet(set, 1));
+    head.querySelector(".set-bulk.none").addEventListener("click", () => bulkSet(set, 0));
     card.appendChild(head);
 
     const progressWrap = document.createElement("div");
@@ -398,72 +444,100 @@
     return card;
   }
 
+  /* Compact emoji-coded stat chips for an item's own effects. */
+  function statChips(effects) {
+    const chips = [];
+    for (const e of effects || []) {
+      const cat = effectCategory(e.name);
+      if (!cat || !e.value) continue;
+      const emoji = CAT_EMOJI[cat.id] || "✨";
+      const v = cat.id === "waves" ? "+" + e.value
+        : cat.id === "reserveKill" ? "💀" + Number(e.value).toLocaleString()
+        : "+" + e.value + (cat.id === "breach" ? "s" : "%");
+      chips.push('<span class="stat-chip" title="' + esc(e.label) + '">' + emoji + " " + v + "</span>");
+    }
+    return chips.length ? '<div class="stat-chips">' + chips.join("") + "</div>" : "";
+  }
+
+  function refreshSetHeader(set) {
+    const cnt = countOwnedInSet(set);
+    const total = set.items.length + set.gems.length;
+    const countEl = document.getElementById("sc-" + set.setID);
+    const barEl = document.getElementById("sb-" + set.setID);
+    if (countEl) countEl.textContent = cnt + "/" + total;
+    if (barEl) barEl.style.width = (cnt / total * 100) + "%";
+    const summary = document.querySelector("#tab-gear > p");
+    if (summary) {
+      const n = totalOwnedPieces();
+      summary.innerHTML = n === 0
+        ? "Set how many of each piece you own — your inventory saves automatically."
+        : `<strong style="color:var(--text)">${n}</strong> piece${n === 1 ? "" : "s"} owned (duplicates count). Use − / + on each piece.`;
+    }
+    updateOwnedLabel();
+    const resultsOut = document.getElementById("results-out");
+    if (resultsOut && resultsOut.children.length > 0) runAndRenderOptimizer();
+  }
+
   function makeToggleRow(item, isGem, set) {
     const id = String(item.id);
-    const isOwned = owned.has(id);
     const slotLabel = isGem ? GEM_LABELS[item.gemType] : item.slot;
     const name = isGem ? (item.name || GEM_LABELS[item.gemType]) : item.name;
 
     const row = document.createElement("div");
-    row.className = "item-toggle" + (isOwned ? " owned" : "");
+    row.className = "item-toggle" + (getQty(id) > 0 ? " owned" : "");
     row.dataset.id = id;
 
-    /* Thumbnail */
     const thumbWrap = document.createElement("div");
     thumbWrap.className = "item-thumb-wrap";
     thumbWrap.appendChild(spriteEl(item, 36, isGem ? "💎" : esc(SLOT_EMOJI[item.slot] || "?")));
     row.appendChild(thumbWrap);
 
-    /* Info */
     const info = document.createElement("div");
     info.className = "item-toggle-info";
-    info.innerHTML = `<span class="item-slot-tag">${esc(slotLabel)}</span><span class="item-name">${esc(name)}</span>`;
+    info.innerHTML = `<span class="item-slot-tag">${esc(slotLabel)}</span><span class="item-name">${esc(name)}</span>` +
+      statChips(item.effects);
     row.appendChild(info);
 
-    /* Toggle button */
-    const btn = document.createElement("button");
-    btn.className = "own-btn";
-    btn.title = isOwned ? "Remove" : "Mark as owned";
-    btn.textContent = isOwned ? "✓" : "+";
-    row.appendChild(btn);
+    /* Quantity stepper */
+    const stepper = document.createElement("div");
+    stepper.className = "qty-stepper";
+    stepper.innerHTML =
+      '<button class="qty-btn qty-dec">−</button>' +
+      '<span class="qty-val">' + getQty(id) + "</span>" +
+      '<button class="qty-btn qty-inc">+</button>';
+    row.appendChild(stepper);
 
-    function toggle() {
-      toggleOwned(id);
-      const nowOwned = owned.has(id);
-      row.classList.toggle("owned", nowOwned);
-      btn.textContent = nowOwned ? "✓" : "+";
-      btn.title = nowOwned ? "Remove" : "Mark as owned";
-      /* Update set count + bar */
-      const cnt = countOwnedInSet(set);
-      const total = set.items.length + set.gems.length;
-      const countEl = document.getElementById("sc-" + set.setID);
-      const barEl = document.getElementById("sb-" + set.setID);
-      if (countEl) countEl.textContent = cnt + "/" + total;
-      if (barEl) barEl.style.width = (cnt / total * 100) + "%";
-      /* Update gear tab summary */
-      const summary = document.querySelector("#tab-gear > p");
-      if (summary) {
-        const n = owned.size;
-        summary.innerHTML = n === 0
-          ? "Tick each piece you own — your inventory saves automatically in your browser."
-          : `<strong style="color:var(--text)">${n}</strong> piece${n === 1 ? "" : "s"} owned. Click a piece to toggle.`;
-      }
-      updateOwnedLabel();
-      /* Re-run optimizer if results are showing */
-      const resultsOut = document.getElementById("results-out");
-      if (resultsOut && resultsOut.children.length > 0) runAndRenderOptimizer();
+    function update(delta) {
+      setQty(id, getQty(id) + delta);
+      stepper.querySelector(".qty-val").textContent = getQty(id);
+      row.classList.toggle("owned", getQty(id) > 0);
+      refreshSetHeader(set);
     }
-
-    row.addEventListener("click", (e) => { if (e.target !== btn) toggle(); });
-    btn.addEventListener("click", (e) => { e.stopPropagation(); toggle(); });
+    stepper.querySelector(".qty-dec").addEventListener("click", (e) => { e.stopPropagation(); update(-1); });
+    stepper.querySelector(".qty-inc").addEventListener("click", (e) => { e.stopPropagation(); update(+1); });
+    /* Clicking the row toggles 0 <-> 1 for quick entry */
+    row.addEventListener("click", (e) => {
+      if (e.target.closest(".qty-stepper")) return;
+      update(getQty(id) > 0 ? -getQty(id) : +1);
+    });
     return row;
   }
 
   /* ---- Optimize tab ---- */
   function renderOptimize(container) {
+    const presetBtns = Object.entries(PRESETS).map(([k, p]) =>
+      '<button class="preset-btn' + (k === curPreset ? " active" : "") + '" data-preset="' + k + '">' + p.label + "</button>"
+    ).join("");
     container.innerHTML = `
+      <div class="opt-goal">
+        <span class="opt-goal-label">Optimize for</span>
+        <div class="preset-row" id="preset-row">${presetBtns}</div>
+      </div>
       <div class="opt-controls">
         <button class="opt-run-btn" id="run-btn">⚡ Optimize</button>
+        <label class="opt-cmdrs">Commanders
+          <select id="cmdr-count"><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>
+        </label>
         <button class="opt-clear-btn" id="clear-btn">Clear all owned</button>
         <span class="opt-owned-count" id="owned-count-label"></span>
       </div>
@@ -471,12 +545,23 @@
     `;
     updateOwnedLabel();
 
+    document.getElementById("preset-row").addEventListener("click", (e) => {
+      const b = e.target.closest(".preset-btn");
+      if (!b) return;
+      curPreset = b.dataset.preset;
+      document.querySelectorAll(".preset-btn").forEach((x) => x.classList.toggle("active", x === b));
+      const out = document.getElementById("results-out");
+      if (out && out.children.length > 0) runAndRenderOptimizer();
+    });
+    document.getElementById("cmdr-count").addEventListener("change", () => {
+      const out = document.getElementById("results-out");
+      if (out && out.children.length > 0) runAndRenderOptimizer();
+    });
     document.getElementById("run-btn").addEventListener("click", runAndRenderOptimizer);
     document.getElementById("clear-btn").addEventListener("click", () => {
       if (!confirm("Clear your entire owned inventory?")) return;
-      owned.clear();
+      qty = {};
       saveOwned();
-      /* Re-render gear tab toggles */
       const gearPane = document.getElementById("tab-gear");
       if (gearPane) { gearPane.innerHTML = ""; renderGear(gearPane); }
       updateOwnedLabel();
@@ -487,7 +572,7 @@
   function updateOwnedLabel() {
     const el = document.getElementById("owned-count-label");
     if (!el) return;
-    const n = owned.size;
+    const n = totalOwnedPieces();
     el.innerHTML = n === 0
       ? "No pieces owned yet — add them in the Gear tab."
       : `<strong>${n}</strong> piece${n === 1 ? "" : "s"} owned across all sets.`;
@@ -498,27 +583,47 @@
     if (!out) return;
     updateOwnedLabel();
 
-    if (owned.size === 0) {
+    if (totalOwnedPieces() === 0) {
       out.innerHTML = `<p class="no-results-hint">You haven't marked any pieces yet.<br>
-        <a href="#" onclick="document.querySelector('[data-tab=gear]').click();return false;">Go to My Gear</a> to tick off what you own.</p>`;
+        <a href="#" onclick="document.querySelector('[data-tab=gear]').click();return false;">Go to My Gear</a> to set what you own.</p>`;
       return;
     }
 
-    const { assignment, score, totals } = runOptimizer();
+    /* Build up to N commanders, consuming the owned pool so duplicates matter. */
+    const nCmdrs = +(document.getElementById("cmdr-count")?.value || 1);
+    const pool = { ...qty };
+    const builds = [];
+    for (let c = 0; c < nCmdrs; c++) {
+      const r = runOptimizer(pool);
+      if (!r.assignment || r.score <= 0) break;
+      builds.push(r);
+      for (const v of Object.values(r.assignment)) {
+        if (!v) continue;
+        const id = String(v.item ? v.item.id : v.gem.id);
+        pool[id] = Math.max(0, (pool[id] || 0) - 1);
+      }
+    }
 
-    if (!assignment || score <= 0) {
+    if (!builds.length) {
       out.innerHTML = `<p class="no-results-hint">Could not find a valid combination. Make sure you have at least a few pieces owned.</p>`;
       return;
     }
 
-    /* Build set piece counts from assignment */
+    let html = `<p class="opt-result-note">Goal: <b>${PRESETS[curPreset].label}</b>` +
+      (builds.length > 1 ? ` · ${builds.length} commanders from your pool (duplicates consumed)` : "") + `</p>`;
+    builds.forEach((b, i) => {
+      html += renderBuild(b, i + 1, builds.length);
+    });
+    out.innerHTML = html;
+  }
+
+  function renderBuild({ assignment, totals }, idx, total) {
     const setCounts = {};
     for (const v of Object.values(assignment)) {
       if (v) setCounts[v.setID] = (setCounts[v.setID] || 0) + 1;
     }
 
-    /* ---- Loadout table ---- */
-    let html = "<h3 style='font-size:.85rem;text-transform:uppercase;letter-spacing:.06em;color:var(--text-dim);margin:0 0 12px'>Recommended Loadout</h3>";
+    let html = `<div class="cmdr-build"><h3 class="cmdr-build-h">${total > 1 ? "👑 Commander " + idx : "Recommended Loadout"}</h3>`;
     html += `<table class="loadout-table"><thead><tr>
       <th>Slot</th><th>Item</th><th>Set</th>
     </tr></thead><tbody>`;
@@ -595,7 +700,7 @@
     const shown = totalRows.filter((r) => (totals[r.id] || 0) > 0);
     if (shown.length) {
       html += `<div class="stat-totals">
-        <h3>Combat totals <span class="stat-totals-note">(priority: attack &gt; unit limit &gt; strength)</span></h3>
+        <h3>Combat totals</h3>
         <div class="stat-grid">` +
         shown.map((r) =>
           `<div class="stat-cell">
@@ -604,8 +709,8 @@
           </div>`).join("") +
         `</div></div>`;
     }
-
-    out.innerHTML = html;
+    html += "</div>";
+    return html;
   }
 
   /* ---- Reference tab ---- */

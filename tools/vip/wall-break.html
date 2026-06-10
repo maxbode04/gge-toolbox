@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rift Wall-Break Simulator — Chemie's VIP Corner</title>
+  <meta name="robots" content="noindex" />
+  <link rel="stylesheet" href="../../assets/css/theme.css?v=12" />
+  <link rel="stylesheet" href="./vip.css" />
+  <style>
+    .wb-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media (max-width: 820px) { .wb-grid { grid-template-columns: 1fr; } }
+    .wb-card { background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 18px; }
+    .wb-h { font-size: .8rem; text-transform: uppercase; letter-spacing: .06em; color: var(--gold-dim); font-weight: 700; margin: 0 0 12px; }
+    .wb-row { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 10px; }
+    .wb-field { display: flex; flex-direction: column; gap: 4px; font-size: .76rem; color: var(--text-dim); }
+    .wb-field select, .wb-field input {
+      padding: 8px 10px; font: inherit; font-size: .9rem;
+      background: var(--bg-elev-2); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text);
+    }
+    .wb-field input { width: 110px; }
+    .wb-field select { min-width: 130px; max-width: 230px; }
+    .wb-field input:focus, .wb-field select:focus { outline: none; border-color: var(--gold); }
+
+    .wb-boss-fx { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+    .wb-chip { font-size: .72rem; padding: 3px 9px; border-radius: 99px; background: var(--bg-elev-2); border: 1px solid var(--border); color: var(--text-dim); }
+    .wb-chip b { color: var(--text); }
+    .wb-chip.bad { border-color: rgba(248,81,73,.4); }
+    .wb-chip.prot { border-color: rgba(227,179,65,.4); }
+
+    .wb-verdict { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 12px; }
+    .wb-verdict .big { font-size: 1.5rem; font-weight: 800; font-family: var(--font-display); }
+    .wb-verdict.ok .big { color: var(--good); }
+    .wb-verdict.no .big { color: var(--bad); }
+    .wb-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; margin-bottom: 12px; }
+    .wb-stat { background: var(--bg-elev-2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 9px 12px; }
+    .wb-stat .v { font-size: 1.05rem; font-weight: 800; color: var(--gold); font-variant-numeric: tabular-nums; }
+    .wb-stat .k { font-size: .68rem; color: var(--text-dim); margin-top: 1px; }
+    table.wb-waves { width: 100%; border-collapse: collapse; font-size: .8rem; }
+    .wb-waves th { text-align: right; font-size: .64rem; text-transform: uppercase; color: var(--text-faint); padding: 5px 8px; border-bottom: 1px solid var(--border); }
+    .wb-waves th:first-child { text-align: left; }
+    .wb-waves td { padding: 5px 8px; border-bottom: 1px solid var(--border-soft); color: var(--text-dim); text-align: right; font-variant-numeric: tabular-nums; }
+    .wb-waves td:first-child { text-align: left; color: var(--text); }
+    .wb-note { font-size: .76rem; color: var(--text-faint); margin-top: 12px; line-height: 1.5; }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap">
+      <a class="brand" href="../../"><span class="crest">🛡️</span> Maxy's Empire <b>Toolkit</b></a>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="tool-head">
+      <a class="back" href="./index.html">← VIP Corner</a>
+      <h1>🧱 Rift Wall-Break Simulator</h1>
+      <p>Pick a boss stage and a wall segment, set up your waves, and see whether it
+         breaks — with projected losses and activity points. Uses the community-verified
+         combat curve (<b>losses = (weaker/stronger)^1.5</b>) with the boss's real
+         per-stage garrison and effects. <b>In calibration:</b> send Maxy battle reports
+         to tighten it.</p>
+    </div>
+
+    <section class="panel">
+      <div class="vip-nav">
+        <a href="./rankings.html">Rankings</a>
+        <a href="./empire-rankings.html">Live Event Rankings</a>
+        <a href="./fortress.html">Fortress Tracker</a>
+        <a href="./search.html">Search &amp; Analyse</a>
+        <a href="./scores.html">Score Tools</a>
+        <a href="./wall-break.html" class="active">Wall-Break Sim</a>
+      </div>
+
+      <div class="wb-grid">
+        <div class="wb-card">
+          <h2 class="wb-h">🎯 Target</h2>
+          <div class="wb-row">
+            <label class="wb-field"><span>Boss</span><select id="boss"></select></label>
+            <label class="wb-field"><span>Level</span><select id="level"></select></label>
+            <label class="wb-field"><span>Health stage</span><select id="stage"></select></label>
+            <label class="wb-field"><span>Segment</span>
+              <select id="segment">
+                <option value="front">Front (gate)</option>
+                <option value="left">Left flank (wall)</option>
+                <option value="right">Right flank (wall)</option>
+              </select>
+            </label>
+          </div>
+          <div id="garrison" class="wb-boss-fx"></div>
+          <div id="bossfx" class="wb-boss-fx"></div>
+        </div>
+
+        <div class="wb-card">
+          <h2 class="wb-h">⚔️ Your attack (per wave)</h2>
+          <div class="wb-row">
+            <label class="wb-field"><span>Melee unit</span><select id="mUnit"></select></label>
+            <label class="wb-field"><span>Count / wave</span><input type="number" id="mCount" min="0" value="500" /></label>
+            <label class="wb-field"><span>Melee bonus %</span><input type="number" id="mBonus" min="0" value="0" /></label>
+          </div>
+          <div class="wb-row">
+            <label class="wb-field"><span>Ranged unit</span><select id="rUnit"></select></label>
+            <label class="wb-field"><span>Count / wave</span><input type="number" id="rCount" min="0" value="500" /></label>
+            <label class="wb-field"><span>Ranged bonus %</span><input type="number" id="rBonus" min="0" value="0" /></label>
+          </div>
+          <div class="wb-row">
+            <label class="wb-field"><span>Waves</span><input type="number" id="waves" min="1" max="20" value="4" /></label>
+            <label class="wb-field"><span>Wall/gate tools % <small>(total reduction)</small></span><input type="number" id="tools" min="0" value="0" /></label>
+            <label class="wb-field"><span>Front/flank strength % <small>(your gear)</small></span><input type="number" id="posBonus" min="0" value="0" /></label>
+          </div>
+        </div>
+      </div>
+
+      <div class="wb-card" style="margin-top:14px">
+        <h2 class="wb-h">📊 Result</h2>
+        <div id="result"></div>
+        <div class="wb-note">
+          Model: attacker strength = count × unit attack × (1 + bonuses − boss malus);
+          defender strength = garrison × defence stat × (1 + boss front/flank strength)
+          × (1 + max(0, wall/gate protection − your tools)); each lane (melee vs ranged)
+          resolves separately by attacker share; losses follow (weaker/stronger)<sup>1.5</sup>;
+          waves hit the surviving garrison sequentially. Walls don't drain boss health —
+          a breach opens the courtyard window. Points = kill share × wall point factor.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    if (localStorage.getItem("vip_unlocked_v1") !== "1") location.replace("./index.html");
+
+    const $ = (id) => document.getElementById(id);
+    const esc = (s) => String(s == null ? "" : s).replace(/[&<>"]/g, (c) =>
+      ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+    const num = (v) => Math.round(v).toLocaleString();
+
+    let BOSSES = [], TROOPS = [];
+
+    const boss = () => BOSSES[+$("boss").value];
+    const level = () => boss().levels[+$("level").value];
+    const stage = () => level().stages[+$("stage").value];
+
+    function fillTargets() {
+      $("level").innerHTML = boss().levels.map((l, i) => `<option value="${i}">Level ${l.level}</option>`).join("");
+      fillStages();
+    }
+    function fillStages() {
+      $("stage").innerHTML = level().stages.map((s, i) => `<option value="${i}">${s.health}% HP</option>`).join("");
+      renderTarget();
+    }
+
+    function renderTarget() {
+      const st = stage(), seg = $("segment").value;
+      const units = st[seg] || [];
+      $("garrison").innerHTML = "<span class='wb-chip'>Garrison:</span>" + units.map((u) =>
+        `<span class="wb-chip"><b>${num(u.count)}</b>× ${esc(u.name)} <span style="color:var(--text-faint)">(def ⚔${u.meleeDef}/🏹${u.rangeDef})</span></span>`).join("");
+      const c = st.combat || {};
+      const prot = seg === "front" ? (c.gateProt || 0) : (c.wallProt || 0);
+      const str = seg === "front" ? (c.frontStr || 0) : (c.flankStr || 0);
+      const chips = [
+        `<span class="wb-chip prot">${seg === "front" ? "Gate" : "Wall"} protection <b>+${num(prot)}%</b></span>`,
+        `<span class="wb-chip prot">Defender strength <b>+${num(str)}%</b></span>`,
+      ];
+      if (c.atkRangedMalus) chips.push(`<span class="wb-chip bad">Your ranged attack <b>${num(c.atkRangedMalus)}%</b></span>`);
+      if (c.atkMeleeMalus) chips.push(`<span class="wb-chip bad">Your melee attack <b>${num(c.atkMeleeMalus)}%</b></span>`);
+      $("bossfx").innerHTML = chips.join("");
+      simulate();
+    }
+
+    function fillTroops() {
+      // strongest attackers first, melee select gets melee units etc.
+      const melee = TROOPS.filter((t) => t.meleeAtk > 0).sort((a, b) => b.meleeAtk - a.meleeAtk).slice(0, 40);
+      const ranged = TROOPS.filter((t) => t.rangeAtk > 0).sort((a, b) => b.rangeAtk - a.rangeAtk).slice(0, 40);
+      $("mUnit").innerHTML = melee.map((t) => `<option value="${t.meleeAtk}">${esc(t.name)} (⚔${t.meleeAtk})</option>`).join("");
+      $("rUnit").innerHTML = ranged.map((t) => `<option value="${t.rangeAtk}">${esc(t.name)} (🏹${t.rangeAtk})</option>`).join("");
+    }
+
+    function simulate() {
+      if (!BOSSES.length) return;
+      const st = stage(), seg = $("segment").value, c = st.combat || {};
+      const lvl = level();
+
+      // ---- defender pool (mutable copy) ----
+      let defenders = (st[seg] || []).map((u) => ({ ...u }));
+      const startTotal = defenders.reduce((a, u) => a + u.count, 0);
+      if (!startTotal) { $("result").innerHTML = "<p class='muted'>No garrison on this segment.</p>"; return; }
+
+      const prot = Math.max(0, (seg === "front" ? (c.gateProt || 0) : (c.wallProt || 0)) - (+$("tools").value || 0));
+      const protMult = 1 + prot / 100;
+      const defStrMult = (1 + ((seg === "front" ? (c.frontStr || 0) : (c.flankStr || 0)) / 100))
+                       / (1 + (+$("posBonus").value || 0) / 100);
+
+      const mAtkStat = +$("mUnit").value || 0, rAtkStat = +$("rUnit").value || 0;
+      const mCount0 = +$("mCount").value || 0, rCount0 = +$("rCount").value || 0;
+      const mMult = (1 + (+$("mBonus").value || 0) / 100) * (1 + (c.atkMeleeMalus || 0) / 100);
+      const rMult = (1 + (+$("rBonus").value || 0) / 100) * (1 + (c.atkRangedMalus || 0) / 100);
+      const nWaves = Math.max(1, Math.min(20, +$("waves").value || 1));
+
+      let totalAtkLossM = 0, totalAtkLossR = 0, breachedAt = 0;
+      const waveRows = [];
+
+      for (let w = 1; w <= nWaves; w++) {
+        const defCount = defenders.reduce((a, u) => a + u.count, 0);
+        if (defCount <= 0) break;
+
+        const atkM = mCount0 * mAtkStat * mMult;
+        const atkR = rCount0 * rAtkStat * rMult;
+        const atkTotal = atkM + atkR;
+        if (atkTotal <= 0) break;
+
+        // defender strength per lane (defence stat vs the attacker type)
+        const defVsM = defenders.reduce((a, u) => a + u.count * u.meleeDef, 0) * defStrMult * protMult;
+        const defVsR = defenders.reduce((a, u) => a + u.count * u.rangeDef, 0) * defStrMult * protMult;
+
+        // lanes scaled by attacker strength share (GeneralsCamp engine)
+        const shareM = atkTotal > 0 ? atkM / atkTotal : 0;
+        const shareR = 1 - shareM;
+        const scaledDefM = atkM > 0 ? defVsM * (atkR > 0 ? shareM : 1) : 0;
+        const scaledDefR = atkR > 0 ? defVsR * (atkM > 0 ? shareR : 1) : 0;
+
+        // attacker losses per lane
+        const lossRatioM = atkM > 0 ? (atkM > scaledDefM ? Math.pow(scaledDefM / atkM, 1.5) : 1) : 0;
+        const lossRatioR = atkR > 0 ? (atkR > scaledDefR ? Math.pow(scaledDefR / atkR, 1.5) : 1) : 0;
+        const lossM = Math.min(Math.ceil(mCount0 * lossRatioM), mCount0);
+        const lossR = Math.min(Math.ceil(rCount0 * lossRatioR), rCount0);
+
+        // defender losses
+        const defForRatio = scaledDefM + scaledDefR;
+        const killRatio = defForRatio <= 0 ? 1 : (atkTotal < defForRatio ? Math.pow(atkTotal / defForRatio, 1.5) : 1);
+        let kills = Math.min(Math.ceil(defCount * killRatio), defCount);
+
+        // distribute kills across defender unit types proportionally
+        let remaining = kills;
+        for (const u of defenders) {
+          const k = Math.min(u.count, Math.round(kills * (u.count / defCount)));
+          u.count -= k; remaining -= k;
+        }
+        for (const u of defenders) { // mop up rounding leftovers
+          if (remaining <= 0) break;
+          const k = Math.min(u.count, remaining);
+          u.count -= k; remaining -= k;
+        }
+
+        totalAtkLossM += lossM; totalAtkLossR += lossR;
+        const defLeft = defenders.reduce((a, u) => a + u.count, 0);
+        waveRows.push({ w, kills, defLeft, lossM, lossR });
+        if (defLeft <= 0 && !breachedAt) breachedAt = w;
+      }
+
+      const defLeft = defenders.reduce((a, u) => a + u.count, 0);
+      const killedTotal = startTotal - defLeft;
+      const killShare = killedTotal / startTotal;
+      const points = killShare * (lvl.wallPointFactor || 0);
+      const breached = defLeft <= 0;
+
+      $("result").innerHTML =
+        `<div class="wb-verdict ${breached ? "ok" : "no"}">
+           <span class="big">${breached ? "💥 BREACHED" : "🧱 Holds"}</span>
+           <span style="color:var(--text-dim)">${breached
+             ? "Segment broken on wave " + breachedAt + " of " + nWaves + "."
+             : num(defLeft) + " of " + num(startTotal) + " defenders still standing after " + nWaves + " wave" + (nWaves > 1 ? "s" : "") + "."}</span>
+         </div>
+         <div class="wb-stats">
+           <div class="wb-stat"><div class="v">${num(killedTotal)} <span style="color:var(--text-dim);font-size:.75rem">/ ${num(startTotal)}</span></div><div class="k">Defenders killed</div></div>
+           <div class="wb-stat"><div class="v">${num(totalAtkLossM)}</div><div class="k">Your melee losses</div></div>
+           <div class="wb-stat"><div class="v">${num(totalAtkLossR)}</div><div class="k">Your ranged losses</div></div>
+           <div class="wb-stat"><div class="v">+${num(points)}</div><div class="k">Activity points (wall ×${num(lvl.wallPointFactor || 0)})</div></div>
+           <div class="wb-stat"><div class="v">${num(Math.max(0, (seg === "front" ? (c.gateProt || 0) : (c.wallProt || 0)) - (+$("tools").value || 0)))}%</div><div class="k">Protection left after tools</div></div>
+         </div>
+         <table class="wb-waves"><thead><tr><th>Wave</th><th>Kills</th><th>Defenders left</th><th>Melee lost</th><th>Ranged lost</th></tr></thead><tbody>` +
+        waveRows.map((r) =>
+          `<tr><td>Wave ${r.w}</td><td>${num(r.kills)}</td><td>${num(r.defLeft)}</td><td>${num(r.lossM)}</td><td>${num(r.lossR)}</td></tr>`).join("") +
+        "</tbody></table>";
+    }
+
+    /* wiring */
+    ["segment"].forEach((id) => $(id).addEventListener("change", renderTarget));
+    ["mUnit", "rUnit"].forEach((id) => $(id).addEventListener("change", simulate));
+    ["mCount", "rCount", "mBonus", "rBonus", "waves", "tools", "posBonus"].forEach((id) =>
+      $(id).addEventListener("input", simulate));
+    $("boss").addEventListener("change", fillTargets);
+    $("level").addEventListener("change", fillStages);
+    $("stage").addEventListener("change", renderTarget);
+
+    Promise.all([
+      fetch("../overview-rift/data/rift-bosses.json").then((r) => r.json()),
+      fetch("../overview-troops-tools/data/troops-tools.json").then((r) => r.json()),
+    ]).then(([rb, tt]) => {
+      BOSSES = rb.bosses;
+      TROOPS = tt.troops;
+      $("boss").innerHTML = BOSSES.map((b, i) => `<option value="${i}">${esc(b.name)}</option>`).join("");
+      fillTroops();
+      fillTargets();
+    }).catch((e) => {
+      $("result").innerHTML = "<p class='muted'>Could not load data: " + esc(e.message) + "</p>";
+    });
+  </script>
+</body>
+</html>
