@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Construction Items Overview — Maxy's Empire Toolkit</title>
+  <meta name="description" content="Every Goodgame Empire construction (build) item with its real effects — primary, relic, temporary and event items, searchable by effect." />
+  <link rel="stylesheet" href="../../assets/css/theme.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap">
+      <a class="brand" href="../../"><span class="crest">🛡️</span> Maxy's Empire <b>Toolkit</b></a>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="tool-head">
+      <a class="back" href="../../">← All tools</a>
+      <h1>🧩 Construction Items Overview</h1>
+      <p>Every construction (build) item with its real effects, shown at its
+         maximum level. Search by item name or by effect — try
+         <b>courtyard</b>, <b>flank</b> or <b>mead</b>.</p>
+    </div>
+
+    <section class="panel">
+      <div id="ov"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap"><p>Data extracted from the community game-data cache. One card per item (max level shown).</p></div>
+  </footer>
+
+  <script src="../../assets/js/corrections.js"></script>
+  <script src="../../assets/js/overview.js"></script>
+  <script>
+    fetch("./data/construction-items.json")
+      .then((r) => r.json())
+      .then((d) => {
+        const fix = window.ggeFixName || ((s) => s);
+        const RAR = { 0: "—", 1: "Common", 2: "Rare", 3: "Epic", 4: "Legendary" };
+        const data = d.items.map((it) => ({
+          ...it,
+          name: fix(it.name),
+          rar: RAR[it.rarity] || "—",
+          fxText: (it.effects || []).map((e) => (e.tmpl || e.label)).join(" "),
+        }));
+        const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+        const fxLine = (e) =>
+          e.tmpl && e.tmpl.includes("{0}")
+            ? esc(e.tmpl.replace("{0}", e.v.toLocaleString()))
+            : "+" + e.v.toLocaleString() + (e.pct ? "%" : "") + " " + esc(e.label);
+        EmpireOverview({
+          mount: document.getElementById("ov"),
+          data,
+          layout: "cards",
+          searchKeys: ["name", "fxText", "kind", "rar"],
+          defaultSort: { key: "name", dir: 1 },
+          placeholder: "Search " + data.length + " construction items…",
+          sortOptions: [
+            { key: "name", label: "Name" },
+            { key: "kind", label: "Type" },
+            { key: "level", label: "Max level", num: true },
+            { key: "rarity", label: "Rarity", num: true },
+          ],
+          card: {
+            title: (r) => r.name,
+            img: (r) => r.img || null,
+            corner: (r) => "L" + r.level,
+            placeholder: "🧩",
+            stats: [
+              { label: "Type", key: "kind" },
+              { label: "Rarity", key: "rar" },
+            ],
+            extra: (r) =>
+              r.effects && r.effects.length
+                ? '<div class="effects">' + r.effects.map((e) => '<span class="eff">' + fxLine(e) + "</span>").join("") + "</div>"
+                : "",
+          },
+        });
+      })
+      .catch((e) => {
+        document.getElementById("ov").innerHTML = '<p class="muted">Could not load construction item data.</p>';
+        console.error(e);
+      });
+  </script>
+</body>
+</html>
