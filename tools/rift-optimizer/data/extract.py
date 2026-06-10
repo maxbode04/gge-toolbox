@@ -23,36 +23,59 @@ def fetch(url, label):
     with urllib.request.urlopen(url) as r:
         return r.read().decode("utf-8")
 
-def resolve_effect(eid, val, effects_map, lang):
-    name = effects_map.get(str(eid), "")
-    if not name:
-        return f"Effect {eid} ×{val}"
-    tpl_key = f"equip_effect_description_{name.lower()}"
-    tpl = lang.get(tpl_key, "")
-    if tpl and "{0}" in tpl:
-        return tpl.replace("{0}", str(val))
-    return f"{name} {val}"
-
 def _num(val):
-    """First numeric value out of a raw effect value like '785+600' or '200'."""
+    """First numeric value out of an effect value like '600' (or the count in a unit pair)."""
     m = re.search(r"-?\d+(?:\.\d+)?", str(val))
     return float(m.group(0)) if m else 0.0
 
-def parse_effects(effects_str, effects_map, lang):
-    out = []
-    for pair in str(effects_str or "").split(","):
-        pair = pair.strip()
-        if "&" not in pair:
-            continue
-        eid, val = pair.split("&", 1)
-        eid, val = eid.strip(), val.strip()
-        out.append({
-            "raw": pair,
-            "label": resolve_effect(eid, val, effects_map, lang),
-            "name": effects_map.get(eid, ""),
-            "value": _num(val),
-        })
-    return out
+def make_effect_resolver(effects_map, eq_effects_map, unit_names, lang):
+    """
+    IMPORTANT: the IDs inside equipments.effects and equipment_sets.effects are
+    equipmentEffectIDs — they must be chained through the equipment_effects
+    table to the real effectID. (For legacy gear both tables share IDs, which
+    hides the bug; for new gear — all Rift sets — they diverge completely.)
+    Gem effect strings use real effectIDs directly, so gems skip the chain.
+
+    Values like '785+600' on unit-targeted effects are (unit wodID)+(count)
+    pairs — the lang template then has {0}=count, {1}=unit name.
+    """
+    def resolve(eid, val, chain):
+        real_id = str(eid)
+        if chain:
+            row = eq_effects_map.get(real_id)
+            if row:
+                real_id = str(row.get("effectID", real_id))
+        name = effects_map.get(real_id, "")
+        if not name:
+            return name, f"Effect {eid} ×{val}", _num(val)
+
+        tpl = lang.get(f"equip_effect_description_{name.lower()}", "")
+        # unit-pair value: '<unitWodID>+<count>'
+        m = re.fullmatch(r"(\d+)\+(\d+)", str(val))
+        if m and tpl and "{1}" in tpl:
+            unit, count = m.group(1), m.group(2)
+            uname = unit_names.get(unit, f"unit {unit}")
+            label = tpl.replace("{0}", count).replace("{1}", uname)
+            return name, label, float(count)
+        if tpl and "{0}" in tpl:
+            out = tpl.replace("{0}", str(val))
+            out = out.replace("--", "-").replace("+-", "-")
+            out = re.sub(r"\s*\{\d\}", "", out).replace(" .", ".")
+            return name, out, _num(val)
+        return name, f"{name} {val}", _num(val)
+
+    def parse(effects_str, chain):
+        out = []
+        for pair in str(effects_str or "").split(","):
+            pair = pair.strip()
+            if "&" not in pair:
+                continue
+            eid, val = pair.split("&", 1)
+            name, label, value = resolve(eid.strip(), val.strip(), chain)
+            out.append({"raw": pair, "label": label, "name": name, "value": value})
+        return out
+
+    return parse
 
 def build_img_index(dll_text):
     """Return dict: lowercase asset key → full CDN URL."""
@@ -89,6 +112,20 @@ def main():
     for e in d.get("effects", []):
         effects_map[str(e.get("effectID", ""))] = e.get("name", "")
 
+    # equipmentEffectID → row (the chain table for item/set effect strings)
+    eq_effects_map = {str(e.get("equipmentEffectID", "")): e
+                      for e in d.get("equipment_effects", [])}
+
+    # unit wodID → display name (for 'kills N <unit>' effect values)
+    unit_names = {}
+    for u in d.get("units", []):
+        t = (u.get("type") or "").lower()
+        nm = lang.get(f"{t}_name", "")
+        if nm:
+            unit_names[str(u.get("wodID", ""))] = nm
+
+    parse_effects = make_effect_resolver(effects_map, eq_effects_map, unit_names, lang)
+
     # Identify rift sets: have at least one 9-piece bonus entry and
     # gems that have sellRiftShard or sellOfferingShard
     eq_sets   = d.get("equipment_sets", [])
@@ -114,7 +151,7 @@ def main():
         if sid not in rift_gem_sids:
             continue
         pieces = int(s.get("neededItems", 0))
-        fx = parse_effects(s.get("effects",""), effects_map, lang)
+        fx = parse_effects(s.get("effects",""), chain=True)
         bonus_map.setdefault(sid, []).append({"pieces": pieces, "effects": fx})
     for sid in bonus_map:
         bonus_map[sid].sort(key=lambda x: x["pieces"])
@@ -169,7 +206,9 @@ def main():
         return f"Set {sid}"
 
     def item_name(eid):
-        return lang_name(f"equipment_unique_{eid}") or lang_name(f"equipment_unique_{eid}_name", f"Item {eid}")
+        return (lang_name(f"equipment_unique_{eid}")
+                or lang_name(f"hero_unique_{eid}")
+                or lang_name(f"equipment_unique_{eid}_name", f"Item {eid}"))
 
     def gem_name(gid):
         return lang_name(f"gem_unique_{gid}") or lang_name(f"gem_{gid}_name") or lang_name(f"gem_{gid}", "")
@@ -193,7 +232,7 @@ def main():
                 continue
             eid  = str(e.get("equipmentID",""))
             name = item_name(eid)
-            fx   = parse_effects(e.get("effects",""), effects_map, lang)
+            fx   = parse_effects(e.get("effects",""), chain=True)
             items_out.append({
                 "id":     eid,
                 "name":   name,
@@ -211,7 +250,7 @@ def main():
             name  = gem_name(gid)
             if not name:
                 name = f"Gem {idx+1}"
-            fx   = parse_effects(g.get("effects",""), effects_map, lang)
+            fx   = parse_effects(g.get("effects",""), chain=False)
             gems_out.append({
                 "id":      gid,
                 "name":    name,

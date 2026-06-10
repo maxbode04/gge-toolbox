@@ -47,15 +47,21 @@
        6. Event tokens / economy                                — negligible
   ---------------------------------------------------------------------------- */
   const STAT_CATEGORIES = [
-    { id: "rangeAtk",  label: "Range attack",        weight: 10, test: (n) => /offensiverange|rangedbonus|rangebonus/.test(n) },
-    { id: "meleeAtk",  label: "Melee attack",        weight: 10, test: (n) => /offensivemelee|meleebonus/.test(n) },
-    { id: "courtyard", label: "Courtyard attack",    weight: 10, test: (n) => n.includes("yard") },
-    { id: "limit",     label: "Flank/front limit",   weight: 6,  test: (n) => n.includes("attackunitamount") },
-    { id: "frontFlankStr", label: "Flank/front str", weight: 3,  test: (n) => /offensivefront|frontstr|offensiveflank|flankstr/.test(n) },
-    { id: "breach",    label: "Wall-break utility",  weight: 4,  test: (n) => n.includes("wallregenerationdelay") },
-    { id: "minor",     label: "Speed / moat / misc", weight: 0.5, test: (n) => /speed|moat|infectionrate/.test(n) },
+    /* Primary damage — what actually clears walls and courtyard. */
+    { id: "rangeAtk",  label: "Range attack",      weight: 10, test: (n) => n.includes("offensiverangedbonus") },
+    { id: "meleeAtk",  label: "Melee attack",      weight: 10, test: (n) => n.includes("offensivemeleebonus") },
+    { id: "courtyard", label: "Courtyard attack",  weight: 10, test: (n) => n.includes("offensiveyardstr") },
+    /* Extra waves multiply the whole attack — one wave is worth a lot. */
+    { id: "waves",     label: "Extra waves",       weight: 800, test: (n) => n.includes("additionalwaves") },
+    /* Reserve kills damage the boss's health pool directly. */
+    { id: "reserveKill", label: "Reserve kills",   weight: 2,  test: (n) => n.startsWith("reserveunitkill") },
+    { id: "limit",     label: "Flank/front limit", weight: 6,  test: (n) => n.includes("attackunitamount") },
+    { id: "frontFlankStr", label: "Flank/front str", weight: 3, test: (n) => /offensivefrontstr|offensiveflankstr/.test(n) },
+    { id: "breach",    label: "Wall-break delay",  weight: 4,  test: (n) => n.includes("wallregenerationdelay") },
+    { id: "protect",   label: "Wall/gate protection", weight: 1, test: (n) => /arewallprotection|aregateprotection/.test(n) },
+    { id: "minor",     label: "Speed / misc",      weight: 0.5, test: (n) => /speedbonus|returntravelboost|infectionrate/.test(n) },
   ];
-  const ECON_WEIGHT = 0.05; // event tokens, coins, charm, auto-spy, etc.
+  const ECON_WEIGHT = 0.05; // anything uncategorised
 
   function effectCategory(name) {
     const n = (name || "").toLowerCase();
@@ -558,6 +564,8 @@
       { id: "rangeAtk",      label: "Range attack",         unit: "%" },
       { id: "meleeAtk",      label: "Melee attack",         unit: "%" },
       { id: "courtyard",     label: "Courtyard attack",     unit: "%" },
+      { id: "waves",         label: "Extra waves",          unit: "" },
+      { id: "reserveKill",   label: "Reserve kills",        unit: "" },
       { id: "limit",         label: "Flank/front limit",    unit: "%" },
       { id: "frontFlankStr", label: "Flank/front strength", unit: "%" },
       { id: "breach",        label: "Wall-break delay",     unit: "s" },
