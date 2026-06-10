@@ -105,7 +105,7 @@
           </div>
           <div class="wb-row">
             <label class="wb-field"><span>Waves</span><input type="number" id="waves" min="1" max="20" value="4" /></label>
-            <label class="wb-field"><span>Wall/gate tools % <small>(total reduction)</small></span><input type="number" id="tools" min="0" value="0" /></label>
+            <label class="wb-field"><span>Wall/gate reduction % <small>(gear + tools)</small></span><input type="number" id="tools" min="0" value="0" /></label>
             <label class="wb-field"><span>Front/flank strength % <small>(your gear)</small></span><input type="number" id="posBonus" min="0" value="0" /></label>
           </div>
         </div>
@@ -115,12 +115,20 @@
         <h2 class="wb-h">📊 Result</h2>
         <div id="result"></div>
         <div class="wb-note">
+          <b style="color:var(--good)">✓ Validated</b> against a real Level 11 Fungal stage-1
+          clear: the garrison (13,000 / 13,300 / 12,200), boss effects (+10,000% wall/gate,
+          +10,100% front/flank) and courtyard (800k) all match the game exactly. Calibration
+          finding — a <b>heavily-tooled top hit reduces the boss protection to ~900% net</b>
+          (not zero), which is what makes it a multi-wave grind. Enter your real
+          <b>wall/gate reduction %</b> (gear + tools combined) in the tools field; the
+          <b>Protection left after tools</b> stat shows what you're actually fighting.<br><br>
           Model: attacker strength = count × unit attack × (1 + bonuses − boss malus);
           defender strength = garrison × defence stat × (1 + boss front/flank strength)
-          × (1 + max(0, wall/gate protection − your tools)); each lane (melee vs ranged)
-          resolves separately by attacker share; losses follow (weaker/stronger)<sup>1.5</sup>;
-          waves hit the surviving garrison sequentially. Walls don't drain boss health —
-          a breach opens the courtyard window. Points = kill share × wall point factor.
+          ÷ (1 + your front/flank gear) × (1 + max(0, wall/gate protection − your reduction));
+          each lane (melee vs ranged) resolves separately by attacker share; losses follow
+          (weaker/stronger)<sup>1.5</sup>; waves hit the surviving garrison sequentially.
+          Walls don't drain boss health — a breach opens the courtyard window.
+          Points = kill share × wall point factor.
         </div>
       </div>
     </section>
