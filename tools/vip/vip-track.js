@@ -14,9 +14,18 @@
   "use strict";
 
   const LS = "vip_track_cfg";
+  // Shared team credentials may be baked into the (encrypted) page as
+  // window.VIP_SHARED — anyone who unlocks the VIP corner syncs with zero
+  // setup. A leader's own Config entries (localStorage) override them.
+  const shared = window.VIP_SHARED || {};
   const cfg = { jsonbinKey: "", riftBinId: "", accountsBinId: "", anthropic: "" };
-  try { Object.assign(cfg, JSON.parse(localStorage.getItem(LS) || "{}")); } catch (e) {}
-  function saveCfg(patch) { Object.assign(cfg, patch); localStorage.setItem(LS, JSON.stringify(cfg)); }
+  let own = {};
+  try { own = JSON.parse(localStorage.getItem(LS) || "{}"); } catch (e) {}
+  Object.keys(cfg).forEach((k) => { cfg[k] = own[k] || shared[k] || ""; });
+  function saveCfg(patch) {
+    Object.keys(patch).forEach((k) => { own[k] = patch[k]; cfg[k] = patch[k] || shared[k] || ""; });
+    localStorage.setItem(LS, JSON.stringify(own));
+  }
 
   // ---- JSONBin REST (whole-record get/put) ----
   async function binGet(binId) {
