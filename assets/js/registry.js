@@ -54,7 +54,7 @@ window.TOOLS = [
   },
   {
     slug: "guide-defence",
-    img: "assets/img/tool-art/wall.webp",
+    img: "assets/img/tool-art/stronghold.webp",
     cat: "featured",
     name: "Defence Guide",
     desc: "Castellans, castle layouts, wall ratios and defensive tooling — the full turtle playbook. Coming soon.",
@@ -64,7 +64,7 @@ window.TOOLS = [
   },
   {
     slug: "guide-commander-building",
-    img: "assets/img/tool-art/generals.webp",
+    img: "assets/img/tool-art/victorious-captain.webp",
     cat: "featured",
     name: "Commander Building Guide",
     desc: "How to build an attack commander: equipment, gems and set bonuses by role. Coming soon.",
@@ -74,7 +74,7 @@ window.TOOLS = [
   },
   {
     slug: "guide-cast-building",
-    img: "assets/img/tool-art/equipment.webp",
+    img: "assets/img/tool-art/stalwart-marshal.webp",
     cat: "featured",
     name: "Cast Building Guide",
     desc: "Building the perfect castellan: stat caps, equipment, gems and heroes for defence. Coming soon.",
@@ -128,7 +128,7 @@ window.TOOLS = [
   },
   {
     slug: "guide-courtyard-limits",
-    img: "assets/img/tool-art/wall.webp",
+    img: "assets/img/tool-art/reinforced-vault.webp",
     cat: "guides",
     name: "Courtyard Limits",
     desc: "Every source of CY capacity: Keep, Guardhouse, Stronghold, Reinforced Vault, defence decos and build items — with caps.",
@@ -173,13 +173,13 @@ window.TOOLS = [
   },
   {
     slug: "wall-limit",
-    img: "assets/img/tool-art/wall.webp",
+    img: "assets/img/tool-art/spike-board.webp",
     cat: "calculators",
-    name: "Wall & Gate Limit",
-    desc: "Maximum wall and gate defence bonus for your castle setup.",
+    name: "Wall Limit",
+    desc: "Maximum wall defence bonus for your castle setup.",
     icon: "🧱",
     status: "soon",
-    tags: ["wall", "gate", "defence", "limit"],
+    tags: ["wall", "defence", "limit", "protection"],
   },
   {
     slug: "food-production",
@@ -236,7 +236,7 @@ window.TOOLS = [
   // ---- Simulators --------------------------------------------------------
   {
     slug: "gacha-sim",
-    img: "assets/img/tool-art/gacha.webp",
+    img: "assets/img/tool-art/stalwart-marshal.webp",
     cat: "simulators",
     name: "Gacha Spin Simulator",
     desc: "Real drop rates for every gacha & loot box — then spin as much as you like.",
