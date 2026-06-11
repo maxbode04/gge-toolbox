@@ -6,7 +6,6 @@
   const NAV = [
     { id: "home",        label: "Home",           icon: "🏰", href: "index.html" },
     { id: "all",         label: "All Tools",      icon: "🗂️", href: "browse.html" },
-    { id: "featured",    label: "Feature Guides", icon: "⭐", href: "browse.html?cat=featured" },
     { id: "guides",      label: "Guides",         icon: "📖", href: "browse.html?cat=guides" },
     { id: "calculators", label: "Calculators",    icon: "🧮", href: "browse.html?cat=calculators" },
     { id: "simulators",  label: "Simulators",     icon: "⚔️", href: "browse.html?cat=simulators" },
@@ -24,6 +23,18 @@
     vip: "🔒 Chemie's VIP Corner",
   };
   const ORDER = ["featured", "guides", "calculators", "simulators", "overviews", "rankings", "vip"];
+
+  // Curated strip shown on the home page (by slug, in this order).
+  const POPULAR = [
+    "guide-rift-raid",          // Rift Raid Basics
+    "rift-optimizer",           // Rift Commander Maker
+    "guide-commander-building", // Commander Building Guide
+    "gacha-sim",                // Gacha Spin Simulator
+    "guide-fungal-rift",        // Fungal Rift guide
+    "guide-mead-production",    // Mead Optimisation
+    "storm-islands",            // Storm Islands Rankings
+    "overview-generals",        // Generals overview
+  ];
 
   const page = document.body.dataset.page || "home";
   const params = new URLSearchParams(location.search);
@@ -58,8 +69,14 @@
 
   // ---- Grid rendering ------------------------------------------------------
   function matches(t) {
-    if (page === "home" && !query && t.cat !== "featured") return false; // searching home searches everything
-    if (page === "browse" && cat && t.cat !== cat) return false;
+    if (page === "browse" && cat) {
+      // Guides window gathers Feature Guides + Guides under one roof.
+      if (cat === "guides") {
+        if (t.cat !== "guides" && t.cat !== "featured") return false;
+      } else if (t.cat !== cat) {
+        return false;
+      }
+    }
     if (!query) return true;
     const hay = (t.name + " " + t.desc + " " + (t.tags || []).join(" ")).toLowerCase();
     return hay.includes(query);
@@ -85,6 +102,28 @@
   function render() {
     if (!gridHost) return;
     gridHost.innerHTML = "";
+
+    // Home, no search → curated "Popular" strip instead of a category sweep.
+    if (page === "home" && !query) {
+      const bySlug = {};
+      window.TOOLS.forEach((t) => { bySlug[t.slug] = t; });
+      const items = POPULAR.map((s) => bySlug[s]).filter(Boolean);
+      const label = document.createElement("div");
+      label.className = "section-label";
+      label.textContent = "🔥 Popular";
+      const grid = document.createElement("div");
+      grid.className = "grid";
+      items.forEach((t) => grid.appendChild(cardFor(t)));
+      gridHost.appendChild(label);
+      gridHost.appendChild(grid);
+      const cta = document.createElement("a");
+      cta.className = "browse-cta";
+      cta.href = "browse.html";
+      cta.innerHTML = "<span>Browse the full archive</span><span class='arr'>→</span>";
+      gridHost.appendChild(cta);
+      return;
+    }
+
     const visible = window.TOOLS.filter(matches);
     if (!visible.length) {
       gridHost.innerHTML = '<div class="empty">No tools match “' + query + "”.</div>";
