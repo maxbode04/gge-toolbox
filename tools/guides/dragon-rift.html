@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dragon Rift (Ashen Tyrant) — Maxy's Empire Toolkit</title>
+  <meta name="description" content="How to beat the Dragon Rift boss (Ashen Tyrant): egg spawns, post-battle evolution, the -range%/-melee% wall tooling, and the level-5 full-negate secret." />
+  <link rel="stylesheet" href="../../assets/css/theme.css" />
+  <link rel="stylesheet" href="./guide.css" />
+  <link rel="icon" type="image/png" href="../../assets/img/favicon.png" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap">
+      <a class="brand" href="../../"><span class="crest">🛡️</span> Maxy's Empire <b>Toolkit</b></a>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="tool-head guide">
+      <a class="back" href="../../">← All tools</a>
+      <h1>🐉 Dragon Rift — Ashen Tyrant</h1>
+      <div class="guide-meta">
+        <span class="guide-tag">Event</span>
+        <span class="guide-tag">Rift Raid</span>
+        <span class="guide-tag">Dragon</span>
+        <span class="guide-tag">Eggs</span>
+        <span class="guide-read">~7 min read</span>
+      </div>
+    </div>
+
+    <div class="guide">
+      <article>
+        <p class="guide-lead">The <b>Ashen Tyrant</b> looks outrageously complicated the first time you meet
+          it — but stripped right back, it's a <b>more tedious version of the Fungal rift</b>. Same core
+          loop (it spawns extra reserve troops when walls regenerate), with two changes bolted on that
+          you <em>must</em> understand: <b>post-battle evolution</b> and the new <b>wall tooling</b>.
+          This builds on <a href="./rift-raid.html">Rift Raid Basics</a> and reads as a companion to the
+          <a href="./fungal-rift.html">Fungal guide</a> — skim those first.</p>
+
+        <h2>Same as Fungal: eggs spawn when walls regenerate</h2>
+        <p>Just like the Fungal boss dumps spores, the Dragon boss feeds <b>eggs</b> into its reserve
+          every time a wall <b>regenerates</b> — that happens at the <b>start of a new health stage</b>,
+          <em>or</em> whenever a <b>wall timer expires</b> and you have to break it again. So sloppy
+          wall timing literally refills the boss.</p>
+        <figure class="guide-fig">
+          <img src="./img/rift/dragon-health-stage.webp" alt="Health stage effects: all wall segments instantly regenerate once at the stage start, and 100k Dormant Rift-Egg are added to the reserve at each wall regeneration" loading="lazy" onerror="this.parentNode.style.display='none'">
+          <figcaption>Each wall regeneration tips a fresh batch of <b>Dormant Rift-Eggs</b> into the reserve.</figcaption>
+        </figure>
+        <figure class="guide-fig">
+          <img src="./img/rift/dragon-reserve.webp" alt="Reserve espionage showing the dragon reserve made up of eggs and the different dragon tiers" loading="lazy" onerror="this.parentNode.style.display='none'">
+          <figcaption>Reserve espionage — eggs plus the evolving dragon tiers all sit here as the boss's "health".</figcaption>
+        </figure>
+
+        <h2>Big change #1: post-battle evolution (why your hits make the bar go <em>up</em>)</h2>
+        <p>This is the part that confuses everyone. <b>After every attack — win or lose — the dragon
+          troops "evolve" up through three tiers.</b> Eggs become first-phase dragons, those become the
+          next tier, and so on.</p>
+        <figure class="guide-fig">
+          <img src="./img/rift/dragon-evolve-1.webp" alt="Post-battle effects: transforms 20% of Dormant Rift-Egg units into Dormant Rift-Wyrmling, and 10% of Wyrmling units into Lesser Rift-Dragon units" loading="lazy" onerror="this.parentNode.style.display='none'">
+          <figcaption>Post-battle effects: eggs → Wyrmlings → Lesser Rift-Dragons, a percentage at a time, <b>every</b> attack.</figcaption>
+        </figure>
+        <figure class="guide-fig">
+          <img src="./img/rift/dragon-evolve-2.webp" alt="Post-battle effects continued: transforms 5% of Lesser Rift-Dragon units into Great Rift-Dragon units" loading="lazy" onerror="this.parentNode.style.display='none'">
+          <figcaption>…and Lesser Dragons keep climbing into Great Rift-Dragons.</figcaption>
+        </figure>
+        <div class="tip warn">
+          <b>Expect the health bar to RISE for the first ~10 hits of a new stage.</b> That's not you
+          failing — it's the eggs hatching into stronger units faster than you're clearing them. Push
+          through it.
+        </div>
+        <div class="tip">
+          <b>When does progress show?</b> Once the <b>eggs are all gone</b> from the reserve, a
+          percentage of dragons keep evolving — but now every clear actually <b>drops the health
+          meter</b>. From that point it's a normal grind down. The early "going backwards" phase is just
+          the egg buffer burning off.
+        </div>
+
+        <h2>Big change #2: the walls hit back — bring −range% / −melee% tools</h2>
+        <p>Zombie and Fungal walls are mostly about protection percentages. <b>Dragon walls are
+          different</b>: they carry an <b>enormous range, melee, and flank/front attack bonus</b>, so the
+          wall itself shreds your incoming army. To get through you have to <b>cancel that down</b> with
+          the <b>−range%</b> and <b>−melee%</b> tools.</p>
+        <ul>
+          <li><b>Bronze</b> versions come from the <b>rift event shop</b>.</li>
+          <li><b>Silver and gold</b> versions are in the <b>webshop / ruby shop</b>.</li>
+        </ul>
+        <figure class="guide-fig">
+          <img src="./img/rift/dragon-obsidian-net.webp" alt="Gold Obsidian Weighted Net tool card: reduces the combat strength of melee defenders, -500% defense strength for melee defense units in the assigned wave" loading="lazy" onerror="this.parentNode.style.display='none'">
+          <figcaption>A melee-side dragon tool — note it targets the side whose <b>melee</b> stat is the higher one.</figcaption>
+        </figure>
+        <div class="tip warn">
+          <b>Read the defender before you pick a tool.</b> These tools only bite the troops whose
+          <b>matching stat is the higher one</b> — a −melee tool hits units that are melee-dominant, a
+          −range tool hits range-dominant units. Use the <em>wrong</em> one and it does
+          <b>nothing</b> to the opposite type. Scout, see which stat is higher, then bring the tool that
+          matches.
+        </div>
+
+        <div class="tip">
+          <b>🤫 Secret tip — full negation up to level 5.</b> Up to <b>boss level 5</b> (and
+          <b>level 6 for the gate</b>) you can <b>completely negate the range and melee</b> bonuses.
+          When it's fully negated you need <b>no ladders or rams</b> at all, and it no longer even
+          matters which troops you send — the wall simply can't fight back. Lean on this hard in the
+          early levels and save your good tools for later.
+        </div>
+
+        <h2>The short version</h2>
+        <ul>
+          <li>It's <b>Fungal-but-tedious</b>: walls regenerating (new stage, or expired timers) keep
+            adding <b>eggs</b> to the reserve.</li>
+          <li><b>Every attack evolves</b> the reserve a tier up — so the bar <b>rises for ~10 hits</b>,
+            then drops once the eggs run out.</li>
+          <li>Dragon walls have huge <b>range/melee/flank/front attack</b> — bring <b>−range%</b> and
+            <b>−melee%</b> tools (bronze = rift shop, silver/gold = webshop). They only affect the
+            <b>higher-stat</b> side, so pick the right one.</li>
+          <li><b>Up to level 5 (6 for gate)</b> you can fully negate range + melee — <b>no rams/ladders,
+            any troops work</b>.</li>
+        </ul>
+
+        <p>Use the tools below alongside this: the <b>Rift Wall-Break Simulator</b> (VIP Corner) checks
+          whether a send actually breaks through, and the <b>Rift Raid Bosses</b> overview lists each
+          stage's wall numbers.</p>
+        <p>
+          <a class="guide-tool-link" href="../overview-rift/"><span class="ico">🌀</span> Rift Raid Bosses</a>
+          <a class="guide-tool-link" href="../rift-optimizer/"><span class="ico">🌀</span> Rift Commander Maker</a>
+        </p>
+
+        <div class="guide-nav">
+          <a class="guide-tool-link" href="./fungal-rift.html">← Fungal Rift</a>
+          <a class="guide-tool-link" href="../../">All tools</a>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap"><p>A community guide. Mechanics belong to Goodgame Studios. Corrections welcome via the GitHub repo.</p></div>
+  </footer>
+</body>
+</html>

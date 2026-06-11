@@ -32,6 +32,17 @@ window.TOOLS = [
     tags: ["guide", "rift", "fungal", "mycelial", "sovereign", "spores", "flintlock", "gun", "grenade", "flask", "chrono-vial", "timer", "sporeguard", "wolves", "boss"],
   },
   {
+    slug: "guide-dragon-rift",
+    img: "assets/img/event-icons/riftraid.webp",
+    cat: "guides",
+    name: "Dragon Rift (Ashen Tyrant)",
+    desc: "Beat the Dragon boss: egg spawns, post-battle evolution (why the bar goes up first), -range%/-melee% wall tools, and the level-5 full-negate secret.",
+    icon: "🐉",
+    status: "live",
+    url: "tools/guides/dragon-rift.html",
+    tags: ["guide", "rift", "dragon", "ashen", "tyrant", "eggs", "wyrmling", "evolution", "range", "melee", "wall", "obsidian", "boss"],
+  },
+  {
     slug: "guide-food-production",
     img: "assets/img/tool-art/food.webp",
     cat: "featured",
