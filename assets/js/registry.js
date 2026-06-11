@@ -21,6 +21,17 @@ window.TOOLS = [
     tags: ["guide", "rift", "raid", "event", "boss", "necromancer", "dragon", "fungal", "wall", "alliance"],
   },
   {
+    slug: "guide-fungal-rift",
+    img: "assets/img/event-icons/riftraid.webp",
+    cat: "guides",
+    name: "Fungal Rift (Mycelial Sovereign)",
+    desc: "Beat the Fungal boss: dormant spores, the flintlock gun & grenade flask, Chrono-Vial timers, and the 32-wolf free-timer trick.",
+    icon: "🍄",
+    status: "live",
+    url: "tools/guides/fungal-rift.html",
+    tags: ["guide", "rift", "fungal", "mycelial", "sovereign", "spores", "flintlock", "gun", "grenade", "flask", "chrono-vial", "timer", "sporeguard", "wolves", "boss"],
+  },
+  {
     slug: "guide-food-production",
     img: "assets/img/tool-art/food.webp",
     cat: "featured",
