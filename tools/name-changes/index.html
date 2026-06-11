@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Name Changes — Maxy's Empire Toolkit</title>
+  <meta name="description" content="Catch the renamers — every recent GGE player and alliance name change on the server, old name to new name with might and alliance." />
+  <link rel="stylesheet" href="../../assets/css/theme.css?v=15" />
+  <link rel="stylesheet" href="../vip/vip.css" />
+  <style>
+    .nc-arrow { color: var(--text-faint); padding: 0 4px; }
+    .nc-old { color: var(--text-dim); }
+  </style>
+  <link rel="icon" type="image/png" href="../../assets/img/favicon.png" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap">
+      <a class="brand" href="../../"><span class="crest">🛡️</span> Maxy's Empire <b>Toolkit</b></a>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="tool-head">
+      <a class="back" href="../../">← All tools</a>
+      <h1>✏️ Name Changes</h1>
+      <p>Catch the renamers. Every recent player and alliance name change on the server —
+         old name → new name, with might and alliance so you can still ID who's who.</p>
+    </div>
+
+    <section class="panel">
+      <div class="vip-toolbar" id="toolbar">
+        <select class="vip-server-pick" id="mode">
+          <option value="players">Player renames</option>
+          <option value="alliances">Alliance renames</option>
+        </select>
+        <input class="vip-input" id="q" placeholder="Filter by old or new name…" />
+        <button class="vip-btn" id="go">Refresh</button>
+      </div>
+
+      <div class="vip-status" id="status"></div>
+      <div id="out"></div>
+
+      <p class="vip-credit">Data: <a href="https://gge-tracker.com" target="_blank" rel="noopener">gge-tracker.com</a> public API.</p>
+    </section>
+  </main>
+
+  <script src="../vip/vip-shared.js"></script>
+  <script>
+    const { api, esc, num, ago } = window.VIP;
+    window.VIP.mountServerPicker(document.getElementById("toolbar"));
+
+    const out = document.getElementById("out");
+    const status = document.getElementById("status");
+    const modeSel = document.getElementById("mode");
+    const q = document.getElementById("q");
+
+    // Cache of the full rename list per showType (the dataset is small, so we
+    // pull every page once and filter/search client-side — server search only
+    // exact-matches the new name, which is no use for "find this player").
+    const cache = {};
+
+    function table(headers, rowsHtml) {
+      return '<div style="overflow-x:auto"><table class="vip-table"><thead><tr>' +
+        headers.map((h) => "<th>" + h + "</th>").join("") + "</tr></thead><tbody>" +
+        rowsHtml + "</tbody></table></div>";
+    }
+
+    async function fetchAll(showType) {
+      if (cache[showType]) return cache[showType];
+      let page = 1, pages = 1, all = [];
+      do {
+        const d = await api("server/renames", { page, showType });
+        all = all.concat(d.renames || []);
+        pages = d.pagination ? d.pagination.total_pages : 1;
+        page++;
+      } while (page <= pages && page < 50);   // hard cap, just in case
+      cache[showType] = all;
+      return all;
+    }
+
+    function render(rows, isPlayers) {
+      if (!rows.length) {
+        out.innerHTML = "<p class='muted'>No matching name changes on this server.</p>";
+        return;
+      }
+      const arrow = '<span class="nc-arrow">→</span>';
+      if (isPlayers) {
+        out.innerHTML = table(["When", "Name change", "Alliance", "Might"],
+          rows.map((r) =>
+            "<tr><td>" + ago(r.date) + "</td>" +
+            '<td><span class="nc-old">' + esc(r.old_player_name) + "</span>" + arrow +
+            '<span class="nm">' + esc(r.new_player_name) + "</span></td>" +
+            "<td>" + esc(r.alliance_name ?? "—") + '</td><td class="r">' + num(r.player_might) + "</td></tr>").join(""));
+      } else {
+        out.innerHTML = table(["When", "Alliance name change"],
+          rows.map((r) =>
+            "<tr><td>" + ago(r.date) + "</td>" +
+            '<td><span class="nc-old">' + esc(r.old_player_name) + "</span>" + arrow +
+            '<span class="nm">' + esc(r.new_player_name) + "</span></td></tr>").join(""));
+      }
+    }
+
+    async function run() {
+      const showType = modeSel.value;
+      const isPlayers = showType === "players";
+      const term = q.value.trim().toLowerCase();
+      out.innerHTML = "";
+      status.textContent = "Loading…"; status.className = "vip-status";
+      try {
+        let rows = await fetchAll(showType);
+        if (term) rows = rows.filter((r) =>
+          ((r.old_player_name || "") + " " + (r.new_player_name || "")).toLowerCase().includes(term));
+        render(rows, isPlayers);
+        status.textContent = rows.length + (isPlayers ? " player" : " alliance") + " name change" +
+          (rows.length === 1 ? "" : "s") + (term ? " matching “" + q.value.trim() + "”" : " tracked") + ".";
+      } catch (e) {
+        status.textContent = "Error: " + e.message; status.className = "vip-status vip-error";
+      }
+    }
+
+    document.getElementById("go").addEventListener("click", () => { run(); });
+    q.addEventListener("input", run);
+    modeSel.addEventListener("change", run);
+    run();
+  </script>
+</body>
+</html>

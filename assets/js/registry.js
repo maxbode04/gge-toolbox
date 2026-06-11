@@ -419,6 +419,26 @@ window.TOOLS = [
     url: "tools/storm-islands/",
     tags: ["storm islands", "rankings", "leaderboard", "cargo", "aquamarine", "stormy isles", "server", "gge-tracker"],
   },
+  {
+    slug: "fortress-tracker",
+    cat: "rankings",
+    name: "Fortress Tracker",
+    desc: "Every NPC fortress on the map — Barbarian, Desert and Dragon forts — with live cooldown timers, last attacker, near-player search and your personal 72h re-hit timer.",
+    icon: "🏰",
+    status: "live",
+    url: "tools/fortress-tracker/",
+    tags: ["fortress", "fort", "dungeons", "tracker", "cooldown", "barbarian", "desert", "dragon", "map", "gge-tracker"],
+  },
+  {
+    slug: "name-changes",
+    cat: "rankings",
+    name: "Name Changes",
+    desc: "Catch the renamers — every recent player and alliance name change on the server, old name → new name with might and alliance so you can still ID who's who.",
+    icon: "✏️",
+    status: "live",
+    url: "tools/name-changes/",
+    tags: ["name change", "rename", "player", "alliance", "tracker", "server", "gge-tracker"],
+  },
 
   // ---- Chemie's VIP Corner (access-gated) --------------------------------
   {
@@ -429,6 +449,6 @@ window.TOOLS = [
     icon: "🔒",
     status: "live",
     url: "tools/vip/",
-    tags: ["vip", "chemie", "members", "fortress", "tracker", "search", "analyse", "score", "rankings", "dungeons"],
+    tags: ["vip", "chemie", "members", "search", "analyse", "score", "rankings", "wall break", "rift leaders"],
   },
 ];
