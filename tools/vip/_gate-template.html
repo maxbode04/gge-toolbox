@@ -90,7 +90,17 @@
           const key = await crypto.subtle.importKey("raw", b64dec(stored), { name: "AES-GCM" }, true, ["decrypt"]);
           render(await decryptWith(key));
           return;
-        } catch (e) { sessionStorage.removeItem(SKEY); }
+        } catch (e) {
+          // We hold a valid session key but THIS page won't open with it — almost
+          // always a stale cached copy left over from before a code rotation. Do
+          // one cache-busting reload to pull the fresh page (the session key opens
+          // it automatically). The ?cb guard means we only ever try this once.
+          if (!/[?&]cb=/.test(location.search)) {
+            location.replace(location.pathname + "?cb=" + Date.now());
+            return;
+          }
+          sessionStorage.removeItem(SKEY);  // fresh page still failed → key is genuinely wrong
+        }
       }
       const ui = document.getElementById("lock-ui");
       ui.hidden = false;
