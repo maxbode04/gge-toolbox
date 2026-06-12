@@ -1,23 +1,25 @@
 {
  "server": "AU1",
- "scannedAt": "2026-06-12T05:32:19Z",
+ "scannedAt": "2026-06-12T05:46:05Z",
  "sample": false,
  "respawnHours": 10.0,
+ "maxHits": 10,
  "forts": [
   {
    "level": 80,
    "x": 609,
    "y": 636,
-   "aqua": 639,
+   "aqua": 0,
    "rawLevel": 14,
    "hits": 0,
-   "hitsLeft": 10
+   "hitsLeft": 10,
+   "refillAt": "2026-06-12T15:46:05Z"
   },
   {
    "level": 80,
    "x": 609,
    "y": 675,
-   "aqua": 8173,
+   "aqua": 7347,
    "rawLevel": 14,
    "hits": 0,
    "hitsLeft": 10
@@ -26,7 +28,7 @@
    "level": 80,
    "x": 615,
    "y": 599,
-   "aqua": 32193,
+   "aqua": 31368,
    "rawLevel": 14,
    "hits": 0,
    "hitsLeft": 10
@@ -35,7 +37,7 @@
    "level": 80,
    "x": 619,
    "y": 653,
-   "aqua": 3519,
+   "aqua": 2693,
    "rawLevel": 14,
    "hits": 0,
    "hitsLeft": 10
@@ -46,15 +48,15 @@
    "y": 616,
    "aqua": 0,
    "rawLevel": 14,
-   "hits": 1,
-   "hitsLeft": 9,
+   "hits": 4,
+   "hitsLeft": 6,
    "refillAt": "2026-06-12T15:32:19Z"
   },
   {
    "level": 80,
    "x": 627,
    "y": 668,
-   "aqua": 26033,
+   "aqua": 25207,
    "rawLevel": 14,
    "hits": 0,
    "hitsLeft": 10
@@ -63,7 +65,7 @@
    "level": 80,
    "x": 635,
    "y": 615,
-   "aqua": 15620,
+   "aqua": 14794,
    "rawLevel": 14,
    "hits": 0,
    "hitsLeft": 10
@@ -72,7 +74,7 @@
    "level": 80,
    "x": 636,
    "y": 667,
-   "aqua": 3233,
+   "aqua": 2407,
    "rawLevel": 14,
    "hits": 0,
    "hitsLeft": 10
@@ -81,7 +83,7 @@
    "level": 80,
    "x": 643,
    "y": 638,
-   "aqua": 35008,
+   "aqua": 34182,
    "rawLevel": 14,
    "hits": 0,
    "hitsLeft": 10
@@ -90,7 +92,7 @@
    "level": 80,
    "x": 646,
    "y": 603,
-   "aqua": 18358,
+   "aqua": 17532,
    "rawLevel": 14,
    "hits": 0,
    "hitsLeft": 10
@@ -99,7 +101,7 @@
    "level": 80,
    "x": 663,
    "y": 644,
-   "aqua": 32050,
+   "aqua": 31224,
    "rawLevel": 14,
    "hits": 0,
    "hitsLeft": 10
@@ -108,7 +110,7 @@
    "level": 80,
    "x": 663,
    "y": 683,
-   "aqua": 8109,
+   "aqua": 7283,
    "rawLevel": 14,
    "hits": 0,
    "hitsLeft": 10
@@ -117,7 +119,7 @@
    "level": 80,
    "x": 683,
    "y": 672,
-   "aqua": 25404,
+   "aqua": 24578,
    "rawLevel": 14,
    "hits": 0,
    "hitsLeft": 10
@@ -126,7 +128,7 @@
    "level": 70,
    "x": 600,
    "y": 633,
-   "aqua": 26922,
+   "aqua": 26097,
    "rawLevel": 13,
    "hits": 0,
    "hitsLeft": 10
@@ -137,15 +139,15 @@
    "y": 653,
    "aqua": 0,
    "rawLevel": 13,
-   "hits": 7,
-   "hitsLeft": 3,
+   "hits": 8,
+   "hitsLeft": 2,
    "refillAt": "2026-06-12T15:15:54Z"
   },
   {
    "level": 70,
    "x": 600,
    "y": 664,
-   "aqua": 6199,
+   "aqua": 5373,
    "rawLevel": 13,
    "hits": 0,
    "hitsLeft": 10
@@ -154,7 +156,7 @@
    "level": 70,
    "x": 601,
    "y": 604,
-   "aqua": 13268,
+   "aqua": 12442,
    "rawLevel": 13,
    "hits": 0,
    "hitsLeft": 10
@@ -163,7 +165,7 @@
    "level": 70,
    "x": 612,
    "y": 641,
-   "aqua": 13861,
+   "aqua": 13035,
    "rawLevel": 13,
    "hits": 0,
    "hitsLeft": 10
@@ -172,7 +174,7 @@
    "level": 70,
    "x": 616,
    "y": 656,
-   "aqua": 11779,
+   "aqua": 10954,
    "rawLevel": 13,
    "hits": 0,
    "hitsLeft": 10
@@ -181,7 +183,7 @@
    "level": 70,
    "x": 617,
    "y": 631,
-   "aqua": 8839,
+   "aqua": 8013,
    "rawLevel": 13,
    "hits": 0,
    "hitsLeft": 10
@@ -190,7 +192,7 @@
    "level": 70,
    "x": 621,
    "y": 636,
-   "aqua": 34138,
+   "aqua": 33312,
    "rawLevel": 13,
    "hits": 0,
    "hitsLeft": 10
@@ -199,7 +201,7 @@
    "level": 70,
    "x": 622,
    "y": 647,
-   "aqua": 4474,
+   "aqua": 3648,
    "rawLevel": 13,
    "hits": 0,
    "hitsLeft": 10
@@ -208,7 +210,7 @@
    "level": 70,
    "x": 624,
    "y": 683,
-   "aqua": 11376,
+   "aqua": 10550,
    "rawLevel": 13,
    "hits": 0,
    "hitsLeft": 10
@@ -217,7 +219,7 @@
    "level": 70,
    "x": 625,
    "y": 635,
-   "aqua": 34484,
+   "aqua": 33658,
    "rawLevel": 13,
    "hits": 0,
    "hitsLeft": 10
@@ -226,7 +228,7 @@
    "level": 70,
    "x": 631,
    "y": 665,
-   "aqua": 16858,
+   "aqua": 16032,
    "rawLevel": 13,
    "hits": 0,
    "hitsLeft": 10
@@ -235,7 +237,7 @@
    "level": 70,
    "x": 639,
    "y": 633,
-   "aqua": 31554,
+   "aqua": 30729,
    "rawLevel": 13,
    "hits": 0,
    "hitsLeft": 10
@@ -244,7 +246,7 @@
    "level": 70,
    "x": 639,
    "y": 653,
-   "aqua": 18711,
+   "aqua": 17885,
    "rawLevel": 13,
    "hits": 0,
    "hitsLeft": 10
@@ -253,7 +255,7 @@
    "level": 70,
    "x": 640,
    "y": 604,
-   "aqua": 13617,
+   "aqua": 12791,
    "rawLevel": 13,
    "hits": 0,
    "hitsLeft": 10
@@ -262,7 +264,7 @@
    "level": 70,
    "x": 640,
    "y": 657,
-   "aqua": 35258,
+   "aqua": 34432,
    "rawLevel": 13,
    "hits": 0,
    "hitsLeft": 10
@@ -271,7 +273,7 @@
    "level": 70,
    "x": 640,
    "y": 682,
-   "aqua": 12914,
+   "aqua": 12088,
    "rawLevel": 13,
    "hits": 0,
    "hitsLeft": 10
@@ -282,15 +284,15 @@
    "y": 622,
    "aqua": 0,
    "rawLevel": 13,
-   "hits": 4,
-   "hitsLeft": 6,
+   "hits": 7,
+   "hitsLeft": 3,
    "refillAt": "2026-06-12T15:15:54Z"
   },
   {
    "level": 70,
    "x": 646,
    "y": 681,
-   "aqua": 15528,
+   "aqua": 14703,
    "rawLevel": 13,
    "hits": 0,
    "hitsLeft": 10
@@ -299,7 +301,7 @@
    "level": 70,
    "x": 653,
    "y": 646,
-   "aqua": 20024,
+   "aqua": 19199,
    "rawLevel": 13,
    "hits": 0,
    "hitsLeft": 10
@@ -308,7 +310,7 @@
    "level": 70,
    "x": 660,
    "y": 675,
-   "aqua": 19779,
+   "aqua": 18953,
    "rawLevel": 13,
    "hits": 0,
    "hitsLeft": 10
@@ -317,7 +319,7 @@
    "level": 70,
    "x": 662,
    "y": 667,
-   "aqua": 837,
+   "aqua": 12,
    "rawLevel": 13,
    "hits": 0,
    "hitsLeft": 10
@@ -326,7 +328,7 @@
    "level": 70,
    "x": 664,
    "y": 655,
-   "aqua": 2622,
+   "aqua": 1797,
    "rawLevel": 13,
    "hits": 0,
    "hitsLeft": 10
@@ -335,7 +337,7 @@
    "level": 70,
    "x": 664,
    "y": 661,
-   "aqua": 8537,
+   "aqua": 7712,
    "rawLevel": 13,
    "hits": 0,
    "hitsLeft": 10
@@ -344,7 +346,7 @@
    "level": 70,
    "x": 666,
    "y": 629,
-   "aqua": 10014,
+   "aqua": 9188,
    "rawLevel": 13,
    "hits": 0,
    "hitsLeft": 10
@@ -353,7 +355,7 @@
    "level": 70,
    "x": 673,
    "y": 685,
-   "aqua": 5490,
+   "aqua": 4664,
    "rawLevel": 13,
    "hits": 0,
    "hitsLeft": 10
@@ -362,7 +364,7 @@
    "level": 70,
    "x": 674,
    "y": 615,
-   "aqua": 34708,
+   "aqua": 33882,
    "rawLevel": 13,
    "hits": 0,
    "hitsLeft": 10
@@ -371,7 +373,7 @@
    "level": 70,
    "x": 678,
    "y": 664,
-   "aqua": 24141,
+   "aqua": 23315,
    "rawLevel": 13,
    "hits": 0,
    "hitsLeft": 10
@@ -380,7 +382,7 @@
    "level": 60,
    "x": 600,
    "y": 672,
-   "aqua": 32752,
+   "aqua": 31927,
    "rawLevel": 12,
    "hits": 0,
    "hitsLeft": 10
@@ -389,7 +391,7 @@
    "level": 60,
    "x": 604,
    "y": 599,
-   "aqua": 25702,
+   "aqua": 24877,
    "rawLevel": 12,
    "hits": 0,
    "hitsLeft": 10
@@ -408,7 +410,7 @@
    "level": 60,
    "x": 605,
    "y": 633,
-   "aqua": 26893,
+   "aqua": 26067,
    "rawLevel": 12,
    "hits": 0,
    "hitsLeft": 10
@@ -427,7 +429,7 @@
    "level": 60,
    "x": 612,
    "y": 628,
-   "aqua": 33628,
+   "aqua": 32802,
    "rawLevel": 12,
    "hits": 0,
    "hitsLeft": 10
@@ -446,7 +448,7 @@
    "level": 60,
    "x": 624,
    "y": 605,
-   "aqua": 27481,
+   "aqua": 26655,
    "rawLevel": 12,
    "hits": 0,
    "hitsLeft": 10
@@ -465,7 +467,7 @@
    "level": 60,
    "x": 639,
    "y": 664,
-   "aqua": 7756,
+   "aqua": 6930,
    "rawLevel": 12,
    "hits": 0,
    "hitsLeft": 10
@@ -474,7 +476,7 @@
    "level": 60,
    "x": 644,
    "y": 650,
-   "aqua": 34246,
+   "aqua": 33421,
    "rawLevel": 12,
    "hits": 0,
    "hitsLeft": 10
@@ -493,7 +495,7 @@
    "level": 60,
    "x": 656,
    "y": 670,
-   "aqua": 35239,
+   "aqua": 34413,
    "rawLevel": 12,
    "hits": 0,
    "hitsLeft": 10
@@ -502,7 +504,7 @@
    "level": 60,
    "x": 658,
    "y": 624,
-   "aqua": 35919,
+   "aqua": 35093,
    "rawLevel": 12,
    "hits": 0,
    "hitsLeft": 10
@@ -511,7 +513,7 @@
    "level": 60,
    "x": 658,
    "y": 653,
-   "aqua": 29594,
+   "aqua": 28768,
    "rawLevel": 12,
    "hits": 0,
    "hitsLeft": 10
@@ -520,7 +522,7 @@
    "level": 60,
    "x": 660,
    "y": 636,
-   "aqua": 18055,
+   "aqua": 17229,
    "rawLevel": 12,
    "hits": 0,
    "hitsLeft": 10
@@ -529,7 +531,7 @@
    "level": 60,
    "x": 660,
    "y": 660,
-   "aqua": 892,
+   "aqua": 67,
    "rawLevel": 12,
    "hits": 0,
    "hitsLeft": 10
@@ -538,7 +540,7 @@
    "level": 60,
    "x": 671,
    "y": 678,
-   "aqua": 18005,
+   "aqua": 17180,
    "rawLevel": 12,
    "hits": 0,
    "hitsLeft": 10
@@ -547,7 +549,7 @@
    "level": 60,
    "x": 674,
    "y": 654,
-   "aqua": 18666,
+   "aqua": 17840,
    "rawLevel": 12,
    "hits": 0,
    "hitsLeft": 10
@@ -556,7 +558,7 @@
    "level": 60,
    "x": 678,
    "y": 625,
-   "aqua": 2988,
+   "aqua": 2163,
    "rawLevel": 12,
    "hits": 0,
    "hitsLeft": 10
@@ -565,7 +567,7 @@
    "level": 60,
    "x": 679,
    "y": 604,
-   "aqua": 10140,
+   "aqua": 9314,
    "rawLevel": 12,
    "hits": 0,
    "hitsLeft": 10
@@ -574,7 +576,7 @@
    "level": 60,
    "x": 679,
    "y": 643,
-   "aqua": 27941,
+   "aqua": 27115,
    "rawLevel": 12,
    "hits": 0,
    "hitsLeft": 10
@@ -583,7 +585,7 @@
    "level": 60,
    "x": 683,
    "y": 650,
-   "aqua": 24973,
+   "aqua": 24147,
    "rawLevel": 12,
    "hits": 0,
    "hitsLeft": 10
@@ -602,7 +604,7 @@
    "level": 50,
    "x": 599,
    "y": 648,
-   "aqua": 27731,
+   "aqua": 26905,
    "rawLevel": 11,
    "hits": 0,
    "hitsLeft": 10
@@ -661,7 +663,7 @@
    "level": 50,
    "x": 608,
    "y": 655,
-   "aqua": 6126,
+   "aqua": 5300,
    "rawLevel": 11,
    "hits": 0,
    "hitsLeft": 10
@@ -680,7 +682,7 @@
    "level": 50,
    "x": 612,
    "y": 602,
-   "aqua": 10738,
+   "aqua": 9913,
    "rawLevel": 11,
    "hits": 0,
    "hitsLeft": 10
@@ -709,7 +711,7 @@
    "level": 50,
    "x": 615,
    "y": 677,
-   "aqua": 17311,
+   "aqua": 16485,
    "rawLevel": 11,
    "hits": 0,
    "hitsLeft": 10
@@ -728,7 +730,7 @@
    "level": 50,
    "x": 621,
    "y": 675,
-   "aqua": 15181,
+   "aqua": 14355,
    "rawLevel": 11,
    "hits": 0,
    "hitsLeft": 10
@@ -747,7 +749,7 @@
    "level": 50,
    "x": 622,
    "y": 639,
-   "aqua": 16843,
+   "aqua": 16017,
    "rawLevel": 11,
    "hits": 0,
    "hitsLeft": 10
@@ -756,7 +758,7 @@
    "level": 50,
    "x": 623,
    "y": 628,
-   "aqua": 33857,
+   "aqua": 33032,
    "rawLevel": 11,
    "hits": 0,
    "hitsLeft": 10
@@ -797,8 +799,8 @@
    "y": 659,
    "aqua": 0,
    "rawLevel": 11,
-   "hits": 2,
-   "hitsLeft": 8,
+   "hits": 3,
+   "hitsLeft": 7,
    "refillAt": "2026-06-12T15:15:54Z"
   },
   {
@@ -825,11 +827,10 @@
    "level": 50,
    "x": 632,
    "y": 678,
-   "aqua": 0,
+   "aqua": 35966,
    "rawLevel": 11,
-   "hits": 9,
-   "hitsLeft": 1,
-   "refillAt": "2026-06-12T15:15:54Z"
+   "hits": 0,
+   "hitsLeft": 10
   },
   {
    "level": 50,
@@ -845,7 +846,7 @@
    "level": 50,
    "x": 639,
    "y": 614,
-   "aqua": 15039,
+   "aqua": 14213,
    "rawLevel": 11,
    "hits": 0,
    "hitsLeft": 10
@@ -854,7 +855,7 @@
    "level": 50,
    "x": 639,
    "y": 625,
-   "aqua": 16025,
+   "aqua": 15199,
    "rawLevel": 11,
    "hits": 0,
    "hitsLeft": 10
@@ -863,7 +864,7 @@
    "level": 50,
    "x": 644,
    "y": 611,
-   "aqua": 27180,
+   "aqua": 26354,
    "rawLevel": 11,
    "hits": 0,
    "hitsLeft": 10
@@ -872,7 +873,7 @@
    "level": 50,
    "x": 646,
    "y": 642,
-   "aqua": 15927,
+   "aqua": 15102,
    "rawLevel": 11,
    "hits": 0,
    "hitsLeft": 10
@@ -893,8 +894,8 @@
    "y": 625,
    "aqua": 0,
    "rawLevel": 11,
-   "hits": 6,
-   "hitsLeft": 4,
+   "hits": 7,
+   "hitsLeft": 3,
    "refillAt": "2026-06-12T15:15:54Z"
   },
   {
@@ -903,8 +904,8 @@
    "y": 636,
    "aqua": 0,
    "rawLevel": 11,
-   "hits": 6,
-   "hitsLeft": 4,
+   "hits": 7,
+   "hitsLeft": 3,
    "refillAt": "2026-06-12T15:15:54Z"
   },
   {
@@ -931,7 +932,7 @@
    "level": 50,
    "x": 654,
    "y": 638,
-   "aqua": 3026,
+   "aqua": 2200,
    "rawLevel": 11,
    "hits": 0,
    "hitsLeft": 10
@@ -970,7 +971,7 @@
    "level": 50,
    "x": 663,
    "y": 605,
-   "aqua": 16702,
+   "aqua": 15877,
    "rawLevel": 11,
    "hits": 0,
    "hitsLeft": 10
@@ -989,7 +990,7 @@
    "level": 50,
    "x": 668,
    "y": 620,
-   "aqua": 13357,
+   "aqua": 12532,
    "rawLevel": 11,
    "hits": 0,
    "hitsLeft": 10
@@ -1028,7 +1029,7 @@
    "level": 50,
    "x": 673,
    "y": 633,
-   "aqua": 7227,
+   "aqua": 6401,
    "rawLevel": 11,
    "hits": 0,
    "hitsLeft": 10
@@ -1037,7 +1038,7 @@
    "level": 50,
    "x": 678,
    "y": 672,
-   "aqua": 1634,
+   "aqua": 809,
    "rawLevel": 11,
    "hits": 0,
    "hitsLeft": 10
@@ -1046,7 +1047,7 @@
    "level": 50,
    "x": 682,
    "y": 599,
-   "aqua": 13155,
+   "aqua": 12330,
    "rawLevel": 11,
    "hits": 0,
    "hitsLeft": 10
@@ -1055,7 +1056,7 @@
    "level": 50,
    "x": 687,
    "y": 648,
-   "aqua": 16067,
+   "aqua": 15241,
    "rawLevel": 11,
    "hits": 0,
    "hitsLeft": 10
@@ -1076,8 +1077,8 @@
    "y": 687,
    "aqua": 0,
    "rawLevel": 10,
-   "hits": 6,
-   "hitsLeft": 4,
+   "hits": 7,
+   "hitsLeft": 3,
    "refillAt": "2026-06-12T15:15:54Z"
   },
   {
@@ -1124,7 +1125,7 @@
    "level": 40,
    "x": 612,
    "y": 680,
-   "aqua": 5177,
+   "aqua": 4351,
    "rawLevel": 10,
    "hits": 0,
    "hitsLeft": 10
@@ -1173,7 +1174,7 @@
    "level": 40,
    "x": 623,
    "y": 667,
-   "aqua": 27890,
+   "aqua": 27065,
    "rawLevel": 10,
    "hits": 0,
    "hitsLeft": 10
@@ -1212,7 +1213,7 @@
    "level": 40,
    "x": 627,
    "y": 649,
-   "aqua": 16506,
+   "aqua": 15680,
    "rawLevel": 10,
    "hits": 0,
    "hitsLeft": 10
@@ -1241,7 +1242,7 @@
    "level": 40,
    "x": 629,
    "y": 681,
-   "aqua": 14315,
+   "aqua": 13489,
    "rawLevel": 10,
    "hits": 0,
    "hitsLeft": 10
@@ -1250,7 +1251,7 @@
    "level": 40,
    "x": 631,
    "y": 626,
-   "aqua": 30926,
+   "aqua": 30100,
    "rawLevel": 10,
    "hits": 0,
    "hitsLeft": 10
@@ -1311,15 +1312,15 @@
    "y": 633,
    "aqua": 0,
    "rawLevel": 10,
-   "hits": 4,
-   "hitsLeft": 6,
+   "hits": 5,
+   "hitsLeft": 5,
    "refillAt": "2026-06-12T15:15:54Z"
   },
   {
    "level": 40,
    "x": 644,
    "y": 661,
-   "aqua": 6410,
+   "aqua": 5584,
    "rawLevel": 10,
    "hits": 0,
    "hitsLeft": 10
@@ -1378,7 +1379,7 @@
    "level": 40,
    "x": 651,
    "y": 641,
-   "aqua": 12527,
+   "aqua": 11701,
    "rawLevel": 10,
    "hits": 0,
    "hitsLeft": 10
@@ -1397,7 +1398,7 @@
    "level": 40,
    "x": 655,
    "y": 656,
-   "aqua": 24647,
+   "aqua": 23822,
    "rawLevel": 10,
    "hits": 0,
    "hitsLeft": 10
@@ -1476,7 +1477,7 @@
    "level": 40,
    "x": 668,
    "y": 651,
-   "aqua": 18030,
+   "aqua": 17204,
    "rawLevel": 10,
    "hits": 0,
    "hitsLeft": 10
@@ -1495,7 +1496,7 @@
    "level": 40,
    "x": 675,
    "y": 667,
-   "aqua": 24070,
+   "aqua": 23244,
    "rawLevel": 10,
    "hits": 0,
    "hitsLeft": 10
@@ -1504,7 +1505,7 @@
    "level": 40,
    "x": 677,
    "y": 648,
-   "aqua": 15127,
+   "aqua": 14301,
    "rawLevel": 10,
    "hits": 0,
    "hitsLeft": 10
@@ -1523,7 +1524,7 @@
    "level": 40,
    "x": 685,
    "y": 642,
-   "aqua": 6365,
+   "aqua": 5539,
    "rawLevel": 10,
    "hits": 0,
    "hitsLeft": 10
@@ -1532,7 +1533,7 @@
    "level": 40,
    "x": 686,
    "y": 616,
-   "aqua": 15343,
+   "aqua": 14517,
    "rawLevel": 10,
    "hits": 0,
    "hitsLeft": 10
