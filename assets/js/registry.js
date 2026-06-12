@@ -239,6 +239,16 @@ window.TOOLS = [
     url: "tools/wall-break/",
     tags: ["rift", "wall", "break", "simulator", "calculator", "toril", "ram", "ladder", "tools", "boss"],
   },
+  {
+    slug: "defence-survival",
+    cat: "calculators",
+    name: "Defence Survival Calculator",
+    desc: "Will your castle hold? Enter your wall/gate/moat protection, defensive tools and garrison, then an incoming attack — and see whether each wall segment holds and whether the courtyard falls. In calibration.",
+    icon: "🛡️",
+    status: "live",
+    url: "tools/defence-survival/",
+    tags: ["defence", "defense", "survival", "hold", "wall", "gate", "moat", "garrison", "castellan", "pvp", "calculator", "courtyard"],
+  },
 
   // ---- Simulators --------------------------------------------------------
   {
@@ -260,16 +270,6 @@ window.TOOLS = [
     icon: "⚔️",
     status: "soon",
     tags: ["battle", "combat", "waves", "tools", "commander"],
-  },
-  {
-    slug: "layout-editor",
-    img: "assets/img/tool-art/layout.webp",
-    cat: "simulators",
-    name: "Castle Layout Editor",
-    desc: "Drag-and-drop planner for your castle building layout.",
-    icon: "🏰",
-    status: "soon",
-    tags: ["layout", "castle", "buildings", "planner"],
   },
 
   // ---- Overviews ---------------------------------------------------------

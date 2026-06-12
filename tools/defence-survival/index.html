@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Defence Survival Calculator — Maxy's Empire Toolkit</title>
+  <meta name="description" content="Will your castle hold? Enter your wall/gate/moat protection, defensive tools and garrison, then an incoming attack — see whether each wall segment holds and whether the courtyard falls." />
+  <link rel="stylesheet" href="../../assets/css/theme.css?v=15" />
+  <link rel="icon" type="image/png" href="../../assets/img/favicon.png" />
+  <style>
+    .ds-warn { margin: 0 0 18px; padding: 11px 15px; border: 1px solid rgba(248,81,73,.5);
+      background: rgba(248,81,73,.09); border-radius: var(--radius-sm); font-size: .82rem;
+      color: var(--text); line-height: 1.5; }
+    .ds-card { background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 18px; margin-bottom: 16px; }
+    .ds-h { font-size: .8rem; text-transform: uppercase; letter-spacing: .06em; color: var(--gold-dim); font-weight: 700; margin: 0 0 4px; display:flex; align-items:center; gap:6px; }
+    .ds-sub { font-size: .73rem; color: var(--text-faint); margin: 0 0 13px; line-height: 1.5; }
+    .ds-row { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 6px; }
+    .ds-field { display: flex; flex-direction: column; gap: 4px; font-size: .74rem; color: var(--text-dim); }
+    .ds-field select, .ds-field input {
+      padding: 8px 10px; font: inherit; font-size: .9rem;
+      background: var(--bg-elev-2); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text); }
+    .ds-field input { width: 84px; }
+    .ds-field select { min-width: 150px; max-width: 240px; }
+    .ds-field input:focus, .ds-field select:focus { outline: none; border-color: var(--gold); }
+
+    /* per-section garrison / assault grids */
+    .ds-seg-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap:12px; }
+    .ds-seg-grid.four { grid-template-columns: repeat(4, 1fr); }
+    @media (max-width: 900px) { .ds-seg-grid, .ds-seg-grid.four { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 560px) { .ds-seg-grid, .ds-seg-grid.four { grid-template-columns: 1fr; } }
+    .ds-seg { background: var(--bg-elev-2); border:1px solid var(--border); border-radius: var(--radius-sm); padding:11px 12px; display:flex; flex-direction:column; gap:8px; }
+    .ds-seg.front { border-color: rgba(217,178,90,.4); }
+    .ds-seg.yard  { border-color: rgba(120,170,255,.4); }
+    .ds-seg-h { font-size:.8rem; font-weight:800; color: var(--gold-dim); }
+    .ds-seg .ds-field { font-size:.68rem; width:100%; }
+    .ds-seg .ds-field select { min-width:0; max-width:none; width:100%; }
+    .ds-seg .ds-field input { width:100%; }
+    .ds-unit { display:flex; align-items:center; gap:7px; }
+    .ds-unit .art { width:34px; height:34px; border-radius:7px; overflow:hidden; border:1px solid var(--border); background: var(--bg-elev); flex:none; display:flex; align-items:center; justify-content:center; }
+    .ds-unit .art img { width:100%; height:100%; object-fit:cover; }
+    .ds-unit .art.empty::after { content:"—"; color: var(--text-faint); }
+    .ds-unit .gw { flex:1; }
+
+    /* knob rows */
+    .ds-knobs { display:grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr)); gap:10px; }
+
+    /* wave plan strip */
+    .ds-plan { display:flex; flex-wrap:wrap; gap:4px; margin:6px 0 2px; }
+    .ds-plan .pw { font-size:.6rem; min-width:22px; text-align:center; padding:4px 5px; border-radius:6px; border:1px solid rgba(248,81,73,.4); background: rgba(248,81,73,.06); color: var(--bad); font-weight:700; font-variant-numeric: tabular-nums; }
+
+    /* verdict banner */
+    .ds-verdict { border-radius: var(--radius); padding: 18px 20px; margin-bottom: 16px; border:1px solid var(--border); display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
+    .ds-verdict.hold { border-color: rgba(63,185,80,.55); background: rgba(63,185,80,.07); }
+    .ds-verdict.fall { border-color: rgba(248,81,73,.55); background: rgba(248,81,73,.08); }
+    .ds-verdict .big { font-family: var(--font-display); font-size: 1.7rem; font-weight: 800; }
+    .ds-verdict.hold .big { color: var(--good); }
+    .ds-verdict.fall .big { color: var(--bad); }
+    .ds-verdict .mtxt { font-size:.84rem; color: var(--text-dim); line-height:1.45; flex:1; min-width:200px; }
+    .ds-verdict .marg { font-size:.72rem; color: var(--text-faint); }
+
+    .ds-totals { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px; }
+    .ds-tot { background: var(--bg-elev-2); border:1px solid var(--border); border-radius: var(--radius-sm); padding:9px 14px; flex:1; min-width:130px; }
+    .ds-tot .v { font-size:1.15rem; font-weight:800; color: var(--gold); font-variant-numeric: tabular-nums; }
+    .ds-tot .k { font-size:.68rem; color: var(--text-dim); }
+
+    .ds-segs { display:grid; grid-template-columns: repeat(3, 1fr); gap:12px; margin-bottom:14px; }
+    @media (max-width: 900px) { .ds-segs { grid-template-columns: 1fr; } }
+    .ds-rescard { background: var(--bg-elev); border:1px solid var(--border); border-radius: var(--radius); padding:14px 15px; }
+    .ds-rescard.hold { border-color: rgba(63,185,80,.5); }
+    .ds-rescard.breach { border-color: rgba(248,81,73,.5); }
+    .ds-rescard .rh { display:flex; align-items:baseline; justify-content:space-between; gap:8px; margin-bottom:8px; }
+    .ds-rescard .rh .nm { font-family: var(--font-display); font-size:1.02rem; font-weight:700; }
+    .ds-rescard .rh .vd { font-size:.82rem; font-weight:800; }
+    .ds-rescard.hold .vd { color: var(--good); }
+    .ds-rescard.breach .vd { color: var(--bad); }
+    .ds-mini { display:grid; grid-template-columns: 1fr 1fr; gap:6px; margin-bottom:8px; }
+    .ds-mini .b { background: var(--bg-elev-2); border:1px solid var(--border-soft); border-radius: var(--radius-sm); padding:6px 9px; }
+    .ds-mini .b .v { font-size:.92rem; font-weight:700; color: var(--gold); font-variant-numeric: tabular-nums; }
+    .ds-mini .b .k { font-size:.62rem; color: var(--text-dim); }
+    table.ds-waves { width:100%; border-collapse:collapse; font-size:.72rem; }
+    table.ds-waves th { text-align:right; font-size:.58rem; text-transform:uppercase; color: var(--text-faint); padding:3px 5px; border-bottom:1px solid var(--border); }
+    table.ds-waves th:first-child { text-align:left; }
+    table.ds-waves td { padding:3px 5px; border-bottom:1px solid var(--border-soft); color: var(--text-dim); text-align:right; font-variant-numeric: tabular-nums; }
+    table.ds-waves td:first-child { text-align:left; }
+    .ds-prot { font-size:.68rem; color: var(--text-faint); margin-top:6px; }
+    .ds-tools-row { display:flex; flex-wrap:wrap; gap:10px; }
+    .ds-note { font-size:.78rem; color: var(--text-faint); margin-top:8px; line-height:1.5; border-left:3px solid var(--gold-dim); padding:8px 14px; background: rgba(217,178,90,.05); border-radius: var(--radius-sm); }
+    .muted { color: var(--text-faint); }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap">
+      <a class="brand" href="../../"><span class="crest">🛡️</span> Maxy's Empire <b>Toolkit</b></a>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="tool-head">
+      <a class="back" href="../../">← All tools</a>
+      <h1>🛡️ Defence Survival Calculator</h1>
+      <p>The defender's-seat companion to the Wall-Break sim. Enter your protection, defensive
+         tools and garrison, then the attack heading your way — and see whether each wall segment
+         holds, how many troops you lose, and whether your courtyard falls.</p>
+    </div>
+
+    <div class="ds-warn">⚠️ <b>Uncalibrated — early build.</b> The combat model uses Goodgame's
+      published loss curve, but the constants haven't yet been tuned against real defence reports.
+      Treat the verdict as a guide, not gospel. If your castle is attacked, <b>send Maxy the full
+      battle report</b> (both sides, all segments) so this can be calibrated like the Wall-Break sim was.</div>
+
+    <!-- ============ YOUR DEFENCES ============ -->
+    <div class="ds-card">
+      <div class="ds-h">🏰 Your defences</div>
+      <p class="ds-sub">Read these straight off your castle. Wall protects the flanks, the gate
+        protects the front, the moat protects everything. Defensive bonuses come from your castellan,
+        research and decorations.</p>
+      <div class="ds-row">
+        <label class="ds-field">Wall protection %<input id="wallProt" type="number" value="1000" min="0"></label>
+        <label class="ds-field">Gate protection %<input id="gateProt" type="number" value="1000" min="0"></label>
+        <label class="ds-field">Moat protection %<input id="moatProt" type="number" value="350" min="0"></label>
+      </div>
+      <div class="ds-knobs" style="margin-top:10px">
+        <label class="ds-field">+% Melee defence<input id="defMelee" type="number" value="0" min="0"></label>
+        <label class="ds-field">+% Ranged defence<input id="defRanged" type="number" value="0" min="0"></label>
+        <label class="ds-field">+% Courtyard defence<input id="defYard" type="number" value="0" min="0"></label>
+      </div>
+      <div class="ds-h" style="margin:16px 0 8px">🧰 Defensive tools</div>
+      <p class="ds-sub">Tools you place on the walls — they raise protection, boost defender strength,
+        or kill attackers outright in the courtyard. Pick up to three.</p>
+      <div class="ds-tools-row" id="defTools"></div>
+    </div>
+
+    <!-- ============ YOUR GARRISON ============ -->
+    <div class="ds-card">
+      <div class="ds-h">⚔️ Your garrison</div>
+      <p class="ds-sub">How your defenders are spread across the three wall segments and the courtyard.
+        Melee hold the line; ranged shoot from the wall.</p>
+      <div class="ds-seg-grid four" id="garrison"></div>
+    </div>
+
+    <!-- ============ INCOMING ATTACK ============ -->
+    <div class="ds-card">
+      <div class="ds-h">🔥 Incoming attack</div>
+      <p class="ds-sub">What's coming at each segment, and how hard the attacker hits. Rams cut your
+        gate, ladders cut your wall, combo tools sap your defenders' strength.</p>
+      <div class="ds-row">
+        <label class="ds-field">Waves<input id="waves" type="number" value="6" min="1" max="40"></label>
+        <label class="ds-field" style="flex:1;min-width:240px">Wave plan
+          <div class="ds-plan" id="wavePlan"></div></label>
+      </div>
+      <div class="ds-knobs" style="margin:6px 0 12px">
+        <label class="ds-field">+% Attack strength<input id="atkPow" type="number" value="0" min="0"></label>
+        <label class="ds-field">+% Melee attack<input id="atkMelee" type="number" value="0" min="0"></label>
+        <label class="ds-field">+% Ranged attack<input id="atkRanged" type="number" value="0" min="0"></label>
+        <label class="ds-field">+% Front strength<input id="atkFront" type="number" value="0" min="0"></label>
+        <label class="ds-field">+% Flank strength<input id="atkFlank" type="number" value="0" min="0"></label>
+      </div>
+      <div class="ds-seg-grid" id="assault"></div>
+    </div>
+
+    <!-- ============ VERDICT ============ -->
+    <div class="ds-h" style="margin:22px 0 10px;font-size:.92rem;color:var(--gold)">📋 Verdict</div>
+    <div id="verdict"></div>
+    <div class="ds-totals" id="totals"></div>
+    <div class="ds-segs" id="segResults"></div>
+
+    <p class="ds-note"><b>How it reads.</b> Each wall segment is fought wave by wave: your garrison
+      grinds down the incoming army while taking losses of its own. A segment <b>holds</b> if your
+      troops outlast the waves, or is <b>breached</b> if they're wiped — and whatever attackers
+      survive a breach pour into the courtyard for the final stand. Your castle <b>falls</b> only
+      if the courtyard itself is overrun.</p>
+  </main>
+
+  <script>
+    const $ = (id) => document.getElementById(id);
+    const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+    const num = (n) => Math.round(n).toLocaleString();
+    // Two independent curves (shape borrowed from the calibrated Wall-Break sim):
+    //  · defenders killed scales steeply with the attack/defence power ratio
+    //  · the winner's own losses scale gently — so even a winning side still bleeds
+    const KILL_EXP = 1.5;   // defenders killed = (atk/def)^1.5  (capped at 1)
+    const LOSS_EXP = 0.3;   // attacker losses  = (def/atk)^0.3  (capped at 1)
+
+    let MELEE = [], RANGED = [], RAMS = [], LADDERS = [], COMBO = [], DEFTOOLS = [];
+
+    /* parse a signed percentage of a given kind out of an effect string */
+    function effPct(effects, re) {
+      for (const e of effects || []) { const m = re.exec(e); if (m) return +m[1]; }
+      return 0;
+    }
+    /* defensive tool → its bundle of bonuses */
+    function defToolBonus(t) {
+      const fx = t.effects || [];
+      return {
+        wall:   effPct(fx, /\+(\d+(?:\.\d+)?)%\s*wall protection/i),
+        gate:   effPct(fx, /\+(\d+(?:\.\d+)?)%\s*gate protection/i),
+        moat:   effPct(fx, /\+(\d+(?:\.\d+)?)%\s*moat protection/i),
+        melee:  effPct(fx, /\+(\d+(?:\.\d+)?)%\s*melee defence strength/i),
+        ranged: effPct(fx, /\+(\d+(?:\.\d+)?)%\s*ranged defence strength/i),
+        yard:   effPct(fx, /\+(\d+(?:\.\d+)?)%\s*courtyard defence strength/i),
+        kill:   effPct(fx, /kills (\d+(?:\.\d+)?) (?:melee |ranged )?attackers in the courtyard/i),
+      };
+    }
+    const sumBonus = (list) => list.reduce((a, b) => ({
+      wall: a.wall + b.wall, gate: a.gate + b.gate, moat: a.moat + b.moat,
+      melee: a.melee + b.melee, ranged: a.ranged + b.ranged, yard: a.yard + b.yard, kill: a.kill + b.kill,
+    }), { wall: 0, gate: 0, moat: 0, melee: 0, ranged: 0, yard: 0, kill: 0 });
+
+    /* ---------- segment definitions ---------- */
+    const WALL_SEGS = [
+      { key: "left",  label: "🧱 Left flank",  front: false },
+      { key: "front", label: "🚪 Front (gate)", front: true  },
+      { key: "right", label: "🧱 Right flank", front: false },
+    ];
+
+    /* ---------- build the garrison inputs (4 sections incl. courtyard) ---------- */
+    function unitSelect(id, list, def) {
+      return `<select id="${id}">` + list.map((u, i) =>
+        `<option value="${i}" ${i === def ? "selected" : ""}>${esc(u.name)}</option>`).join("") + `</select>`;
+    }
+    function garrisonBlock(key, label, cls) {
+      return `<div class="ds-seg ${cls || ""}">
+        <div class="ds-seg-h">${label}</div>
+        <label class="ds-field">Melee unit ${unitSelect("gm-" + key, MELEE, 0)}</label>
+        <div class="ds-unit"><span class="art empty" id="gma-${key}"></span>
+          <label class="ds-field gw">Count<input id="gmc-${key}" type="number" value="0" min="0"></label></div>
+        <label class="ds-field">Ranged unit ${unitSelect("gr-" + key, RANGED, 0)}</label>
+        <div class="ds-unit"><span class="art empty" id="gra-${key}"></span>
+          <label class="ds-field gw">Count<input id="grc-${key}" type="number" value="0" min="0"></label></div>
+      </div>`;
+    }
+    function buildGarrison() {
+      $("garrison").innerHTML =
+        WALL_SEGS.map((s) => garrisonBlock(s.key, s.label, s.front ? "front" : "")).join("") +
+        garrisonBlock("yard", "🏰 Courtyard", "yard");
+      // sensible defaults so the tool shows something on load
+      const setv = (id, v) => { const el = $(id); if (el) el.value = v; };
+      setv("gmc-left", 1500); setv("grc-left", 1500);
+      setv("gmc-front", 2000); setv("grc-front", 2000);
+      setv("gmc-right", 1500); setv("grc-right", 1500);
+      setv("gmc-yard", 3000); setv("grc-yard", 3000);
+      ["left", "front", "right", "yard"].forEach((k) => {
+        ["gm-" + k, "gr-" + k].forEach((id) => $(id).addEventListener("change", () => { refreshUnitArt(); run(); }));
+        ["gmc-" + k, "grc-" + k].forEach((id) => $(id).addEventListener("input", run));
+      });
+    }
+
+    /* ---------- build the attacker assault inputs (3 wall sections) ---------- */
+    function toolSelect(id, list, label) {
+      return `<label class="ds-field">${label}<select id="${id}"><option value="-1">— none —</option>` +
+        list.map((t, i) => `<option value="${i}">${esc(t.name)} (${t.pct > 0 ? "−" + t.pct + "%" : t.dbl + "%"})</option>`).join("") +
+        `</select></label>`;
+    }
+    function assaultBlock(s) {
+      const k = s.key;
+      const siege = s.front
+        ? toolSelect("ram-" + k, RAMS, "Ram (−gate)")
+        : toolSelect("lad-" + k, LADDERS, "Ladder (−wall)");
+      return `<div class="ds-seg ${s.front ? "front" : ""}">
+        <div class="ds-seg-h">${s.label}</div>
+        <label class="ds-field">Melee unit ${unitSelect("am-" + k, MELEE, 0)}</label>
+        <div class="ds-unit"><span class="art empty" id="ama-${k}"></span>
+          <label class="ds-field gw">Per wave<input id="amc-${k}" type="number" value="0" min="0"></label></div>
+        <label class="ds-field">Ranged unit ${unitSelect("ar-" + k, RANGED, 0)}</label>
+        <div class="ds-unit"><span class="art empty" id="ara-${k}"></span>
+          <label class="ds-field gw">Per wave<input id="arc-${k}" type="number" value="0" min="0"></label></div>
+        ${siege}
+        ${toolSelect("cmb-" + k, COMBO, "Combo (−def)")}
+      </div>`;
+    }
+    function buildAssault() {
+      $("assault").innerHTML = WALL_SEGS.map(assaultBlock).join("");
+      const setv = (id, v) => { const el = $(id); if (el) el.value = v; };
+      setv("amc-left", 800); setv("arc-left", 800);
+      setv("amc-front", 1400); setv("arc-front", 1100);
+      setv("amc-right", 800); setv("arc-right", 800);
+      WALL_SEGS.forEach((s) => {
+        const k = s.key;
+        ["am-" + k, "ar-" + k].forEach((id) => $(id).addEventListener("change", () => { refreshUnitArt(); run(); }));
+        ["amc-" + k, "arc-" + k].forEach((id) => $(id).addEventListener("input", run));
+        [s.front ? "ram-" + k : "lad-" + k, "cmb-" + k].forEach((id) => $(id) && $(id).addEventListener("change", run));
+      });
+    }
+
+    /* ---------- defensive tool slots ---------- */
+    function buildDefTools() {
+      $("defTools").innerHTML = [0, 1, 2].map((i) =>
+        `<label class="ds-field">Slot ${i + 1}
+          <select id="dt-${i}"><option value="-1">— none —</option>` +
+          DEFTOOLS.map((t, j) => `<option value="${j}">${esc(t.name)}</option>`).join("") +
+          `</select></label>`).join("");
+      [0, 1, 2].forEach((i) => $("dt-" + i).addEventListener("change", run));
+    }
+
+    /* ---------- show unit thumbnails ---------- */
+    function setArt(elId, unit) {
+      const el = $(elId); if (!el) return;
+      if (unit && unit.img) { el.className = "art"; el.innerHTML = `<img src="${esc(unit.img)}" alt="" onerror="this.parentNode.className='art empty';this.remove()">`; }
+      else { el.className = "art empty"; el.innerHTML = ""; }
+    }
+    function refreshUnitArt() {
+      ["left", "front", "right", "yard"].forEach((k) => {
+        setArt("gma-" + k, MELEE[+$("gm-" + k).value]);
+        setArt("gra-" + k, RANGED[+$("gr-" + k).value]);
+      });
+      WALL_SEGS.forEach((s) => {
+        setArt("ama-" + s.key, MELEE[+$("am-" + s.key).value]);
+        setArt("ara-" + s.key, RANGED[+$("ar-" + s.key).value]);
+      });
+    }
+
+    /* ---------- wave plan strip ---------- */
+    function nWaves() { return Math.max(1, Math.min(40, +$("waves").value || 6)); }
+    function renderPlan() {
+      const n = nWaves();
+      let html = ""; for (let w = 1; w <= n; w++) html += `<span class="pw">⚔${w}</span>`;
+      $("wavePlan").innerHTML = html;
+    }
+
+    /* ---------- read everything ---------- */
+    function readInputs() {
+      const wallProt = +$("wallProt").value || 0;
+      const gateProt = +$("gateProt").value || 0;
+      const moatProt = +$("moatProt").value || 0;
+      // defensive tool bonuses (global)
+      const chosen = [0, 1, 2].map((i) => +$("dt-" + i).value).filter((j) => j >= 0).map((j) => DEFTOOLS[j]);
+      const dt = sumBonus(chosen.map(defToolBonus));
+      const defMelee  = (+$("defMelee").value  || 0) + dt.melee;
+      const defRanged = (+$("defRanged").value || 0) + dt.ranged;
+      const defYard   = (+$("defYard").value   || 0) + dt.yard;
+      const atk = {
+        pow: +$("atkPow").value || 0, melee: +$("atkMelee").value || 0, ranged: +$("atkRanged").value || 0,
+        front: +$("atkFront").value || 0, flank: +$("atkFlank").value || 0,
+      };
+      const segs = {};
+      for (const s of WALL_SEGS) {
+        const k = s.key;
+        const ram = s.front ? (RAMS[+($("ram-" + k) || {}).value] || null) : null;
+        const lad = !s.front ? (LADDERS[+($("lad-" + k) || {}).value] || null) : null;
+        const cmb = COMBO[+($("cmb-" + k) || {}).value] || null;
+        segs[k] = {
+          front: s.front,
+          // defenders on this segment
+          dm: MELEE[+$("gm-" + k).value], dmc: +$("gmc-" + k).value || 0,
+          dr: RANGED[+$("gr-" + k).value], drc: +$("grc-" + k).value || 0,
+          // attackers per wave
+          am: MELEE[+$("am-" + k).value], amc: +$("amc-" + k).value || 0,
+          ar: RANGED[+$("ar-" + k).value], arc: +$("arc-" + k).value || 0,
+          // attacker protection cuts + defender debuffs
+          ramCut: ram ? ram.pct : 0,
+          ladCut: lad ? lad.pct : 0,
+          dbMelee: cmb ? (cmb.dbMelee || 0) : 0,
+          dbRanged: cmb ? (cmb.dbRanged || 0) : 0,
+        };
+      }
+      return {
+        wallProt, gateProt, moatProt, defMelee, defRanged, defYard,
+        yardKill: dt.kill, wallTool: dt.wall, gateTool: dt.gate, moatTool: dt.moat,
+        atk, segs, waves: nWaves(),
+        yard: { dm: MELEE[+$("gm-yard").value], dmc: +$("gmc-yard").value || 0,
+                dr: RANGED[+$("gr-yard").value], drc: +$("grc-yard").value || 0 },
+      };
+    }
+
+    /* one clash between an attacking force and a defending force.
+       Power = Σ count × stat × multiplier. Each side takes losses on its own curve:
+       defenders are killed on the steep KILL_EXP curve, the attacking wave bleeds on the
+       gentle LOSS_EXP curve. A segment breaks when the garrison is emptied. */
+    function clash(atkPower, defPower) {
+      if (atkPower <= 0) return { defKill: 0, atkKill: 0, atkWins: false };
+      if (defPower <= 0) return { defKill: 1, atkKill: 0, atkWins: true };
+      const defKill = Math.min(1, Math.pow(atkPower / defPower, KILL_EXP)); // garrison killed this wave
+      const atkKill = Math.min(1, Math.pow(defPower / atkPower, LOSS_EXP)); // this wave's attackers killed
+      return { defKill, atkKill, atkWins: atkPower >= defPower };
+    }
+
+    /* resolve one wall segment over the wave plan */
+    function computeSegment(IN, k) {
+      const sg = IN.segs[k];
+      // protection facing this segment
+      const wallP = Math.max(0, IN.wallProt + IN.wallTool - sg.ladCut);
+      const gateP = Math.max(0, IN.gateProt + IN.gateTool - sg.ramCut);
+      const moatP = IN.moatProt + IN.moatTool;
+      const protMelee  = 1 + ((sg.front ? gateP : wallP) + moatP + IN.defMelee  - sg.dbMelee)  / 100; // melee hold the gate/wall
+      const protRanged = 1 + (wallP + moatP + IN.defRanged - sg.dbRanged) / 100;                       // ranged always shoot from the wall
+      const atkMul = 1 + (IN.atk.pow + (sg.front ? IN.atk.front : IN.atk.flank)) / 100;
+      const atkMMul = atkMul * (1 + IN.atk.melee / 100);
+      const atkRMul = atkMul * (1 + IN.atk.ranged / 100);
+
+      let dmc = sg.dmc, drc = sg.drc;                     // defenders (persist, grind down)
+      const startDef = dmc + drc;
+      let defLossM = 0, defLossR = 0, atkLossTot = 0, atkThrough = 0, breachedAt = 0;
+      const rows = [];
+
+      for (let w = 1; w <= IN.waves; w++) {
+        const defLeft = dmc + drc;
+        if (defLeft <= 0) { atkThrough += (sg.amc + sg.arc); continue; } // already breached → this wave walks in
+        // powers
+        const atkM = sg.amc * (sg.am ? sg.am.meleeAtk : 0) * atkMMul;
+        const atkR = sg.arc * (sg.ar ? sg.ar.rangeAtk : 0) * atkRMul;
+        const defM = dmc * (sg.dm ? sg.dm.meleeDef : 0) * protMelee;
+        const defR = drc * (sg.dr ? sg.dr.rangeDef : 0) * protRanged;
+        const atkP = atkM + atkR, defP = defM + defR;
+        const { defKill, atkKill } = clash(atkP, defP);
+        // apply defender casualties proportionally across melee/ranged
+        const dkM = Math.min(dmc, Math.round(dmc * defKill));
+        const dkR = Math.min(drc, Math.round(drc * defKill));
+        dmc -= dkM; drc -= dkR; defLossM += dkM; defLossR += dkR;
+        // attacker casualties this wave
+        const akM = Math.round(sg.amc * atkKill), akR = Math.round(sg.arc * atkKill);
+        atkLossTot += akM + akR;
+        const survived = (sg.amc - akM) + (sg.arc - akR);
+        const nowDef = dmc + drc;
+        if (nowDef <= 0 && !breachedAt) { breachedAt = w; atkThrough += survived; }
+        rows.push({ w, defLeft: nowDef, defLost: dkM + dkR, atkLost: akM + akR });
+        if (nowDef <= 0) continue;
+      }
+      const held = (dmc + drc) > 0;
+      return {
+        key: k, front: sg.front, held, breachedAt, startDef, defLeft: dmc + drc,
+        defLost: defLossM + defLossR, atkLost: atkLossTot, atkThrough,
+        protMelee: (sg.front ? gateP : wallP) + moatP, protRanged: wallP + moatP, rows,
+      };
+    }
+
+    /* courtyard final stand: everything that breached pours in */
+    function computeYard(IN, spill) {
+      const y = IN.yard;
+      let dmc = y.dmc, drc = y.drc;
+      const startDef = dmc + drc;
+      // courtyard-kill tools flatly remove attackers first
+      let inc = Math.max(0, spill - (IN.yardKill || 0));
+      const protMul = 1 + (IN.moatProt + IN.defYard) / 100;     // courtyard defence bonus
+      // the spilled army is a mixed blob; approximate with average melee attack of the front attacker
+      const refAtk = (MELEE[+$("am-front").value] || { meleeAtk: 0 }).meleeAtk || 0;
+      const atkMul = 1 + (IN.atk.pow + IN.atk.front) / 100;
+      const atkP = inc * refAtk * atkMul;
+      const defP = (dmc * (y.dm ? y.dm.meleeDef : 0) + drc * (y.dr ? y.dr.rangeDef : 0)) * protMul;
+      const { defKill, atkKill } = clash(atkP, defP);
+      const defLost = Math.min(startDef, Math.round(startDef * defKill));
+      const atkLost = Math.round(inc * atkKill);
+      const defLeft = startDef - defLost;
+      return { startDef, defLeft, defLost, incoming: spill, atkLost, held: defLeft > 0 && atkP <= defP * 1.0,
+               overrun: defLeft <= 0 };
+    }
+
+    /* ---------- render ---------- */
+    function run() {
+      if (!MELEE.length) return;
+      const IN = readInputs();
+      const segs = WALL_SEGS.map((s) => computeSegment(IN, s.key));
+      const breached = segs.filter((r) => !r.held);
+      const spill = breached.reduce((a, r) => a + r.atkThrough, 0);
+      const yard = computeYard(IN, spill);
+
+      const castleFalls = breached.length > 0 && yard.overrun;
+      // verdict banner
+      const vd = $("verdict");
+      if (castleFalls) {
+        vd.innerHTML = `<div class="ds-verdict fall">
+          <div class="big">💥 Castle falls</div>
+          <div class="mtxt">${breached.length} wall segment${breached.length > 1 ? "s" : ""} breached and the
+            courtyard is overrun — the attacker takes the castle.
+            <div class="marg">Courtyard: ${num(yard.defLeft)} of ${num(yard.startDef)} defenders left after ${num(yard.incoming)} attackers poured in.</div></div></div>`;
+      } else if (breached.length > 0) {
+        vd.innerHTML = `<div class="ds-verdict hold">
+          <div class="big">🛡️ Castle holds</div>
+          <div class="mtxt">${breached.length} wall segment${breached.length > 1 ? "s" : ""} breached, but the
+            courtyard repels what got through.
+            <div class="marg">Courtyard: ${num(yard.defLeft)} of ${num(yard.startDef)} defenders survive ${num(yard.incoming)} attackers.</div></div></div>`;
+      } else {
+        vd.innerHTML = `<div class="ds-verdict hold">
+          <div class="big">🛡️ Castle holds</div>
+          <div class="mtxt">Every wall segment holds — the attack never reaches your courtyard.</div></div>`;
+      }
+
+      const totDefLost = segs.reduce((a, r) => a + r.defLost, 0) + yard.defLost;
+      const totAtkLost = segs.reduce((a, r) => a + r.atkLost, 0) + yard.atkLost;
+      $("totals").innerHTML =
+        `<div class="ds-tot"><div class="v">${breached.length} / 3</div><div class="k">Wall segments breached</div></div>
+         <div class="ds-tot"><div class="v">${num(totDefLost)}</div><div class="k">Your troop losses</div></div>
+         <div class="ds-tot"><div class="v">${num(totAtkLost)}</div><div class="k">Attacker losses (≈)</div></div>
+         <div class="ds-tot"><div class="v">${num(yard.defLeft)}</div><div class="k">Courtyard left</div></div>`;
+
+      $("segResults").innerHTML = segs.map((r) => {
+        const lbl = WALL_SEGS.find((s) => s.key === r.key).label;
+        const rows = r.rows.map((w) =>
+          `<tr><td>W${w.w}</td><td>${num(w.defLost)}</td><td>${num(w.defLeft)}</td><td>${num(w.atkLost)}</td></tr>`).join("");
+        return `<div class="ds-rescard ${r.held ? "hold" : "breach"}">
+          <div class="rh"><span class="nm">${lbl}</span>
+            <span class="vd">${r.held ? "🛡️ Holds" : "💥 Breached"}</span></div>
+          <div class="ds-mini">
+            <div class="b"><div class="v">${num(r.defLost)}<span class="muted" style="font-size:.7rem">/${num(r.startDef)}</span></div><div class="k">Defenders lost</div></div>
+            <div class="b"><div class="v">${num(r.atkLost)}</div><div class="k">Attackers killed (≈)</div></div>
+          </div>
+          ${r.held
+            ? `<div class="ds-prot">${num(r.defLeft)} defenders still standing.</div>`
+            : `<div class="ds-prot">Broke on wave ${r.breachedAt} — ${num(r.atkThrough)} attackers poured toward the courtyard.</div>`}
+          <table class="ds-waves" style="margin-top:8px"><thead><tr><th>Wave</th><th>You lost</th><th>Def left</th><th>Atk lost</th></tr></thead>
+            <tbody>${rows}</tbody></table>
+          <div class="ds-prot">Protection here — melee ${num(r.protMelee)}%, ranged ${num(r.protRanged)}%.</div>
+        </div>`;
+      }).join("");
+    }
+
+    /* ---------- load data ---------- */
+    fetch("../overview-troops-tools/data/troops-tools.json").then((r) => r.json()).then((d) => {
+      const troops = (d.troops || []).filter((t) => t.kind === "Troop");
+      MELEE = troops.filter((t) => t.role === "Melee" && t.meleeAtk > 0);
+      RANGED = troops.filter((t) => t.role === "Ranged" && t.rangeAtk > 0);
+      // ensure ranged units also expose a defence stat; melee/ranged def present on all troops
+      const tools = d.tools || [];
+      const dedupe = (arr, keyfn) => { const seen = new Set(); return arr.filter((t) => { const kk = keyfn(t); if (seen.has(kk)) return false; seen.add(kk); return true; }); };
+
+      const atkTools = tools.filter((t) => t.side === "Attack");
+      RAMS = dedupe(atkTools.map((t) => ({ name: t.name, pct: effPct(t.effects, /-(\d+(?:\.\d+)?)%\s*gate protection/i) }))
+        .filter((t) => t.pct > 0).sort((a, b) => b.pct - a.pct), (t) => t.name + t.pct);
+      LADDERS = dedupe(atkTools.map((t) => ({ name: t.name, pct: effPct(t.effects, /-(\d+(?:\.\d+)?)%\s*wall protection/i) }))
+        .filter((t) => t.pct > 0).sort((a, b) => b.pct - a.pct), (t) => t.name + t.pct);
+      COMBO = dedupe(atkTools.map((t) => ({
+        name: t.name,
+        dbMelee: effPct(t.effects, /-(\d+(?:\.\d+)?)%\s*defender melee strength/i),
+        dbRanged: effPct(t.effects, /-(\d+(?:\.\d+)?)%\s*defender ranged strength/i),
+      })).filter((t) => t.dbMelee > 0 || t.dbRanged > 0)
+        .sort((a, b) => (b.dbMelee + b.dbRanged) - (a.dbMelee + a.dbRanged)), (t) => t.name + t.dbMelee + t.dbRanged)
+        .map((t) => ({ ...t, pct: 0, dbl: "−" + (t.dbMelee || t.dbRanged) }));
+
+      DEFTOOLS = dedupe(tools.filter((t) => t.side === "Defence")
+        .map((t) => ({ name: t.name, effects: t.effects })), (t) => t.name + JSON.stringify(t.effects))
+        .filter((t) => { const b = defToolBonus(t); return b.wall || b.gate || b.moat || b.melee || b.ranged || b.yard || b.kill; });
+
+      buildDefTools();
+      buildGarrison();
+      buildAssault();
+      refreshUnitArt();
+      renderPlan();
+      // wiring for the top-level fields
+      ["wallProt", "gateProt", "moatProt", "defMelee", "defRanged", "defYard",
+       "atkPow", "atkMelee", "atkRanged", "atkFront", "atkFlank"].forEach((id) => $(id).addEventListener("input", run));
+      $("waves").addEventListener("input", () => { renderPlan(); run(); });
+      run();
+    }).catch((e) => {
+      $("segResults").innerHTML = "<p class='muted'>Could not load troop data: " + esc(e.message) + "</p>";
+    });
+  </script>
+</body>
+</html>
