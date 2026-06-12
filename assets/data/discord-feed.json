@@ -1,6 +1,13 @@
 {
-  "updated": "2026-06-10",
-  "note": "Populated by the Discord reader bot — see .github/DISCORD-FEED.md. Each item: { date, title, body, url? }. Keep newest first; trim old prime times.",
-  "announcements": [],
+  "updated": "2026-06-12",
+  "note": "announcements auto-pulled from the GGE Community Hub (alertsempire category) by assets/data/fetch-ggs-news.py; primeTimes still manual.",
+  "announcements": [
+    {
+      "date": "12 Jun 2026",
+      "title": "DE1 – Server Issues & Upcoming Compensation",
+      "body": "",
+      "url": "https://communityhub.goodgamestudios.com/2026/06/12/de1-server-issues-upcoming-compensation/"
+    }
+  ],
   "primeTimes": []
 }

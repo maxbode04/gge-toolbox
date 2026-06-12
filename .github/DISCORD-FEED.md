@@ -1,12 +1,25 @@
-# Discord feed → site (Prime Times & Announcements)
+# Homepage feed → Prime Times & Announcements
 
-The homepage shows two Discord-sourced panels — **Prime Times** and **GGE
-Announcements** — from [`assets/data/discord-feed.json`](../assets/data/discord-feed.json).
+The homepage shows two panels — **Prime Times** and **GGE Announcements** — from
+[`assets/data/discord-feed.json`](../assets/data/discord-feed.json).
 
-**Important:** a Discord *webhook* URL can only POST messages *into* a channel —
-it cannot read them. So the webhooks you have can't feed the site directly.
-Something has to **read** the announcement channels and **write** the JSON. That
-"something" is a small reader bot (or a no-code automation).
+## Announcements — now AUTOMATIC ✅
+
+**Announcements are auto-pulled from the official GGE Community Hub** (the
+`alertsempire` category of its WordPress API) by
+[`assets/data/fetch-ggs-news.py`](../assets/data/fetch-ggs-news.py), which runs in
+the `refresh-data` GitHub Action. No Discord bot is needed — server-issue /
+maintenance / compensation posts land in the Announcements panel within a day of
+GGS publishing them. The same script refreshes the "Latest from GGS" news panel.
+(If an announcement you saw on Discord never appears, GGS only posted it to
+Discord/in-game and not to the Community Hub — the hub is the canonical web source.)
+
+## Prime Times — still manual / optional Discord
+
+Prime-time offers are NOT on the hub, so that panel stays hand-edited (or you can
+wire a Discord reader bot as below). A Discord *webhook* can only POST *into* a
+channel, not read it, so feeding the site needs a small reader bot or no-code
+automation.
 
 ## The data file
 

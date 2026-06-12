@@ -39,6 +39,9 @@ jobs:
       - name: Refresh all tool data
         run: bash tools/refresh-all.sh
 
+      - name: Refresh GGS news + alerts feed
+        run: python3 assets/data/fetch-ggs-news.py
+
       - name: Commit changes if any
         run: |
           git config user.name  "github-actions[bot]"
