@@ -27,3 +27,20 @@
 2. **Unit-stack screenshots** (or tell us which units the (10)-badge stacks are).
 3. Points scored per hit if visible.
 4. Any different boss level — even one L11/L13 report validates level scaling.
+
+## Pass 2 (batch 2: +3 Fungal L11, +1 Ashen — 10 reports total)
+- **Dormant spores/eggs have ZERO defensive strength** but inflate the CY kill count.
+  Proven three ways: GS = 9% × (real units only) at L11 (18.05/18.08/18.14M ≈ 9% × 201.7M)
+  and L12 (25.2M ≈ 9% × 280M); real-spore base def ≈ 56 at BOTH levels.
+- **Refit u = 2440, rms 13.7%** across 8 victories spanning L11+L12 — same constants
+  predict both levels (L11 Shawno1 +0%, L12 Rage −1%, L11 Gzer −3%, L12 Lydia +5%).
+  Outlier: Stu −32% (likely stronger units; unit-type resolution will fix).
+- **Boss attacker-debuffs from game data** (rift-bosses.json, no GeneralsCamp needed):
+  Fungal = NONE (all levels). Necromancer: L11 −60% RANGED, L12/13 −60% MELEE (flips!).
+  Ashen = none, but CY is 70% ranged defenders, tiny CY (30–40k) @ +1800–2200%.
+- **Ashen single report**: dragon real CY units base def ≈ 298 (5× spores), but CY mostly
+  weak eggs → losses tiny (312 of 67,689).
+- Gzer's L12 full wipe remains the one anomaly (model says narrow win, 72% losses;
+  reality 100% loss in the "Close defeat" steep zone near strength parity).
+- **Calculator design implication**: CY size must be an input (report shows it) because
+  dormant stacking varies it; strength side uses REAL units only = base CY from game data.

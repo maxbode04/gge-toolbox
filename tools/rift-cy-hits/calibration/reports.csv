@@ -11,3 +11,10 @@ r3,glorious_victory,71284,8341,11.7,"6038+65246",Toril,0,675,30,5,"no GS (Vengea
 r4,victory,42185,17743,42.1,"4889+37296",Lord Horatio,25110000,220,30,5,""
 r5,close_victory,38519,24775,64.3,"8207+30312",Toril,0,200,22,5,"no GS (Exalted +0%, Vengeance +0%); flame thrower lower tier +22%"
 r6,glorious_victory,58431,10968,18.8,"58431",Ashira,25200000,462,0,5,"no flame thrower — warwagon only"
+# --- Batch 2 (added later same day): 3x Fungal L11 + 1x Ashen Tyrant ---
+# L11 fungal: base CY 800,000 @ +350% (castellan tooltip matches game data); CY count in report
+#   includes DORMANT spores stacked by stage state (0 defensive strength, confirmed via GS math).
+r7,victory,37474,15598,41.6,"5598+31876",Ashira,18050000,218,0,5,"FUNGAL L11; CY count 1400500 (600k dormant); GS 18.05M = 9% x 201.7M real-spore strength"
+r8,glorious_victory,42185,10921,25.9,"4889+37296",Lord Horatio,18080000,230,30,5,"FUNGAL L11; CY count 900000 (100k dormant)"
+r9,victory,31631,15034,47.5,"31631",Ashira,18140000,245,0,0,"FUNGAL L11; CY count 1000000 (200k dormant); NO combat tools at all"
+r10,glorious_victory,67689,312,0.46,"67689",Toril-no-abilities,0,862,0,5,"ASHEN TYRANT (date 08/05): CY 265000 = 250k dormant eggs + 15,027 real dragon units @ +950%; implies dragon real-unit base def ~298 (vs spore ~56)"
