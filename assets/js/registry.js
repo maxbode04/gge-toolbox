@@ -260,6 +260,16 @@ window.TOOLS = [
     status: "live",
     tags: ["rift", "equipment", "optimizer", "gear", "set bonuses", "commander"],
   },
+  {
+    slug: "wall-break",
+    cat: "calculators",
+    name: "Rift Wall-Break Simulator",
+    desc: "Set up a rift attack — commander, abilities, per-lane troops and tools — and see whether each wall segment breaks, with projected losses and points. In calibration.",
+    icon: "🧱",
+    status: "live",
+    url: "tools/wall-break/",
+    tags: ["rift", "wall", "break", "simulator", "calculator", "toril", "ram", "ladder", "tools", "boss"],
+  },
 
   // ---- Simulators --------------------------------------------------------
   {
@@ -418,6 +428,16 @@ window.TOOLS = [
     status: "live",
     url: "tools/storm-islands/",
     tags: ["storm islands", "rankings", "leaderboard", "cargo", "aquamarine", "stormy isles", "server", "gge-tracker"],
+  },
+  {
+    slug: "or-bth",
+    cat: "rankings",
+    name: "OR & BTH Results",
+    desc: "Outer Realms & Beyond the Horizon results per player — rank and points across every tracked run, plus the server's OR/BTH run list.",
+    icon: "🎯",
+    status: "live",
+    url: "tools/or-bth/",
+    tags: ["outer realms", "beyond the horizon", "or", "bth", "results", "rankings", "event", "gge-tracker"],
   },
   {
     slug: "fortress-tracker",

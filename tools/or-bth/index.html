@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OR &amp; BTH Results — Maxy's Empire Toolkit</title>
+  <link rel="stylesheet" href="../../assets/css/theme.css?v=15" />
+  <link rel="stylesheet" href="../vip/vip.css" />
+  <style>
+    .spark { width: 100%; height: 120px; margin: 6px 0 16px; }
+    .spark polyline { fill: none; stroke: var(--gold); stroke-width: 2; }
+    .spark-label { font-size: .72rem; color: var(--text-faint); text-transform: uppercase; letter-spacing: .05em; }
+  </style>
+  <link rel="icon" type="image/png" href="../../assets/img/favicon.png" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap">
+      <a class="brand" href="../../"><span class="crest">🛡️</span> Maxy's Empire <b>Toolkit</b></a>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="tool-head">
+      <a class="back" href="../../">← All tools</a>
+      <h1>🎯 OR &amp; BTH Results</h1>
+      <p>Outer Realms and Beyond the Horizon results — a player's rank and points across
+         every tracked run, plus the server-wide list of OR/BTH runs and turnouts.</p>
+    </div>
+
+    <section class="panel">
+
+      <div class="vip-toolbar" id="toolbar">
+        <select class="vip-server-pick" id="mode">
+          <option value="events">Player OR/BTH results</option>
+          <option value="server">All OR/BTH runs</option>
+        </select>
+        <input class="vip-input" id="q" placeholder="Player name…" />
+        <button class="vip-btn" id="go">Load</button>
+      </div>
+
+      <div class="vip-status" id="status"></div>
+      <div id="out"></div>
+
+      <p class="vip-credit">Data: <a href="https://gge-tracker.com" target="_blank" rel="noopener">gge-tracker.com</a> public API.</p>
+    </section>
+  </main>
+
+  <script src="../vip/vip-shared.js"></script>
+  <script>
+    const { api, esc, num, ago, mountServerPicker } = window.VIP;
+    mountServerPicker(document.getElementById("toolbar"));
+
+    const out = document.getElementById("out");
+    const status = document.getElementById("status");
+    const modeSel = document.getElementById("mode");
+    const q = document.getElementById("q");
+
+    function table(headers, rowsHtml) {
+      return '<div style="overflow-x:auto"><table class="vip-table"><thead><tr>' +
+        headers.map((h) => "<th>" + h + "</th>").join("") + "</tr></thead><tbody>" +
+        rowsHtml + "</tbody></table></div>";
+    }
+
+    const EVENT_LABELS = { outer_realms: "Outer Realms", beyond_the_horizon: "Beyond the Horizon" };
+    const ORBTH = Object.keys(EVENT_LABELS);
+
+    async function playerId(name) {
+      const p = await api("players/" + encodeURIComponent(name));
+      return { id: p.player_id, p };
+    }
+
+    async function run() {
+      const m = modeSel.value;
+      const name = q.value.trim();
+      out.innerHTML = "";
+      status.textContent = "Loading…"; status.className = "vip-status";
+      try {
+        if (m === "events") {
+          if (!name) { status.textContent = "Enter a player name."; return; }
+          const { id, p } = await playerId(name);
+          const d = await api("events/player/" + id);
+          const evs = (d.events || []).filter((e) => ORBTH.includes(e.type));
+          let html = "<h3>" + esc(p.player_name) + " — OR &amp; BTH results</h3>";
+          ORBTH.forEach((type) => {
+            const rows = evs.filter((e) => e.type === type)
+              .sort((a, b) => Number(b.event_num) - Number(a.event_num));
+            if (!rows.length) return;
+            html += "<h4>" + EVENT_LABELS[type] + "</h4>" +
+              table(["Run #", "Rank", "Points", "When"],
+                rows.map((e) =>
+                  '<tr><td class="r">' + esc(e.event_num) + '</td><td class="r">#' + num(e.rank) +
+                  '</td><td class="r">' + num(e.point) + "</td><td>" + ago(e.collect_date) + "</td></tr>").join(""));
+          });
+          out.innerHTML = evs.length ? html : "<p class='muted'>No Outer Realms or Beyond the Horizon results tracked for this player.</p>";
+          status.textContent = evs.length + " OR/BTH results.";
+        } else {
+          const d = await api("events/list");
+          const evs = (d.events || []).filter((e) => ORBTH.includes(e.type));
+          out.innerHTML = table(["Event", "Run #", "Players", "Collected"],
+            evs.map((e) =>
+              '<tr><td class="nm">' + EVENT_LABELS[e.type] + '</td><td class="r">' + esc(e.event_num) + "</td>" +
+              '<td class="r">' + num(e.player_count) + "</td><td>" + ago(e.collect_date) + "</td></tr>").join(""));
+          status.textContent = evs.length + " OR/BTH runs tracked on this server.";
+        }
+      } catch (e) {
+        status.textContent = "Error: " + e.message; status.className = "vip-status vip-error";
+      }
+    }
+
+    document.getElementById("go").addEventListener("click", run);
+    q.addEventListener("keydown", (e) => { if (e.key === "Enter") run(); });
+    modeSel.addEventListener("change", () => { if (modeSel.value === "server") run(); });
+  </script>
+</body>
+</html>
