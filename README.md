@@ -43,4 +43,4 @@ See [CREDITS.md](CREDITS.md). Unofficial fan project; not affiliated with Goodga
 
 ## License
 
-Project code: [MIT](LICENSE). Game assets and data belong to their respective owners.
+Project code: © 2026 Maximilien Bode — [All Rights Reserved](LICENSE). Game assets and data belong to their respective owners.
