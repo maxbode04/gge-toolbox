@@ -110,19 +110,20 @@
     <!-- ============ CASTELLAN ============ -->
     <div class="ds-card">
       <div class="ds-h">👑 Your castellan & castle</div>
-      <p class="ds-sub">Protection comes off your castle screen (wall / gate / moat %). The castellan
-        adds defence strength and abilities — defaulting to a Sasaki-style setup as an example.</p>
+      <p class="ds-sub">Pick a castellan set and it fills the defence strength, protection and abilities
+        from the real in-game gear. Protection shown is the <b>gear's</b> contribution — add your castle
+        buildings, research and alliance protection on top.</p>
       <div class="ds-row">
         <label class="ds-field">Castellan preset
           <select id="castPreset"></select></label>
-        <label class="ds-field">Wall protection %<input id="wallProt" type="number" value="320" min="0"></label>
-        <label class="ds-field">Gate protection %<input id="gateProt" type="number" value="320" min="0"></label>
-        <label class="ds-field">Moat protection %<input id="moatProt" type="number" value="150" min="0"></label>
+        <label class="ds-field">Wall protection %<input id="wallProt" type="number" value="350" min="0"></label>
+        <label class="ds-field">Gate protection %<input id="gateProt" type="number" value="350" min="0"></label>
+        <label class="ds-field">Moat protection %<input id="moatProt" type="number" value="224" min="0"></label>
       </div>
       <div class="ds-knobs" style="margin-top:10px">
-        <label class="ds-field">+% Melee defence<input id="castMelee" type="number" value="11" min="0"></label>
-        <label class="ds-field">+% Ranged defence<input id="castRanged" type="number" value="11" min="0"></label>
-        <label class="ds-field">+% Courtyard defence<input id="castYard" type="number" value="24" min="0"></label>
+        <label class="ds-field">+% Melee defence<input id="castMelee" type="number" value="24" min="0"></label>
+        <label class="ds-field">+% Ranged defence<input id="castRanged" type="number" value="24" min="0"></label>
+        <label class="ds-field">+% Courtyard defence<input id="castYard" type="number" value="0" min="0"></label>
       </div>
       <div class="ds-toggles" id="castAbil"></div>
     </div>
@@ -153,9 +154,12 @@
         <label class="ds-field">+% Melee atk<input id="cmdMelee" type="number" value="60" min="0"></label>
         <label class="ds-field">+% Ranged atk<input id="cmdRanged" type="number" value="60" min="0"></label>
         <label class="ds-field">+% Universal<input id="cmdUniversal" type="number" value="0" min="0"></label>
-        <label class="ds-field">+% Front str<input id="cmdFront" type="number" value="40" min="0"></label>
-        <label class="ds-field">+% Flank str<input id="cmdFlank" type="number" value="30" min="0"></label>
-        <label class="ds-field">+% Courtyard<input id="cmdYard" type="number" value="40" min="0"></label>
+        <label class="ds-field">+% Front str<input id="cmdFront" type="number" value="26" min="0"></label>
+        <label class="ds-field">+% Flank str<input id="cmdFlank" type="number" value="26" min="0"></label>
+        <label class="ds-field">+% Courtyard<input id="cmdYard" type="number" value="0" min="0"></label>
+        <label class="ds-field">−% Wall prot<input id="cmdWallRed" type="number" value="350" min="0"></label>
+        <label class="ds-field">−% Gate prot<input id="cmdGateRed" type="number" value="350" min="0"></label>
+        <label class="ds-field">−% Moat prot<input id="cmdMoatRed" type="number" value="230" min="0"></label>
       </div>
       <div class="ds-toggles" id="cmdAbil"></div>
       <div class="ds-divline" style="margin-top:12px">Per-segment assault (counts are per wave)</div>
@@ -239,12 +243,14 @@
     function fillCastFromPreset(key) {
       const p = D.castellanPresets[key]; if (!p) return;
       $("castMelee").value = p.melee; $("castRanged").value = p.ranged; $("castYard").value = p.courtyard;
+      if (p.wallProt != null) { $("wallProt").value = p.wallProt; $("gateProt").value = p.gateProt; $("moatProt").value = p.moatProt; }
       renderAbil("castAbil", DEF_ABIL, p.abilities || {});
     }
     function fillCmdFromPreset(key) {
       const p = D.commanderPresets[key]; if (!p) return;
       $("cmdMelee").value = p.melee; $("cmdRanged").value = p.ranged; $("cmdUniversal").value = p.universal;
       $("cmdFront").value = p.front; $("cmdFlank").value = p.flank; $("cmdYard").value = p.courtyard;
+      $("cmdWallRed").value = p.wallRed || 0; $("cmdGateRed").value = p.gateRed || 0; $("cmdMoatRed").value = p.moatRed || 0;
       renderAbil("cmdAbil", ATK_ABIL, p.abilities || {});
     }
 
@@ -390,6 +396,7 @@
       const cmd = {
         melee: +$("cmdMelee").value || 0, ranged: +$("cmdRanged").value || 0, universal: +$("cmdUniversal").value || 0,
         front: +$("cmdFront").value || 0, flank: +$("cmdFlank").value || 0, courtyard: +$("cmdYard").value || 0,
+        wallRed: +$("cmdWallRed").value || 0, gateRed: +$("cmdGateRed").value || 0, moatRed: +$("cmdMoatRed").value || 0,
         abil: readAbil("cmdAbil", ATK_ABIL),
       };
       // segments
@@ -471,9 +478,10 @@
       // ---- defence bonus multiplier (protection)
       let defenseBonusMult = 1;
       if (!isCy) {
-        const wall = Math.max((cast.wallProt + protBonus.wall) - red.wall, 0);
-        const moat = Math.max((cast.moatProt + protBonus.moat) - red.moat, 0);
-        const gate = front ? Math.max((cast.gateProt + protBonus.gate) - red.gate, 0) : 0;
+        // attacker protection reductions = siege tools (red.*) + commander gear (cmd.*Red)
+        const wall = Math.max((cast.wallProt + protBonus.wall) - red.wall - (cmd.wallRed || 0), 0);
+        const moat = Math.max((cast.moatProt + protBonus.moat) - red.moat - (cmd.moatRed || 0), 0);
+        const gate = front ? Math.max((cast.gateProt + protBonus.gate) - red.gate - (cmd.gateRed || 0), 0) : 0;
         defenseBonusMult = 1 + (wall + moat + gate) / 100;
       }
 
@@ -681,9 +689,9 @@
       // preset selectors
       $("castPreset").innerHTML = Object.entries(D.castellanPresets).map(([k, p]) => `<option value="${k}">${esc(p.label)}</option>`).join("");
       $("cmdPreset").innerHTML = Object.entries(D.commanderPresets).map(([k, p]) => `<option value="${k}">${esc(p.label)}</option>`).join("");
-      $("castPreset").value = "sasaki"; $("cmdPreset").value = "silver";
-      renderAbil("castAbil", DEF_ABIL, D.castellanPresets.sasaki.abilities);
-      renderAbil("cmdAbil", ATK_ABIL, D.commanderPresets.silver.abilities || {});
+      $("castPreset").value = "stal_silver"; $("cmdPreset").value = "vic_silver";
+      renderAbil("castAbil", DEF_ABIL, D.castellanPresets.stal_silver.abilities);
+      renderAbil("cmdAbil", ATK_ABIL, D.commanderPresets.vic_silver.abilities || {});
 
       buildGarrison();
       buildAssault();
@@ -694,7 +702,8 @@
       $("castPreset").addEventListener("change", (e) => { fillCastFromPreset(e.target.value); run(); });
       $("cmdPreset").addEventListener("change", (e) => { fillCmdFromPreset(e.target.value); run(); });
       ["wallProt", "gateProt", "moatProt", "castMelee", "castRanged", "castYard",
-       "cmdMelee", "cmdRanged", "cmdUniversal", "cmdFront", "cmdFlank", "cmdYard"].forEach((id) => $(id).addEventListener("input", run));
+       "cmdMelee", "cmdRanged", "cmdUniversal", "cmdFront", "cmdFlank", "cmdYard",
+       "cmdWallRed", "cmdGateRed", "cmdMoatRed"].forEach((id) => $(id).addEventListener("input", run));
       $("waves").addEventListener("input", () => { renderPlan(); run(); });
       wireToggles("castAbil"); wireToggles("cmdAbil");
 

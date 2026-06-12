@@ -520,14 +520,60 @@
   }
  ],
  "castellanPresets": {
+  "stal_gold": {
+   "label": "Gold Stalwart (castellan)",
+   "melee": 28,
+   "ranged": 28,
+   "courtyard": 0,
+   "wallProt": 420,
+   "gateProt": 420,
+   "moatProt": 270,
+   "wallUnitLimit": 176,
+   "abilities": {
+    "conditionalMeleeBoost": true,
+    "waveStrengthBonus": true,
+    "periodicDebuff": true
+   }
+  },
+  "stal_silver": {
+   "label": "Silver Stalwart (castellan)",
+   "melee": 24,
+   "ranged": 24,
+   "courtyard": 0,
+   "wallProt": 350,
+   "gateProt": 350,
+   "moatProt": 224,
+   "wallUnitLimit": 152,
+   "abilities": {
+    "conditionalMeleeBoost": true,
+    "waveStrengthBonus": true,
+    "periodicDebuff": true
+   }
+  },
+  "stal_bronze": {
+   "label": "Bronze Stalwart (castellan)",
+   "melee": 20,
+   "ranged": 20,
+   "courtyard": 0,
+   "wallProt": 280,
+   "gateProt": 280,
+   "moatProt": 180,
+   "wallUnitLimit": 130,
+   "abilities": {
+    "conditionalMeleeBoost": true,
+    "waveStrengthBonus": true,
+    "periodicDebuff": true
+   }
+  },
   "sasaki": {
-   "label": "Sasaki (example castellan)",
+   "label": "Sasaki (example general)",
    "melee": 11,
    "ranged": 11,
    "courtyard": 24,
+   "wallProt": 320,
+   "gateProt": 320,
+   "moatProt": 150,
    "wallUnitLimit": 54,
-   "frontUnitLimit": 13,
-   "cyCapacity": 90000,
    "abilities": {
     "conditionalMeleeBoost": true,
     "waveStrengthBonus": true,
@@ -540,24 +586,51 @@
    "melee": 0,
    "ranged": 0,
    "courtyard": 0,
+   "wallProt": 0,
+   "gateProt": 0,
+   "moatProt": 0,
    "wallUnitLimit": 0,
-   "frontUnitLimit": 0,
-   "cyCapacity": 0,
    "abilities": {}
   }
  },
  "commanderPresets": {
-  "silver": {
-   "label": "Silver attack set (example)",
-   "melee": 60,
-   "ranged": 60,
+  "vic_gold": {
+   "label": "Gold Victorious (commander)",
+   "melee": 0,
+   "ranged": 0,
    "universal": 0,
-   "front": 40,
+   "front": 30,
    "flank": 30,
-   "courtyard": 40,
-   "wallReduction": 0,
-   "gateReduction": 0,
-   "moatReduction": 0,
+   "courtyard": 0,
+   "wallRed": 420,
+   "gateRed": 420,
+   "moatRed": 270,
+   "abilities": {}
+  },
+  "vic_silver": {
+   "label": "Silver Victorious (commander)",
+   "melee": 0,
+   "ranged": 0,
+   "universal": 0,
+   "front": 26,
+   "flank": 26,
+   "courtyard": 0,
+   "wallRed": 350,
+   "gateRed": 350,
+   "moatRed": 230,
+   "abilities": {}
+  },
+  "vic_bronze": {
+   "label": "Bronze Victorious (commander)",
+   "melee": 0,
+   "ranged": 0,
+   "universal": 0,
+   "front": 20,
+   "flank": 20,
+   "courtyard": 0,
+   "wallRed": 280,
+   "gateRed": 280,
+   "moatRed": 180,
    "abilities": {}
   },
   "none": {
@@ -568,10 +641,11 @@
    "front": 0,
    "flank": 0,
    "courtyard": 0,
-   "wallReduction": 0,
-   "gateReduction": 0,
-   "moatReduction": 0,
+   "wallRed": 0,
+   "gateRed": 0,
+   "moatRed": 0,
    "abilities": {}
   }
- }
+ },
+ "setNote": "Set values are the exact in-game effects of the gacha gear (Castle-Lords / PvP). Protection shown is the gear contribution only \u2014 add your castle buildings, research and alliance protection on top of it."
 }
